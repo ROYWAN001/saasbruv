@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAAS BRUV — Roylyonse Mwai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #006B3F;
+  --crimson: #CE1126;
+  --yellow: #FCD116;
+  --carbon: #1a1a1a;
+  --white: #f5f2ee;
+  --stroke: 3px;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  color: var(--carbon);
+  font-family: 'Space Mono', monospace;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ── */
+#cursor {
+  position: fixed;
+  width: 12px; height: 12px;
+  background: var(--crimson);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+  mix-blend-mode: multiply;
+}
+#cursor-ring {
+  position: fixed;
+  width: 40px; height: 40px;
+  border: 2px solid var(--carbon);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.12s ease-out, width 0.2s, height 0.2s, border-color 0.2s;
+}
+body:has(a:hover) #cursor { width: 20px; height: 20px; background: var(--yellow); }
+body:has(a:hover) #cursor-ring { width: 56px; height: 56px; border-color: var(--crimson); }
+
+/* ── NOISE ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+/* ── LOADING SCREEN ── */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: var(--carbon);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  transition: opacity 0.6s ease, visibility 0.6s;
+}
+#loader.done { opacity: 0; visibility: hidden; }
+.loader-text {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: clamp(3rem, 10vw, 7rem);
+  color: var(--white);
+  line-height: 0.85;
+  overflow: hidden;
+}
+.loader-text span { color: var(--yellow); font-style: italic; display: block; }
+.loader-bar-wrap {
+  width: 200px;
+  height: 3px;
+  background: rgba(255,255,255,0.15);
+  overflow: hidden;
+}
+.loader-bar {
+  height: 100%;
+  background: var(--yellow);
+  width: 0%;
+  transition: width 0.05s linear;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: var(--stroke) solid var(--carbon);
+  position: relative;
+  opacity: 0;
+  animation: heroEntrance 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
+  animation-delay: 0.15s;
+}
+
+@keyframes heroEntrance {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-left {
+  padding: 3rem;
+  border-right: var(--stroke) solid var(--carbon);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--carbon);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+  perspective: 900px;
+  transform-style: preserve-3d;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --mesh-scale: 1;
+}
+.hero-left .mesh {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(252,209,22,0.13), rgba(252,209,22,0.06) 18%, transparent 30%),
+    linear-gradient(180deg, rgba(255,255,255,0.04), transparent 45%, rgba(0,0,0,0.06));
+  opacity: 0.82;
+  transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) scale(var(--mesh-scale));
+  transform-origin: center;
+  transform-style: preserve-3d;
+  transition: transform 0.18s ease-out, background 0.18s ease-out, opacity 0.18s ease-out;
+  box-shadow: inset 0 0 80px rgba(252,209,22,0.05);
+}
+.hero-left:hover .mesh {
+  opacity: 0.94;
+}
+
+/* animated grid lines in bg */
+.hero-left::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(252,209,22,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(252,209,22,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridMove 8s linear infinite;
+}
+@keyframes gridMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+.hero-left::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -60px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  border: 40px solid var(--yellow);
+  opacity: 0.12;
+  animation: pulse 4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.12; }
+  50%       { transform: scale(1.08); opacity: 0.2; }
+}
+
+.logo-mark {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: clamp(4rem, 10vw, 8rem);
+  line-height: 0.85;
+  letter-spacing: -4px;
+  color: var(--white);
+  position: relative;
+  z-index: 1;
+}
+.logo-mark span {
+  display: block;
+  color: var(--yellow);
+  font-style: italic;
+}
+
+/* GLITCH */
+.glitch {
+  position: relative;
+}
+.glitch::before, .glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  font-family: inherit;
+}
+.glitch::before {
+  color: var(--crimson);
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+  animation: glitch1 3s infinite;
+  opacity: 0;
+}
+.glitch::after {
+  color: var(--yellow);
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  animation: glitch2 3s infinite;
+  opacity: 0;
+}
+@keyframes glitch1 {
+  0%,89%,100% { opacity:0; transform:translate(0); }
+  90%         { opacity:1; transform:translate(-3px, 1px); }
+  92%         { transform:translate(3px,-1px); }
+  94%         { opacity:0; }
+}
+@keyframes glitch2 {
+  0%,89%,100% { opacity:0; transform:translate(0); }
+  90%         { opacity:1; transform:translate(3px,-1px); }
+  92%         { transform:translate(-3px, 2px); }
+  94%         { opacity:0; }
+}
+
+.kenya-bar {
+  display: flex;
+  height: 10px;
+  position: relative;
+  z-index: 1;
+  border-radius: 999px;
+  overflow: hidden;
+  width: 86px;
+  margin-bottom: 1rem;
+  animation: flagWave 3.2s ease-in-out infinite;
+}
+.kenya-bar div { flex: 1; }
+.kenya-bar div:nth-child(1) { background: var(--carbon); }
+.kenya-bar div:nth-child(2) { background: var(--white); }
+.kenya-bar div:nth-child(3) { background: var(--crimson); }
+.kenya-bar div:nth-child(4) { background: var(--white); }
+.kenya-bar div:nth-child(5) { background: var(--green); }
+.kenya-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 40%, rgba(255,255,255,0.08), transparent 16%),
+    radial-gradient(circle at 75% 65%, rgba(0,0,0,0.08), transparent 14%);
+  opacity: 0.8;
+}
+.kenya-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.05) 48%, transparent 100%);
+  mix-blend-mode: screen;
+  opacity: 0.75;
+  transform: translateX(-8%);
+}
+@keyframes flagWave {
+  0% { transform: translateY(0) skewX(0deg) scaleY(1); }
+  20% { transform: translateY(-1px) skewX(-1.3deg) scaleY(1.02); }
+  40% { transform: translateY(-2px) skewX(1deg) scaleY(0.98); }
+  60% { transform: translateY(-1px) skewX(-0.8deg) scaleY(1.01); }
+  80% { transform: translateY(-1px) skewX(0.6deg) scaleY(1.02); }
+  100% { transform: translateY(0) skewX(0deg) scaleY(1); }
+}
+
+.hero-tagline {
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  line-height: 1.6;
+  color: rgba(245,242,238,0.6);
+  max-width: 320px;
+  position: relative;
+  z-index: 1;
+}
+
+/* TYPEWRITER */
+.typewriter {
+  border-right: 3px solid var(--yellow);
+  animation: blink 0.75s step-end infinite;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+}
+@keyframes blink { 50% { border-color: transparent; } }
+
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.hero-headline {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  border-bottom: var(--stroke) solid var(--carbon);
+  padding-bottom: 1.5rem;
+}
+.hero-headline em { color: var(--crimson); font-style: italic; }
+
+/* word-by-word reveal on headline */
+.word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: wordIn 0.5s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+@keyframes wordIn {
+  to { opacity:1; transform:translateY(0); }
+}
+
+.hero-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--carbon);
+  border: var(--stroke) solid var(--carbon);
+}
+.meta-cell {
+  background: var(--white);
+  padding: 1rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: background 0.2s, color 0.2s;
+}
+.meta-cell:hover { background: var(--yellow); }
+.meta-cell strong {
+  display: block;
+  font-size: 1.2rem;
+  font-family: 'Fraunces', serif;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-top: 0.25rem;
+  color: var(--green);
+}
+.meta-cell:hover strong { color: var(--carbon); }
+
+/* SCROLL INDICATOR */
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  right: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(245,242,238,0.4);
+  z-index: 2;
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+.scroll-arrow {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(245,242,238,0.4), transparent);
+}
+@keyframes scrollBounce {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(6px); }
+}
+
+/* ── MARQUEE ── */
+.marquee-wrap {
+  background: var(--crimson);
+  overflow: hidden;
+  padding: 0.75rem 0;
+  border-bottom: var(--stroke) solid var(--carbon);
+  position: relative;
+}
+.marquee-track {
+  display: flex;
+  gap: 3rem;
+  animation: marquee 20s linear infinite;
+  width: max-content;
+}
+.marquee-wrap:hover .marquee-track { animation-play-state: paused; }
+.marquee-track span {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 1rem;
+  color: var(--white);
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* second marquee reversed */
+.marquee-wrap2 {
+  background: var(--green);
+  overflow: hidden;
+  padding: 0.6rem 0;
+  border-bottom: var(--stroke) solid var(--carbon);
+}
+.marquee-track2 {
+  display: flex;
+  gap: 2rem;
+  animation: marquee2 25s linear infinite;
+  width: max-content;
+}
+@keyframes marquee2 {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.marquee-track2 span {
+  font-size: 0.7rem;
+  color: rgba(245,242,238,0.7);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
+/* ── SECTIONS ── */
+section { border-bottom: var(--stroke) solid var(--carbon); position: relative; }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 3rem;
+  border-bottom: var(--stroke) solid var(--carbon);
+  background: var(--yellow);
+  position: relative;
+  overflow: hidden;
+}
+.section-header::after {
+  content: '';
+  position: absolute;
+  right: -40px; top: 50%;
+  transform: translateY(-50%);
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  border: 3px solid rgba(26,26,26,0.1);
+  animation: spin 8s linear infinite;
+}
+@keyframes spin { to { transform: translateY(-50%) rotate(360deg); } }
+
+.section-num {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 3rem;
+  color: var(--carbon);
+  line-height: 1;
+}
+.section-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+}
+
+/* ── ABOUT ── */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; }
+.about-text {
+  padding: 3rem;
+  border-right: var(--stroke) solid var(--carbon);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+.about-text p + p { margin-top: 1rem; }
+
+.about-links {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.social-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--carbon);
+  text-decoration: none;
+  color: var(--carbon);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: background 0.15s, color 0.15s, transform 0.15s, box-shadow 0.15s;
+  background: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+.social-pill::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--carbon);
+  transform: translateX(-100%);
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
+  z-index: 0;
+}
+.social-pill:hover::before { transform: translateX(0); }
+.social-pill:hover { color: var(--white); transform: translate(-3px,-3px); box-shadow: 4px 4px 0 var(--crimson); }
+.social-pill > * { position: relative; z-index: 1; }
+.dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+/* ── TOOLS ── */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+.tool-card {
+  border-right: var(--stroke) solid var(--carbon);
+  border-bottom: var(--stroke) solid var(--carbon);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--carbon);
+  background: var(--white);
+  position: relative;
+  overflow: hidden;
+  transition: color 0.25s;
+}
+.tool-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--carbon);
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+  z-index: 0;
+}
+.tool-card:hover::before { transform: translateY(0); }
+.tool-card:hover { color: var(--white); }
+.tool-card > * { position: relative; z-index: 1; }
+
+/* number badge on tool cards */
+.tool-card::after {
+  content: attr(data-num);
+  position: absolute;
+  top: 0.75rem; right: 1rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: rgba(26,26,26,0.2);
+  transition: color 0.25s;
+  z-index: 1;
+}
+.tool-card:hover::after { color: rgba(245,242,238,0.3); }
+
+.tool-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.tool-desc { font-size: 0.75rem; line-height: 1.6; opacity: 0.7; }
+.tool-cta {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: var(--green);
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: gap 0.2s;
+}
+.tool-card:hover .tool-cta { color: var(--yellow); gap: 1rem; }
+
+/* stagger reveal for cards */
+.tool-card { opacity: 0; transform: translateY(30px); }
+.tool-card.visible {
+  animation: cardIn 0.5s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+@keyframes cardIn {
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* ── STATS STRIP ── */
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: var(--stroke) solid var(--carbon);
+}
+.stat-cell {
+  padding: 2rem;
+  border-right: var(--stroke) solid var(--carbon);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.stat-cell:last-child { border-right: none; }
+.stat-cell::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 0;
+  background: var(--yellow);
+  transition: height 0.3s cubic-bezier(0.16,1,0.3,1);
+  z-index: 0;
+}
+.stat-cell:hover::before { height: 100%; }
+.stat-cell > * { position: relative; z-index: 1; }
+.stat-num {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1;
+  color: var(--crimson);
+  display: block;
+}
+.stat-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  display: block;
+  opacity: 0.6;
+}
+
+/* counter animation */
+.count-up { transition: all 0.05s; }
+
+/* ── FOOTER ── */
+footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.footer-left {
+  padding: 3rem;
+  border-right: var(--stroke) solid var(--carbon);
+  background: var(--carbon);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.footer-left::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(252,209,22,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(252,209,22,0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+  animation: gridMove 6s linear infinite;
+}
+.footer-brand {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 2.5rem;
+  line-height: 0.9;
+  color: var(--yellow);
+  position: relative;
+  z-index: 1;
+}
+.footer-copy {
+  font-size: 0.7rem;
+  color: rgba(245,242,238,0.4);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+.footer-right {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.footer-right a {
+  font-size: 0.8rem;
+  color: var(--carbon);
+  text-decoration: none;
+  opacity: 0.5;
+  transition: opacity 0.2s, transform 0.2s;
+  display: inline-block;
+}
+.footer-right a:hover { opacity: 1; transform: translateX(6px); }
+
+/* ── CTA BUTTON ── */
+.btn-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.5rem;
+  background: var(--crimson);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  border: var(--stroke) solid var(--carbon);
+  align-self: flex-start;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.25s;
+}
+.btn-main::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--green);
+  transform: translateX(-100%);
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+.btn-main:hover::before { transform: translateX(0); }
+.btn-main span { position: relative; z-index: 1; }
+.btn-main:hover { transform: translate(-2px,-2px); box-shadow: 4px 4px 0 var(--carbon); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  body { cursor: auto; }
+  #cursor, #cursor-ring { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { border-right: none; border-bottom: var(--stroke) solid var(--carbon); min-height: 60vw; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-text { border-right: none; border-bottom: var(--stroke) solid var(--carbon); }
+  .section-header { padding: 1rem 1.5rem; }
+  .about-text, .about-links, .hero-right { padding: 2rem 1.5rem; }
+  .logo-mark { font-size: 4rem; }
+  footer { grid-template-columns: 1fr; }
+  .footer-left { border-right: none; border-bottom: var(--stroke) solid var(--carbon); }
+  .tools-grid { grid-template-columns: 1fr; }
+  .hero-meta { grid-template-columns: 1fr; }
+  .stats-strip { grid-template-columns: 1fr 1fr; }
+  .scroll-hint { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-text">SAAS<span>BRUV</span></div>
+  <div class="loader-bar-wrap"><div class="loader-bar" id="lbar"></div></div>
+</div>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="hero-left">
+    <div class="mesh"></div>
+    <div>
+      <div class="kenya-bar">
+        <div></div><div></div><div></div><div></div><div></div>
+      </div>
+      <div class="logo-mark">
+        <span class="glitch" data-text="SAAS">SAAS</span>
+        <span style="color:var(--yellow);font-style:italic;" class="glitch" data-text="BRUV">BRUV</span>
+      </div>
+    </div>
+    <div>
+      <p class="hero-tagline">
+        <span class="typewriter" id="tw"></span>
+      </p>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-arrow"></div>
+      <span>Scroll</span>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <h1 class="hero-headline" id="headline">
+      Can't afford the SaaS<br>but I can <em>sell it.</em>
+    </h1>
+    <div class="hero-meta reveal">
+      <div class="meta-cell">Platform<strong>@SaaSBruv</strong></div>
+      <div class="meta-cell">Location<strong>Nairobi/Eldoret, KE</strong></div>
+      <div class="meta-cell">Domain<strong>roylyonse.co.uk</strong></div>
+      <div class="meta-cell">Occupation<strong>Digital Creator</strong></div>
+    </div>
+    <a href="https://linktr.ee/roylyonse" target="_blank" class="btn-main reveal">
+      <span>All Links ↗</span>
+    </a>
+  </div>
+</header>
+
+<!-- ── MARQUEE 1 ── -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Affiliate Marketing</span><span>★</span>
+    <span>SaaS Reviews</span><span>★</span>
+    <span>Digital Creator</span><span>★</span>
+    <span>Nairobi, Kenya</span><span>★</span>
+    <span>Product Builder</span><span>★</span>
+    <span>19 Tools Live</span><span>★</span>
+    <span>Affiliate Marketing</span><span>★</span>
+    <span>SaaS Reviews</span><span>★</span>
+    <span>Digital Creator</span><span>★</span>
+    <span>Nairobi, Kenya</span><span>★</span>
+    <span>Product Builder</span><span>★</span>
+    <span>19 Tools Live</span><span>★</span>
+  </div>
+</div>
+
+<!-- ── MARQUEE 2 ── -->
+<div class="marquee-wrap2" aria-hidden="true">
+  <div class="marquee-track2">
+    <span>KAGUA</span><span>·</span>
+    <span>JIRRA</span><span>·</span>
+    <span>PATA</span><span>·</span>
+    <span>roylyonse.co.uk</span><span>·</span>
+    <span>@saasbruv</span><span>·</span>
+    <span>RoyWan LLC</span><span>·</span>
+    <span>KAGUA</span><span>·</span>
+    <span>JIRRA</span><span>·</span>
+    <span>PATA</span><span>·</span>
+    <span>roylyonse.co.uk</span><span>·</span>
+    <span>@saasbruv</span><span>·</span>
+    <span>RoyWan LLC</span><span>·</span>
+  </div>
+</div>
+
+<!-- ── STATS ── -->
+<div class="stats-strip reveal">
+  <div class="stat-cell">
+    <span class="stat-num count-up" data-target="19">0</span>
+    <span class="stat-label">Tools Listed</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-num count-up" data-target="200">0</span>
+    <span class="stat-label">Creators Reached</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-num count-up" data-target="6">0</span>
+    <span class="stat-label">Platforms Active</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-num count-up" data-target="3">0</span>
+    <span class="stat-label">Products Building</span>
+  </div>
+</div>
+
+<!-- ── ABOUT ── -->
+<section>
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div class="section-label">About</div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal-left">
+      <p>I'm <strong>Roylyonse Mwai</strong> — a Kenyan entrepreneur, digital creator, and builder operating out of Eldoret and Nairobi. I find the best SaaS tools on the internet so you don't have to overpay, underperform, or get trapped in the wrong stack.</p>
+      <p>Under the <strong>@SaaSBruv</strong> brand I create honest, no-hype content across TikTok, YouTube, Facebook, and X — reviews, comparisons, and affiliate picks for marketers, founders, and creators building lean.</p>
+      <p>Alongside content, I'm building <strong>KAGUA</strong> (Kenya's first device trust and verification platform) and <strong>JIRRA</strong> (AI-powered domestic labor market professionalization) — products rooted in real Kenyan problems.</p>
+    </div>
+    <div class="about-links reveal-right">
+      <p style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin-bottom:0.5rem;">Find me on</p>
+      <a class="social-pill" href="https://tiktok.com/@saasbruv" target="_blank"><div class="dot" style="background:#000;"></div><span>TikTok — @saasbruv</span></a>
+      <a class="social-pill" href="https://youtube.com/@SaaSBruv" target="_blank"><div class="dot" style="background:#FF0000;"></div><span>YouTube — @SaaSBruv</span></a>
+      <a class="social-pill" href="https://facebook.com/saasbruv/" target="_blank"><div class="dot" style="background:#1877F2;"></div><span>Facebook — SaaS Bro</span></a>
+      <a class="social-pill" href="https://twitter.com/roylyonse" target="_blank"><div class="dot" style="background:#000;"></div><span>X / Twitter — @roylyonse</span></a>
+      <a class="social-pill" href="https://reddit.com/r/saas_markt" target="_blank"><div class="dot" style="background:#FF4500;"></div><span>Reddit — r/saas_markt</span></a>
+      <a class="social-pill" href="https://linkedin.com/in/roylyonse" target="_blank"><div class="dot" style="background:#0A66C2;"></div><span>LinkedIn — roylyonse</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ── TOOLS ── -->
+<section>
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div class="section-label">Recommended SaaS — Affiliate Links</div>
+  </div>
+  <div class="tools-grid">
+    <a class="tool-card" data-num="01" href="https://aifiesta.link/roylyonse-mwai" target="_blank"><div class="tool-name">AI Fiesta</div><div class="tool-desc">Chat with ChatGPT, Gemini, Claude, Deepseek, and Grok — all under one subscription. Compare responses side-by-side in real time.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-num="02" href="https://refer.testimonial.to/roylyonse-mwai" target="_blank"><div class="tool-name">Testimonial.to</div><div class="tool-desc">Collect and display video + text testimonials from customers without writing a line of code. Embeds anywhere.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-num="03" href="https://ref.wisprflow.ai/roylyonse-mwai" target="_blank"><div class="tool-name">Wispr Flow</div><div class="tool-desc">Dictate into any app on Mac with AI-powered voice transcription that understands context and corrects itself.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-num="04" href="https://anara.com?via=roylyonse-mwai" target="_blank"><div class="tool-name">Anara</div><div class="tool-desc">AI research assistant for professionals. Pull insights from documents, PDFs, and the web in seconds.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-num="05" href="https://go.cap.so/roylyonse-mwai" target="_blank"><div class="tool-name">Cap</div><div class="tool-desc">Open-source Loom alternative. Record, share, and collaborate on screen recordings with zero friction.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-num="06" href="https://try.replo.app/roylyonse-mwai" target="_blank"><div class="tool-name">Replo</div><div class="tool-desc">Build high-converting Shopify landing pages with a drag-and-drop editor designed for performance marketers.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-num="07" href="https://anything.link/roylyonse-mwai" target="_blank"><div class="tool-name">Anything AI</div><div class="tool-desc">Turn any idea into a deployed app or site just by describing it. AI agent builds the whole thing for you.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-num="08" href="https://refer.cal.com/roywan-wwvt" target="_blank"><div class="tool-name">Cal.com</div><div class="tool-desc">Open-source scheduling infrastructure. Replace Calendly with something you actually own and can customize fully.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-num="09" href="https://ref.jace.ai/roylyonse-mwai" target="_blank"><div class="tool-name">Jace AI</div><div class="tool-desc">Your AI executive assistant that reads your email, drafts replies, and manages your calendar autonomously.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-num="10" href="https://link.chatbase.co/roylyonse-mwai" target="_blank"><div class="tool-name">Chatbase</div><div class="tool-desc">Build a custom ChatGPT-powered chatbot trained on your own data. Embed it on your site in minutes.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-num="11" href="https://go.intellijend.com/roylyonse-mwai" target="_blank"><div class="tool-name">Intellijend</div><div class="tool-desc">AI-powered outreach and sales intelligence. Find better leads and write better cold emails automatically.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-num="12" href="https://superli.st/roylyonse-mwai" target="_blank"><div class="tool-name">Superlist</div><div class="tool-desc">A beautifully fast to-do and project manager built for teams who move fast and hate bloated tools.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-num="13" href="https://go.kite.video/roylyonse-mwai" target="_blank"><div class="tool-name">Kite Video</div><div class="tool-desc">Create interactive product demos and video tours that convert visitors into customers without a sales call.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-num="14" href="https://try.magica.com/roylyonse-mwai" target="_blank"><div class="tool-name">Magica</div><div class="tool-desc">AI-powered image enhancement and background removal. Restore old photos or clean up product shots in one click.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-num="15" href="https://go.privy.com/roylyonse-mwai" target="_blank"><div class="tool-name">Privy</div><div class="tool-desc">Email and SMS marketing built for Shopify stores. Grow your list, recover carts, and drive repeat sales.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-num="16" href="https://coderabbit.link/roylyonse-mwai" target="_blank"><div class="tool-name">CodeRabbit</div><div class="tool-desc">AI code reviewer that reads your pull requests and gives actionable, context-aware feedback in seconds.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-num="17" href="https://marblism.com?via=roylyonse-mwai" target="_blank"><div class="tool-name">Marblism</div><div class="tool-desc">Get a team of AI employees who manage your inbox, post on social, write SEO articles, and find leads.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-num="18" href="https://tryclico.link/roylyonse-mwai" target="_blank"><div class="tool-name">Clico</div><div class="tool-desc">AI writing assistant browser extension. Write, search, summarize, and dictate inside every text box on the web.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-num="19" href="https://try.ranked.ai/roylyonse-mwai" target="_blank"><div class="tool-name">Ranked AI</div><div class="tool-desc">SEO platform with AI content writing, keyword research, and rank tracking — all in one clean dashboard.</div><div class="tool-cta">Try it →</div></a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-left reveal-left">
+    <div class="footer-brand">SAAS<br>BRUV</div>
+    <div class="footer-copy">© 2026 Roylyonse Mwai · roylyonse.co.uk</div>
+  </div>
+  <div class="footer-right reveal-right">
+    <p style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin-bottom:0.75rem;">Quick links</p>
+    <a href="https://linktr.ee/roylyonse" target="_blank">Linktree</a>
+    <a href="https://tiktok.com/@saasbruv" target="_blank">TikTok</a>
+    <a href="https://youtube.com/@SaaSBruv" target="_blank">YouTube</a>
+    <a href="https://facebook.com/saasbruv/" target="_blank">Facebook</a>
+    <a href="https://twitter.com/roylyonse" target="_blank">X / Twitter</a>
+    <a href="https://reddit.com/r/saas_markt" target="_blank">Reddit</a>
+  </div>
+</footer>
+
+<script>
+// ── CURSOR ──
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+function animCursor(){
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animCursor);
+}
+animCursor();
+
+// ── HERO MESH INTERACTION ──
+const heroLeft = document.querySelector('.hero-left');
+if(heroLeft){
+  heroLeft.addEventListener('mousemove', e => {
+    const rect = heroLeft.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    const tiltX = ((y - 50) / 50) * 4;
+    const tiltY = ((x - 50) / 50) * -4;
+    heroLeft.style.setProperty('--mouse-x', x + '%');
+    heroLeft.style.setProperty('--mouse-y', y + '%');
+    heroLeft.style.setProperty('--tilt-x', tiltX + 'deg');
+    heroLeft.style.setProperty('--tilt-y', tiltY + 'deg');
+    heroLeft.style.setProperty('--mesh-scale', '1.06');
+  });
+  heroLeft.addEventListener('mouseleave', () => {
+    heroLeft.style.setProperty('--mouse-x', '50%');
+    heroLeft.style.setProperty('--mouse-y', '50%');
+    heroLeft.style.setProperty('--tilt-x', '0deg');
+    heroLeft.style.setProperty('--tilt-y', '0deg');
+    heroLeft.style.setProperty('--mesh-scale', '1');
+  });
+}
+
+// ── LOADER ──
+const lbar = document.getElementById('lbar');
+const loader = document.getElementById('loader');
+let prog=0;
+const iv = setInterval(()=>{
+  prog += Math.random()*18;
+  if(prog>=100){ prog=100; clearInterval(iv); setTimeout(()=>{ loader.classList.add('done'); }, 200); }
+  lbar.style.width=prog+'%';
+},80);
+
+// ── TYPEWRITER ──
+const tw = document.getElementById('tw');
+const phrases = [
+  "Your one-stop SaaS supermarket.",
+  "Honest reviews. No hype.",
+  "Curated tools for lean builders.",
+  "Affiliate picks that actually work.",
+];
+let pi=0,ci=0,deleting=false;
+function typeLoop(){
+  const phrase = phrases[pi];
+  if(!deleting){
+    tw.textContent = phrase.slice(0,ci+1);
+    ci++;
+    if(ci===phrase.length){ deleting=true; setTimeout(typeLoop,1800); return; }
+  } else {
+    tw.textContent = phrase.slice(0,ci-1);
+    ci--;
+    if(ci===0){ deleting=false; pi=(pi+1)%phrases.length; }
+  }
+  setTimeout(typeLoop, deleting ? 40 : 70);
+}
+setTimeout(typeLoop, 1200);
+
+// ── WORD-BY-WORD HEADLINE ──
+const hl = document.getElementById('headline');
+const hlHTML = hl.innerHTML;
+// split text nodes only
+function wrapWords(el){
+  el.childNodes.forEach(node=>{
+    if(node.nodeType===3){
+      const words=node.textContent.split(' ');
+      const frag=document.createDocumentFragment();
+      words.forEach((w,i)=>{
+        if(!w){ frag.appendChild(document.createTextNode(' ')); return; }
+        const s=document.createElement('span');
+        s.className='word';
+        s.textContent=w+' ';
+        s.style.animationDelay=(0.8+i*0.08)+'s';
+        frag.appendChild(s);
+      });
+      node.replaceWith(frag);
+    } else if(node.nodeType===1){
+      wrapWords(node);
+    }
+  });
+}
+wrapWords(hl);
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('visible');
+  });
+},{ threshold:0.1 });
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>observer.observe(el));
+
+// ── TOOL CARDS STAGGERED ──
+const cardObs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const idx=Array.from(document.querySelectorAll('.tool-card')).indexOf(e.target);
+      e.target.style.animationDelay=(idx%3)*0.08+'s';
+      e.target.classList.add('visible');
+      cardObs.unobserve(e.target);
+    }
+  });
+},{ threshold:0.05 });
+document.querySelectorAll('.tool-card').forEach(c=>cardObs.observe(c));
+
+// ── COUNT UP ──
+function countUp(el){
+  const target=+el.dataset.target;
+  let val=0;
+  const step=Math.ceil(target/40);
+  const iv=setInterval(()=>{
+    val=Math.min(val+step,target);
+    el.textContent=val+(target>10?'+':'');
+    if(val>=target) clearInterval(iv);
+  },30);
+}
+const statObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.count-up').forEach(countUp);
+      statObs.unobserve(e.target);
+    }
+  });
+},{threshold:0.5});
+document.querySelectorAll('.stats-strip').forEach(s=>statObs.observe(s));
+</script>
+</body>
+</html>
