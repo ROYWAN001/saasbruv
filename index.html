@@ -6,7 +6,7 @@
 <title>Roylyonse Mwai · SaaS Affiliate & Creator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700;1,9..144,900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700;1,9..144,900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Syne:wght@400;700;800&family=DM+Serif+Display:ital@0;1&family=Outfit:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;1,700&family=JetBrains+Mono:wght@400;700&family=Unbounded:wght@400;700;900&family=Josefin+Sans:wght@400;700&family=Italiana&family=Bebas+Neue&family=Exo+2:wght@400;700;900&family=Rajdhani:wght@400;700&family=Oxanium:wght@400;700&display=swap" rel="stylesheet">
 <style>
 /* ─────────────────────────────────
    TOKENS — OLED BLACK FIRST
@@ -41,23 +41,42 @@ body{
 a{text-decoration:none;color:inherit;}
 
 /* ─────────────────────────────────
-   CANVAS BACKGROUND
+   STARFIELD CANVAS BACKGROUND
 ───────────────────────────────── */
 #bg-canvas{
   position:fixed;inset:0;z-index:0;
   pointer-events:none;
-  opacity:.55;
 }
 
 /* ─────────────────────────────────
-   CURSOR
+   CURSOR — UPGRADED
 ───────────────────────────────── */
-#cur{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s,opacity .15s;}
-#cur-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(245,193,51,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .12s ease-out;}
-body:has(a:hover) #cur{width:16px;height:16px;background:var(--gold);}
-body:has(a:hover) #cur-ring{width:48px;height:48px;border-color:rgba(245,193,51,.5);}
-body:has(button:hover) #cur{width:16px;height:16px;background:var(--gold);}
-@media(max-width:900px){body{cursor:auto;}#cur,#cur-ring{display:none;}}
+#cur{
+  position:fixed;width:6px;height:6px;
+  background:var(--gold);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:width .12s,height .12s,background .12s;
+  mix-blend-mode:difference;
+}
+#cur-ring{
+  position:fixed;width:28px;height:28px;
+  border:1.5px solid rgba(245,193,51,.5);border-radius:50%;
+  pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:all .14s cubic-bezier(.16,1,.3,1);
+}
+#cur-trail{
+  position:fixed;width:44px;height:44px;
+  border:1px solid rgba(245,193,51,.12);border-radius:50%;
+  pointer-events:none;z-index:9997;
+  transform:translate(-50%,-50%);
+  transition:all .28s cubic-bezier(.16,1,.3,1);
+}
+body.hovering #cur{width:12px;height:12px;background:var(--gold);}
+body.hovering #cur-ring{width:44px;height:44px;border-color:rgba(245,193,51,.7);}
+body.hovering #cur-trail{width:64px;height:64px;}
+@media(max-width:900px){body{cursor:auto;}#cur,#cur-ring,#cur-trail{display:none;}}
 
 /* ─────────────────────────────────
    LOADER
@@ -113,8 +132,6 @@ body:has(button:hover) #cur{width:16px;height:16px;background:var(--gold);}
   background:rgba(0,0,0,.6);
   backdrop-filter:blur(2px);
 }
-
-/* Subtle grid on left */
 .hero-brand::before{
   content:'';position:absolute;inset:0;
   background-image:
@@ -125,7 +142,6 @@ body:has(button:hover) #cur{width:16px;height:16px;background:var(--gold);}
   pointer-events:none;
 }
 @keyframes gridDrift{0%{background-position:0 0}100%{background-position:36px 36px}}
-
 .hero-brand>*{position:relative;z-index:1;}
 
 /* Kenya flag */
@@ -139,7 +155,6 @@ body:has(button:hover) #cur{width:16px;height:16px;background:var(--gold);}
   margin-bottom:1.4rem;
 }
 .hero-name em{display:block;color:var(--gold);font-style:italic;}
-
 .hero-bio p{font-size:.82rem;line-height:1.9;color:var(--text-muted);max-width:340px;}
 .hero-bio p+p{margin-top:.7rem;}
 .hero-bio strong{color:var(--text);}
@@ -155,7 +170,6 @@ body:has(button:hover) #cur{width:16px;height:16px;background:var(--gold);}
 
 /* RIGHT */
 .hero-right{display:flex;flex-direction:column;position:relative;}
-
 .hero-hl-block{
   padding:3rem 3rem 2.2rem;
   border-bottom:var(--border);
@@ -172,93 +186,55 @@ body:has(button:hover) #cur{width:16px;height:16px;background:var(--gold);}
   font-weight:900;line-height:.96;letter-spacing:-2px;color:var(--text);
 }
 .hero-headline em{color:var(--gold);font-style:italic;}
-
 .word{display:inline-block;opacity:0;transform:translateY(12px);animation:wi .48s cubic-bezier(.16,1,.3,1) forwards;}
 @keyframes wi{to{opacity:1;transform:translateY(0)}}
-
 .tw-wrap{margin-top:.75rem;font-family:'Space Mono',monospace;font-size:.68rem;color:rgba(255,255,255,.35);}
 .typewriter{border-right:1.5px solid var(--gold);animation:blink .8s step-end infinite;white-space:nowrap;overflow:hidden;display:inline-block;}
 @keyframes blink{50%{border-color:transparent}}
 
 /* ─────────────────────────────────
-   LIVE TICKER — TERMINAL STYLE
+   LIVE TICKER
 ───────────────────────────────── */
 .ticker-bar{
   display:flex;align-items:stretch;overflow:hidden;flex-shrink:0;
   border-top:var(--border);border-bottom:var(--border);
-  background:#000;
-  height:34px;
+  background:#000;height:34px;
 }
 .ticker-live-badge{
-  flex-shrink:0;
-  display:flex;align-items:center;gap:6px;
-  padding:0 14px;
-  border-right:var(--border-strong);
-  background:#0a0a0a;
+  flex-shrink:0;display:flex;align-items:center;gap:6px;
+  padding:0 14px;border-right:var(--border-strong);background:#0a0a0a;
 }
 .ticker-pulse{
   width:6px;height:6px;border-radius:50%;background:var(--accent);
-  box-shadow:0 0 0 0 rgba(0,107,63,.8);
-  animation:tpulse 1.6s ease-out infinite;
-  flex-shrink:0;
+  box-shadow:0 0 0 0 rgba(0,107,63,.8);animation:tpulse 1.6s ease-out infinite;flex-shrink:0;
 }
 @keyframes tpulse{
   0%{box-shadow:0 0 0 0 rgba(0,107,63,.7)}
   70%{box-shadow:0 0 0 6px rgba(0,107,63,0)}
   100%{box-shadow:0 0 0 0 rgba(0,107,63,0)}
 }
-.ticker-live-text{
-  font-family:'Space Mono',monospace;font-size:.5rem;font-weight:700;
-  text-transform:uppercase;letter-spacing:.18em;color:var(--accent);
-}
+.ticker-live-text{font-family:'Space Mono',monospace;font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--accent);}
 .ticker-scroll-area{flex:1;overflow:hidden;display:flex;align-items:center;}
-.ticker-track{
-  display:flex;gap:0;
-  animation:tickScroll 32s linear infinite;
-  width:max-content;
-  will-change:transform;
-}
+.ticker-track{display:flex;gap:0;animation:tickScroll 32s linear infinite;width:max-content;will-change:transform;}
 .ticker-track:hover{animation-play-state:paused;}
 @keyframes tickScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-.tick-item{
-  display:flex;align-items:center;
-  padding:0 20px;
-  border-right:var(--border);
-  height:34px;
-  position:relative;
-}
-.tick-name{
-  font-family:'Space Mono',monospace;font-size:.58rem;font-weight:700;
-  text-transform:uppercase;letter-spacing:.06em;color:var(--text);
-  white-space:nowrap;
-}
-.tick-val{
-  font-family:'Space Mono',monospace;font-size:.52rem;
-  color:var(--accent);margin-left:7px;white-space:nowrap;letter-spacing:.04em;
-}
-.tick-arrow{
-  font-size:.5rem;margin-left:4px;color:var(--accent);
-}
+.tick-item{display:flex;align-items:center;padding:0 20px;border-right:var(--border);height:34px;position:relative;}
+.tick-name{font-family:'Space Mono',monospace;font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text);white-space:nowrap;}
+.tick-val{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--accent);margin-left:7px;white-space:nowrap;letter-spacing:.04em;}
+.tick-arrow{font-size:.5rem;margin-left:4px;color:var(--accent);}
 
 /* ─────────────────────────────────
    OPP BOARD
 ───────────────────────────────── */
-.board{
-  flex:1;padding:1.4rem 2.2rem;
-  display:flex;flex-direction:column;gap:.85rem;overflow-y:auto;
-  background:rgba(0,0,0,.3);
-}
-.board-title{
-  font-family:'Space Mono',monospace;font-size:.52rem;text-transform:uppercase;
-  letter-spacing:.18em;font-weight:700;color:rgba(255,255,255,.2);margin-bottom:.1rem;
-}
+.board{flex:1;padding:1.4rem 2.2rem;display:flex;flex-direction:column;gap:.85rem;overflow-y:auto;background:rgba(0,0,0,.3);}
+.board-title{font-family:'Space Mono',monospace;font-size:.52rem;text-transform:uppercase;letter-spacing:.18em;font-weight:700;color:rgba(255,255,255,.2);margin-bottom:.1rem;}
 .opp-card{
   border:var(--border);padding:1.1rem;
   display:flex;flex-direction:column;gap:.45rem;
   position:relative;overflow:hidden;
-  transition:border-color .22s,background .22s;
+  transition:border-color .22s,background .22s,transform .22s;
   background:rgba(255,255,255,.022);
+  transform-style:preserve-3d;
 }
 .opp-card::after{
   content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
@@ -298,12 +274,10 @@ body:has(button:hover) #cur{width:16px;height:16px;background:var(--gold);}
 ───────────────────────────────── */
 .btn-main{
   display:inline-flex;align-items:center;gap:.45rem;
-  padding:.62rem 1.2rem;
-  background:transparent;color:var(--text);
+  padding:.62rem 1.2rem;background:transparent;color:var(--text);
   font-family:'Space Mono',monospace;font-weight:700;font-size:.58rem;
   text-transform:uppercase;letter-spacing:.1em;text-decoration:none;
-  border:var(--border-strong);
-  position:relative;overflow:hidden;
+  border:var(--border-strong);position:relative;overflow:hidden;
   transition:border-color .18s,color .18s;
 }
 .btn-main::before{
@@ -318,8 +292,7 @@ body:has(button:hover) #cur{width:16px;height:16px;background:var(--gold);}
 .btn-red:hover{color:var(--text);border-color:var(--red);}
 .btn-outline{
   display:inline-flex;align-items:center;gap:.45rem;
-  padding:.6rem 1.15rem;border:var(--border-strong);
-  color:var(--text);
+  padding:.6rem 1.15rem;border:var(--border-strong);color:var(--text);
   font-family:'Space Mono',monospace;font-weight:700;font-size:.58rem;
   text-transform:uppercase;letter-spacing:.1em;text-decoration:none;
   transition:background .2s,border-color .2s,color .2s;flex-shrink:0;
@@ -333,7 +306,6 @@ body:has(button:hover) #cur{width:16px;height:16px;background:var(--gold);}
 .mq1-t{display:flex;gap:2.5rem;animation:mq 22s linear infinite;width:max-content;}
 .mq1:hover .mq1-t{animation-play-state:paused;}
 .mq1-t span{font-family:'Fraunces',serif;font-weight:900;font-size:.9rem;color:#fff;white-space:nowrap;text-transform:uppercase;}
-
 .mq2{background:var(--surface-alt);overflow:hidden;padding:.38rem 0;border-bottom:var(--border);}
 .mq2-t{display:flex;gap:2.5rem;animation:mq2r 28s linear infinite;width:max-content;}
 .mq2-t span{font-family:'Space Mono',monospace;font-size:.54rem;color:rgba(255,255,255,.3);white-space:nowrap;text-transform:uppercase;letter-spacing:.12em;}
@@ -361,15 +333,14 @@ section{border-bottom:var(--border);position:relative;z-index:1;}
 .sec-hdr{
   display:flex;align-items:center;gap:1.2rem;
   padding:1.1rem 2.5rem;border-bottom:var(--border);
-  background:var(--black);
-  position:sticky;top:0;z-index:10;
+  background:var(--black);position:sticky;top:0;z-index:10;
   backdrop-filter:blur(12px);
 }
 .sec-num{font-family:'Fraunces',serif;font-weight:900;font-size:2rem;color:var(--gold);line-height:1;}
 .sec-lbl{font-family:'Space Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.16em;color:var(--text-muted);}
 
 /* ─────────────────────────────────
-   DEALS
+   DEALS — MAGNETIC HOVER
 ───────────────────────────────── */
 .deals-intro{
   padding:1.6rem 2.5rem;border-bottom:var(--border);
@@ -378,16 +349,33 @@ section{border-bottom:var(--border);position:relative;z-index:1;}
 }
 .deals-intro p{font-size:.82rem;line-height:1.82;max-width:600px;color:var(--text-muted);}
 .deals-intro strong{color:var(--text);}
-
 .deals-grid{display:grid;grid-template-columns:repeat(3,1fr);}
-.deal-card{
+
+/* ── MAGNETIC CARD WRAPPER ── */
+.mag-wrap{
+  position:relative;
   border-right:var(--border);border-bottom:var(--border);
+  overflow:hidden;
+  --mx:0px;--my:0px;
+}
+.mag-wrap:nth-child(3n){border-right:none;}
+
+.deal-card{
   padding:1.6rem;display:flex;flex-direction:column;gap:.7rem;
   text-decoration:none;color:var(--text);background:var(--black);
   position:relative;overflow:hidden;
-  transition:background .22s;
+  transition:background .22s,transform .18s cubic-bezier(.16,1,.3,1),box-shadow .18s;
+  display:flex;flex-direction:column;
+  will-change:transform;
 }
-.deal-card:nth-child(3n){border-right:none;}
+.deal-card::before{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(circle at var(--mx) var(--my), rgba(245,193,51,.07) 0%, transparent 65%);
+  opacity:0;transition:opacity .3s;
+  pointer-events:none;
+}
+.deal-card:hover::before{opacity:1;}
 .deal-card::after{
   content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
   background:var(--gold);transform:scaleX(0);
@@ -404,10 +392,7 @@ section{border-bottom:var(--border);position:relative;z-index:1;}
 .deal-type.months{color:var(--gold);border-color:rgba(245,193,51,.4);}
 .deal-type.lifetime{color:var(--accent);border-color:rgba(0,107,63,.5);}
 .deal-type.first{color:var(--text-muted);border-color:rgba(255,255,255,.15);}
-.deal-pct{
-  font-family:'Fraunces',serif;font-weight:900;
-  font-size:3rem;line-height:1;letter-spacing:-3px;color:var(--red);
-}
+.deal-pct{font-family:'Fraunces',serif;font-weight:900;font-size:3rem;line-height:1;letter-spacing:-3px;color:var(--red);transition:color .22s;}
 .deal-card:hover .deal-pct{color:var(--gold);}
 .deal-name{font-family:'Fraunces',serif;font-weight:700;font-size:1.05rem;line-height:1.1;}
 .deal-desc{font-size:.68rem;line-height:1.7;color:var(--text-muted);}
@@ -422,21 +407,23 @@ section{border-bottom:var(--border);position:relative;z-index:1;}
 /* ─────────────────────────────────
    OPP FULL SECTION
 ───────────────────────────────── */
-.opps-intro{
-  padding:1.6rem 2.5rem;border-bottom:var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  gap:2rem;flex-wrap:wrap;
-}
+.opps-intro{padding:1.6rem 2.5rem;border-bottom:var(--border);display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
 .opps-intro p{font-size:.82rem;line-height:1.82;max-width:580px;color:var(--text-muted);}
 .opps-intro strong{color:var(--text);}
-
 .opps-grid{display:grid;grid-template-columns:1fr 1fr;}
 .opp-full{
   border-right:var(--border);border-bottom:var(--border);
   padding:2rem;display:flex;flex-direction:column;gap:.65rem;
   background:var(--black);position:relative;overflow:hidden;
-  transition:background .22s;
+  transition:background .22s,transform .18s cubic-bezier(.16,1,.3,1);
+  --mx:50%;--my:50%;
 }
+.opp-full::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at var(--mx) var(--my),rgba(0,107,63,.08) 0%,transparent 65%);
+  opacity:0;transition:opacity .3s;pointer-events:none;
+}
+.opp-full:hover::before{opacity:1;}
 .opp-full:nth-child(2n){border-right:none;}
 .opp-full::after{
   content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
@@ -448,7 +435,7 @@ section{border-bottom:var(--border);position:relative;z-index:1;}
 .opp-full>*{position:relative;z-index:1;}
 .opp-tag{font-family:'Space Mono',monospace;font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--text-muted);display:flex;align-items:center;gap:.5rem;}
 .opp-full-name{font-family:'Fraunces',serif;font-weight:900;font-size:1.25rem;line-height:1.1;}
-.opp-full-pct{font-family:'Fraunces',serif;font-weight:900;font-size:2.3rem;line-height:1;letter-spacing:-2px;color:var(--red);}
+.opp-full-pct{font-family:'Fraunces',serif;font-weight:900;font-size:2.3rem;line-height:1;letter-spacing:-2px;color:var(--red);transition:color .22s;}
 .opp-full:hover .opp-full-pct{color:var(--gold);}
 .opp-full-desc{font-size:.72rem;line-height:1.75;color:var(--text-muted);}
 .opp-full-meta{display:flex;gap:.45rem;flex-wrap:wrap;}
@@ -473,7 +460,6 @@ section{border-bottom:var(--border);position:relative;z-index:1;}
 .cio-num{font-family:'Fraunces',serif;font-weight:900;font-size:1.5rem;line-height:1;color:var(--red);flex-shrink:0;width:32px;}
 .cio-txt strong{font-family:'Fraunces',serif;font-size:.95rem;display:block;margin-bottom:.2rem;}
 .cio-txt span{font-size:.68rem;line-height:1.68;color:var(--text-muted);}
-
 .tiiny-strip{
   padding:2rem 2.5rem;border-bottom:var(--border);
   display:flex;align-items:center;justify-content:space-between;
@@ -481,36 +467,6 @@ section{border-bottom:var(--border);position:relative;z-index:1;}
 }
 .tiiny-strip h3{font-family:'Fraunces',serif;font-weight:900;font-size:1.35rem;line-height:1.05;margin-bottom:.3rem;}
 .tiiny-strip p{font-size:.76rem;line-height:1.72;max-width:480px;color:var(--text-muted);}
-
-/* ─────────────────────────────────
-   ALL TOOLS
-───────────────────────────────── */
-.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));}
-.tool-card{
-  border-right:var(--border);border-bottom:var(--border);
-  padding:1.3rem;display:flex;flex-direction:column;gap:.5rem;
-  text-decoration:none;color:var(--text);background:var(--black);
-  position:relative;overflow:hidden;
-  transition:background .2s;
-  opacity:0;transform:translateY(20px);
-}
-.tool-card.on{animation:cin .44s cubic-bezier(.16,1,.3,1) forwards;}
-@keyframes cin{to{opacity:1;transform:translateY(0)}}
-.tool-card:hover{background:var(--surface-soft);}
-.tool-card::after{
-  content:attr(data-n);position:absolute;top:.65rem;right:.85rem;
-  font-family:'Space Mono',monospace;font-size:.52rem;font-weight:700;
-  color:rgba(255,255,255,.07);z-index:1;
-}
-.tool-card>*{position:relative;z-index:1;}
-.tool-name{font-family:'Fraunces',serif;font-weight:700;font-size:.95rem;line-height:1.1;}
-.tool-desc{font-size:.66rem;line-height:1.68;color:var(--text-muted);}
-.tool-cta{
-  font-family:'Space Mono',monospace;font-size:.54rem;text-transform:uppercase;
-  letter-spacing:.1em;font-weight:700;color:var(--accent);
-  margin-top:auto;display:flex;align-items:center;gap:.35rem;transition:gap .2s,color .2s;
-}
-.tool-card:hover .tool-cta{color:var(--gold);gap:.7rem;}
 
 /* ─────────────────────────────────
    ABOUT
@@ -526,8 +482,16 @@ section{border-bottom:var(--border);position:relative;z-index:1;}
   text-decoration:none;color:inherit;border:var(--border);
   font-weight:600;font-size:.75rem;
   position:relative;overflow:hidden;
-  transition:border-color .18s;background:var(--surface-alt);
+  transition:border-color .18s,transform .18s cubic-bezier(.16,1,.3,1);
+  background:var(--surface-alt);
+  --mx:50%;--my:50%;
 }
+.ch-btn::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at var(--mx) var(--my),rgba(245,193,51,.06) 0%,transparent 70%);
+  opacity:0;transition:opacity .28s;pointer-events:none;
+}
+.ch-btn:hover::before{opacity:1;}
 .ch-btn:hover{border-color:rgba(255,255,255,.18);background:var(--surface-soft);}
 .ch-btn .ch-icon{width:30px;height:30px;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .ch-btn .ch-info{display:flex;flex-direction:column;gap:.05rem;flex:1;}
@@ -543,6 +507,104 @@ section{border-bottom:var(--border);position:relative;z-index:1;}
 .ch-li .ch-icon{background:#0A66C2;color:#fff;}
 
 /* ─────────────────────────────────
+   ALL TOOLS — UNIQUE FONTS PER TOOL
+───────────────────────────────── */
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));}
+
+.tool-card{
+  border-right:var(--border);border-bottom:var(--border);
+  padding:1.3rem;display:flex;flex-direction:column;gap:.5rem;
+  text-decoration:none;color:var(--text);background:var(--black);
+  position:relative;overflow:hidden;
+  transition:background .2s,transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s;
+  opacity:0;transform:translateY(20px);
+  --mx:50%;--my:50%;
+  will-change:transform;
+}
+.tool-card.on{animation:cin .44s cubic-bezier(.16,1,.3,1) forwards;}
+@keyframes cin{to{opacity:1;transform:translateY(0)}}
+.tool-card:hover{background:var(--surface-soft);box-shadow:0 0 30px rgba(0,0,0,.6);}
+
+/* Radial spotlight on hover */
+.tool-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at var(--mx) var(--my),rgba(245,193,51,.06) 0%,transparent 60%);
+  opacity:0;transition:opacity .3s;pointer-events:none;z-index:0;
+}
+.tool-card:hover::before{opacity:1;}
+
+/* Accent color bar at bottom */
+.tool-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--gold),var(--red));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .35s cubic-bezier(.16,1,.3,1);
+}
+.tool-card:hover::after{transform:scaleX(1);}
+
+.tool-card>*{position:relative;z-index:1;}
+.tool-number{
+  font-family:'Space Mono',monospace;font-size:.48rem;font-weight:700;
+  color:rgba(255,255,255,.12);letter-spacing:.08em;margin-bottom:.1rem;
+}
+
+/* ── UNIQUE FONT PER TOOL ── */
+.tool-card[data-n="01"] .tool-name{font-family:'Unbounded',sans-serif;font-size:.78rem;font-weight:900;letter-spacing:-.02em;}
+.tool-card[data-n="02"] .tool-name{font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;font-weight:700;}
+.tool-card[data-n="03"] .tool-name{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:800;letter-spacing:-.03em;}
+.tool-card[data-n="04"] .tool-name{font-family:'DM Serif Display',serif;font-size:1rem;font-weight:400;}
+.tool-card[data-n="05"] .tool-name{font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:700;letter-spacing:-.02em;}
+.tool-card[data-n="06"] .tool-name{font-family:'Outfit',sans-serif;font-size:.92rem;font-weight:900;letter-spacing:-.03em;}
+.tool-card[data-n="07"] .tool-name{font-family:'Exo 2',sans-serif;font-size:.9rem;font-weight:900;letter-spacing:.01em;}
+.tool-card[data-n="08"] .tool-name{font-family:'Italiana',serif;font-size:1.2rem;font-weight:400;letter-spacing:.04em;}
+.tool-card[data-n="09"] .tool-name{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.08em;}
+.tool-card[data-n="10"] .tool-name{font-family:'Oxanium',cursive;font-size:.88rem;font-weight:700;letter-spacing:.02em;}
+.tool-card[data-n="11"] .tool-name{font-family:'Josefin Sans',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;}
+.tool-card[data-n="12"] .tool-name{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;font-weight:400;letter-spacing:.06em;}
+.tool-card[data-n="13"] .tool-name{font-family:'Space Mono',monospace;font-size:.8rem;font-weight:700;}
+.tool-card[data-n="14"] .tool-name{font-family:'Fraunces',serif;font-style:italic;font-size:1.05rem;font-weight:700;}
+.tool-card[data-n="15"] .tool-name{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:800;}
+.tool-card[data-n="16"] .tool-name{font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:700;color:var(--accent);}
+.tool-card[data-n="17"] .tool-name{font-family:'Unbounded',sans-serif;font-size:.72rem;font-weight:700;}
+.tool-card[data-n="18"] .tool-name{font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:900;}
+.tool-card[data-n="19"] .tool-name{font-family:'Exo 2',sans-serif;font-size:.9rem;font-weight:900;letter-spacing:.02em;}
+.tool-card[data-n="20"] .tool-name{font-family:'DM Serif Display',serif;font-size:1rem;}
+.tool-card[data-n="21"] .tool-name{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.1em;}
+.tool-card[data-n="22"] .tool-name{font-family:'Josefin Sans',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;}
+
+/* Accent color per tool (subtle left border on hover) */
+.tool-card[data-n="01"]:hover{border-color:rgba(245,193,51,.18);}
+.tool-card[data-n="02"]:hover{border-color:rgba(206,17,38,.18);}
+.tool-card[data-n="03"]:hover{border-color:rgba(0,107,63,.25);}
+.tool-card[data-n="04"]:hover{border-color:rgba(245,193,51,.18);}
+.tool-card[data-n="05"]:hover{border-color:rgba(206,17,38,.2);}
+.tool-card[data-n="06"]:hover{border-color:rgba(0,107,63,.25);}
+.tool-card[data-n="07"]:hover{border-color:rgba(245,193,51,.2);}
+.tool-card[data-n="08"]:hover{border-color:rgba(206,17,38,.2);}
+.tool-card[data-n="09"]:hover{border-color:rgba(0,107,63,.2);}
+.tool-card[data-n="10"]:hover{border-color:rgba(245,193,51,.2);}
+.tool-card[data-n="11"]:hover{border-color:rgba(206,17,38,.2);}
+.tool-card[data-n="12"]:hover{border-color:rgba(0,107,63,.2);}
+.tool-card[data-n="13"]:hover{border-color:rgba(245,193,51,.2);}
+.tool-card[data-n="14"]:hover{border-color:rgba(206,17,38,.18);}
+.tool-card[data-n="15"]:hover{border-color:rgba(0,107,63,.2);}
+.tool-card[data-n="16"]:hover{border-color:rgba(0,107,63,.3);}
+.tool-card[data-n="17"]:hover{border-color:rgba(245,193,51,.2);}
+.tool-card[data-n="18"]:hover{border-color:rgba(206,17,38,.2);}
+.tool-card[data-n="19"]:hover{border-color:rgba(0,107,63,.2);}
+.tool-card[data-n="20"]:hover{border-color:rgba(245,193,51,.18);}
+.tool-card[data-n="21"]:hover{border-color:rgba(206,17,38,.2);}
+.tool-card[data-n="22"]:hover{border-color:rgba(0,107,63,.2);}
+
+.tool-desc{font-size:.66rem;line-height:1.68;color:var(--text-muted);}
+.tool-cta{
+  font-family:'Space Mono',monospace;font-size:.54rem;text-transform:uppercase;
+  letter-spacing:.1em;font-weight:700;color:var(--accent);
+  margin-top:auto;display:flex;align-items:center;gap:.35rem;transition:gap .2s,color .2s;
+}
+.tool-card:hover .tool-cta{color:var(--gold);gap:.7rem;}
+
+/* ─────────────────────────────────
    ARTICLES
 ───────────────────────────────── */
 .articles-top{
@@ -555,9 +617,18 @@ section{border-bottom:var(--border);position:relative;z-index:1;}
   border-right:var(--border);border-bottom:var(--border);
   padding:1.8rem;display:flex;flex-direction:column;gap:.75rem;
   text-decoration:none;color:var(--text);background:var(--black);
-  transition:background .2s;
+  transition:background .2s,transform .2s cubic-bezier(.16,1,.3,1);
+  position:relative;overflow:hidden;
+  --mx:50%;--my:50%;
 }
+.article-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at var(--mx) var(--my),rgba(206,17,38,.06) 0%,transparent 60%);
+  opacity:0;transition:opacity .3s;pointer-events:none;
+}
+.article-card:hover::before{opacity:1;}
 .article-card:hover{background:var(--surface-soft);}
+.article-card>*{position:relative;z-index:1;}
 .art-cat{
   font-family:'Space Mono',monospace;font-size:.5rem;text-transform:uppercase;
   letter-spacing:.18em;font-weight:700;color:var(--red);
@@ -584,10 +655,7 @@ section{border-bottom:var(--border);position:relative;z-index:1;}
 /* ─────────────────────────────────
    FOOTER
 ───────────────────────────────── */
-footer{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-  border-top:var(--border);position:relative;z-index:1;
-}
+footer{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:var(--border);position:relative;z-index:1;}
 .ft-brand{
   padding:2.5rem;border-right:var(--border);
   display:flex;flex-direction:column;justify-content:space-between;
@@ -615,18 +683,14 @@ footer{
 ───────────────────────────────── */
 @media(max-width:1024px){
   .deals-grid{grid-template-columns:1fr 1fr;}
-  .deal-card:nth-child(3n){border-right:var(--border);}
-  .deal-card:nth-child(2n){border-right:none;}
+  .mag-wrap:nth-child(3n){border-right:var(--border);}
+  .mag-wrap:nth-child(2n){border-right:none;}
   .opps-grid{grid-template-columns:1fr;}
   .opp-full{border-right:none;}
 }
 @media(max-width:900px){
   .hero-inner{grid-template-columns:1fr;}
-  .hero-brand{
-    border-right:none;border-bottom:var(--border);
-    padding:2.2rem 1.6rem;
-    min-height:auto;
-  }
+  .hero-brand{border-right:none;border-bottom:var(--border);padding:2.2rem 1.6rem;min-height:auto;}
   .hero-hl-block{padding:2rem 1.6rem 1.5rem;}
   .board{padding:1.2rem 1.6rem;}
   .hero-cta-row{padding:1.1rem 1.6rem;}
@@ -643,7 +707,7 @@ footer{
 }
 @media(max-width:600px){
   .deals-grid,.tools-grid,.articles-grid{grid-template-columns:1fr;}
-  .deal-card{border-right:none;}
+  .mag-wrap{border-right:none;}
   .stats-strip{grid-template-columns:1fr 1fr;}
   .opps-grid{grid-template-columns:1fr;}
 }
@@ -651,11 +715,12 @@ footer{
 </head>
 <body>
 
-<!-- ANIMATED CANVAS BACKGROUND -->
+<!-- STARFIELD CANVAS BACKGROUND -->
 <canvas id="bg-canvas"></canvas>
 
 <div id="cur"></div>
 <div id="cur-ring"></div>
+<div id="cur-trail"></div>
 
 <!-- LOADER -->
 <div id="loader">
@@ -695,16 +760,14 @@ footer{
         <div class="tw-wrap"><span class="typewriter" id="tw"></span></div>
       </div>
 
-      <!-- LIVE TICKER — TERMINAL STYLE -->
+      <!-- LIVE TICKER -->
       <div class="ticker-bar">
         <div class="ticker-live-badge">
           <div class="ticker-pulse"></div>
           <span class="ticker-live-text">Live</span>
         </div>
         <div class="ticker-scroll-area">
-          <div class="ticker-track" id="tickerTrack">
-            <!-- Filled by JS -->
-          </div>
+          <div class="ticker-track" id="tickerTrack"></div>
         </div>
       </div>
 
@@ -759,8 +822,6 @@ footer{
     <span>SaaS Reviews</span><span>★</span>
     <span>Digital Creator</span><span>★</span>
     <span>Nairobi, Kenya</span><span>★</span>
-    <span>22 Tools Live</span><span>★</span>
-    <span>Roylyonse Mwai</span><span>★</span>
   </div>
 </div>
 <div class="mq2" aria-hidden="true">
@@ -786,60 +847,15 @@ footer{
     <a class="btn-outline" href="https://linktr.ee/roylyonse" target="_blank">All My Links ↗</a>
   </div>
   <div class="deals-grid">
-    <a class="deal-card rv on" href="https://www.beehiiv.com?via=roylyonse-mwai" target="_blank" style="transition-delay:.04s">
-      <span class="deal-type months">3 months</span><div class="deal-pct">20%</div>
-      <div class="deal-name">Beehiiv</div>
-      <div class="deal-desc">The newsletter platform built for growth. Monetise your audience with built-in ads, subscriptions and deep analytics.</div>
-      <div class="deal-cta">Claim deal →</div>
-    </a>
-    <a class="deal-card rv on" href="https://anything.link/roylyonse-mwai" target="_blank" style="transition-delay:.08s">
-      <span class="deal-type first">First purchase</span><div class="deal-pct">20%</div>
-      <div class="deal-name">Anything AI</div>
-      <div class="deal-desc">Turn any idea into a deployed app just by describing it. The AI agent builds and ships the whole thing.</div>
-      <div class="deal-cta">Claim deal →</div>
-    </a>
-    <a class="deal-card rv on" href="https://refer.dub.co/roylyonse-mwai" target="_blank" style="transition-delay:.12s">
-      <span class="deal-type months">3 months</span><div class="deal-pct">20%</div>
-      <div class="deal-name">Dub.co</div>
-      <div class="deal-desc">The open-source link management platform. Short links, QR codes, and analytics for modern teams.</div>
-      <div class="deal-cta">Claim deal →</div>
-    </a>
-    <a class="deal-card rv on" href="https://refer.cal.com/roywan-wwvt" target="_blank" style="transition-delay:.04s">
-      <span class="deal-type months">12 months</span><div class="deal-pct">20%</div>
-      <div class="deal-name">Cal.com</div>
-      <div class="deal-desc">Open-source scheduling infrastructure. Replace Calendly with something you actually own and control.</div>
-      <div class="deal-cta">Claim deal →</div>
-    </a>
-    <a class="deal-card rv on" href="https://go.cap.so/roylyonse-mwai" target="_blank" style="transition-delay:.08s">
-      <span class="deal-type months">12 months</span><div class="deal-pct">20%</div>
-      <div class="deal-name">Cap</div>
-      <div class="deal-desc">Open-source Loom alternative. Record, share, and collaborate on screen recordings with zero friction.</div>
-      <div class="deal-cta">Claim deal →</div>
-    </a>
-    <a class="deal-card rv on" href="https://go.intellijend.com/roylyonse-mwai" target="_blank" style="transition-delay:.12s">
-      <span class="deal-type lifetime">Lifetime</span><div class="deal-pct">10%</div>
-      <div class="deal-name">Intellijend</div>
-      <div class="deal-desc">AI outreach and sales intelligence. Find better leads and write better cold emails automatically.</div>
-      <div class="deal-cta">Claim deal →</div>
-    </a>
-    <a class="deal-card rv on" href="https://marblism.com?via=roylyonse-mwai" target="_blank" style="transition-delay:.04s">
-      <span class="deal-type lifetime">Lifetime</span><div class="deal-pct">10%</div>
-      <div class="deal-name">Marblism</div>
-      <div class="deal-desc">AI employees for inbox, social, SEO, lead gen, and legal — automated and integrated with your tools.</div>
-      <div class="deal-cta">Claim deal →</div>
-    </a>
-    <a class="deal-card rv on" href="https://share.customer.io/7gDDZ2" target="_blank" style="transition-delay:.08s">
-      <span class="deal-type first">For founders</span><div class="deal-pct" style="font-size:1.8rem;letter-spacing:-1px;">Special</div>
-      <div class="deal-name">Customer.io</div>
-      <div class="deal-desc">Powerful marketing automation for product teams. Email, SMS, push — all in one workflow engine.</div>
-      <div class="deal-cta">Claim deal →</div>
-    </a>
-    <a class="deal-card rv on" href="https://tiiny.host?fpr=saasbro" target="_blank" style="transition-delay:.12s">
-      <span class="deal-type months">3 months</span><div class="deal-pct">20%</div>
-      <div class="deal-name">Tiiny Host</div>
-      <div class="deal-desc">The fastest way to publish a static site or prototype online. No server config, no nonsense.</div>
-      <div class="deal-cta">Claim deal →</div>
-    </a>
+    <div class="mag-wrap"><a class="deal-card rv on" href="https://www.beehiiv.com?via=roylyonse-mwai" target="_blank" style="transition-delay:.04s"><span class="deal-type months">3 months</span><div class="deal-pct">20%</div><div class="deal-name">Beehiiv</div><div class="deal-desc">The newsletter platform built for growth. Monetise your audience with built-in ads, subscriptions and deep analytics.</div><div class="deal-cta">Claim deal →</div></a></div>
+    <div class="mag-wrap"><a class="deal-card rv on" href="https://anything.link/roylyonse-mwai" target="_blank" style="transition-delay:.08s"><span class="deal-type first">First purchase</span><div class="deal-pct">20%</div><div class="deal-name">Anything AI</div><div class="deal-desc">Turn any idea into a deployed app just by describing it. The AI agent builds and ships the whole thing.</div><div class="deal-cta">Claim deal →</div></a></div>
+    <div class="mag-wrap"><a class="deal-card rv on" href="https://refer.dub.co/roylyonse-mwai" target="_blank" style="transition-delay:.12s"><span class="deal-type months">3 months</span><div class="deal-pct">20%</div><div class="deal-name">Dub.co</div><div class="deal-desc">The open-source link management platform. Short links, QR codes, and analytics for modern teams.</div><div class="deal-cta">Claim deal →</div></a></div>
+    <div class="mag-wrap"><a class="deal-card rv on" href="https://refer.cal.com/roywan-wwvt" target="_blank" style="transition-delay:.04s"><span class="deal-type months">12 months</span><div class="deal-pct">20%</div><div class="deal-name">Cal.com</div><div class="deal-desc">Open-source scheduling infrastructure. Replace Calendly with something you actually own and control.</div><div class="deal-cta">Claim deal →</div></a></div>
+    <div class="mag-wrap"><a class="deal-card rv on" href="https://go.cap.so/roylyonse-mwai" target="_blank" style="transition-delay:.08s"><span class="deal-type months">12 months</span><div class="deal-pct">20%</div><div class="deal-name">Cap</div><div class="deal-desc">Open-source Loom alternative. Record, share, and collaborate on screen recordings with zero friction.</div><div class="deal-cta">Claim deal →</div></a></div>
+    <div class="mag-wrap"><a class="deal-card rv on" href="https://go.intellijend.com/roylyonse-mwai" target="_blank" style="transition-delay:.12s"><span class="deal-type lifetime">Lifetime</span><div class="deal-pct">10%</div><div class="deal-name">Intellijend</div><div class="deal-desc">AI outreach and sales intelligence. Find better leads and write better cold emails automatically.</div><div class="deal-cta">Claim deal →</div></a></div>
+    <div class="mag-wrap"><a class="deal-card rv on" href="https://marblism.com?via=roylyonse-mwai" target="_blank" style="transition-delay:.04s"><span class="deal-type lifetime">Lifetime</span><div class="deal-pct">10%</div><div class="deal-name">Marblism</div><div class="deal-desc">AI employees for inbox, social, SEO, lead gen, and legal — automated and integrated with your tools.</div><div class="deal-cta">Claim deal →</div></a></div>
+    <div class="mag-wrap"><a class="deal-card rv on" href="https://share.customer.io/7gDDZ2" target="_blank" style="transition-delay:.08s"><span class="deal-type first">For founders</span><div class="deal-pct" style="font-size:1.8rem;letter-spacing:-1px;">Special</div><div class="deal-name">Customer.io</div><div class="deal-desc">Powerful marketing automation for product teams. Email, SMS, push — all in one workflow engine.</div><div class="deal-cta">Claim deal →</div></a></div>
+    <div class="mag-wrap"><a class="deal-card rv on" href="https://tiiny.host?fpr=saasbro" target="_blank" style="transition-delay:.12s"><span class="deal-type months">3 months</span><div class="deal-pct">20%</div><div class="deal-name">Tiiny Host</div><div class="deal-desc">The fastest way to publish a static site or prototype online. No server config, no nonsense.</div><div class="deal-cta">Claim deal →</div></a></div>
   </div>
 </section>
 
@@ -848,31 +864,24 @@ footer{
   <div class="sec-hdr rv on"><div class="sec-num">02</div><div class="sec-lbl">Affiliate Opportunities — Open Now</div></div>
   <div class="opps-intro rv on">
     <p>These are the affiliate programmes I'm currently running or actively recommending. <strong>High commission, high retention, high relevance</strong> — the only three criteria I care about.</p>
-    <a class="btn-outline" href="https://linktr.ee/roylyonse" target="_blank">Apply via Linktree ↗</a>
   </div>
   <div class="opps-grid">
-    <div class="opp-full rv on" style="transition-delay:.04s">
-      <div class="opp-tag"><span class="live-dot"></span>Open programme</div>
-      <div class="opp-full-name">Marblism — AI Employees</div>
+    <a class="opp-full rv on" href="https://partners.dub.co/marblism/apply?via=saasbro" target="_blank" style="transition-delay:.04s">
+      <div class="opp-tag"><span class="live-dot"></span>Open · AI Employees</div>
+      <div class="opp-full-name">Marblism</div>
       <div class="opp-full-pct">30%</div>
-      <div class="opp-full-desc">AI-powered staff for inbox, social, SEO, lead gen, and legal — automated and integrated with your tools. Lifetime recurring. High-ticket SaaS with strong retention.</div>
-      <div class="opp-full-meta">
-        <span class="badge green">30% lifetime recurring</span>
-        <span class="badge amber">High-ticket</span>
-      </div>
-      <a class="opp-apply" href="https://partners.dub.co/marblism/apply?via=saasbro" target="_blank">Apply to programme →</a>
-    </div>
-    <div class="opp-full rv on" style="transition-delay:.1s">
-      <div class="opp-tag"><span class="live-dot"></span>Open programme</div>
-      <div class="opp-full-name">Ranked AI — SEO &amp; Content</div>
+      <div class="opp-full-desc">AI employees who manage your inbox, post on social, write SEO articles, and find leads — recurring commission for the lifetime of the customer.</div>
+      <div class="opp-full-meta"><span class="badge green">30% lifetime recurring</span><span class="badge amber">High-ticket</span></div>
+      <a class="opp-apply" href="https://partners.dub.co/marblism/apply?via=saasbro" target="_blank">Apply now →</a>
+    </a>
+    <a class="opp-full rv on" href="https://partners.dub.co/ranked/apply?via=saasbro" target="_blank" style="transition-delay:.1s">
+      <div class="opp-tag"><span class="live-dot"></span>Open · SEO Platform</div>
+      <div class="opp-full-name">Ranked AI</div>
       <div class="opp-full-pct">20%</div>
-      <div class="opp-full-desc">Scalable, white-hat SEO and blog content for agencies and startups. High demand, high monthly retention — clients stay for years. Straightforward recurring commission structure.</div>
-      <div class="opp-full-meta">
-        <span class="badge green">20% lifetime recurring</span>
-        <span class="badge amber">High retention</span>
-      </div>
-      <a class="opp-apply" href="https://partners.dub.co/ranked/apply?via=saasbro" target="_blank">Apply to programme →</a>
-    </div>
+      <div class="opp-full-desc">SEO and content for agencies and startups. High monthly retention means commissions compound — clients stay for years, you keep earning.</div>
+      <div class="opp-full-meta"><span class="badge green">20% lifetime recurring</span><span class="badge amber">High retention</span></div>
+      <a class="opp-apply" href="https://partners.dub.co/ranked/apply?via=saasbro" target="_blank">Apply now →</a>
+    </a>
   </div>
 </section>
 
@@ -922,33 +931,27 @@ footer{
       <p class="ch-label">Find me on</p>
       <a class="ch-btn ch-tiktok" href="https://tiktok.com/@saasbruv" target="_blank">
         <div class="ch-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.87a8.18 8.18 0 004.79 1.54V7a4.85 4.85 0 01-1.03-.31z"/></svg></div>
-        <div class="ch-info"><span class="ch-name">TikTok</span><span class="ch-handle">@saasbruv</span></div>
-        <span class="ch-arr">→</span>
+        <div class="ch-info"><span class="ch-name">TikTok</span><span class="ch-handle">@saasbruv</span></div><span class="ch-arr">→</span>
       </a>
       <a class="ch-btn ch-yt" href="https://youtube.com/@SaaSBruv" target="_blank">
         <div class="ch-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></div>
-        <div class="ch-info"><span class="ch-name">YouTube</span><span class="ch-handle">@SaaSBruv</span></div>
-        <span class="ch-arr">→</span>
+        <div class="ch-info"><span class="ch-name">YouTube</span><span class="ch-handle">@SaaSBruv</span></div><span class="ch-arr">→</span>
       </a>
       <a class="ch-btn ch-x" href="https://twitter.com/roylyonse" target="_blank">
         <div class="ch-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.258 5.63 5.906-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
-        <div class="ch-info"><span class="ch-name">X / Twitter</span><span class="ch-handle">@roylyonse</span></div>
-        <span class="ch-arr">→</span>
+        <div class="ch-info"><span class="ch-name">X / Twitter</span><span class="ch-handle">@roylyonse</span></div><span class="ch-arr">→</span>
       </a>
       <a class="ch-btn ch-reddit" href="https://reddit.com/u/saasmarkt" target="_blank">
         <div class="ch-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg></div>
-        <div class="ch-info"><span class="ch-name">Reddit</span><span class="ch-handle">u/saasmarkt</span></div>
-        <span class="ch-arr">→</span>
+        <div class="ch-info"><span class="ch-name">Reddit</span><span class="ch-handle">u/saasmarkt</span></div><span class="ch-arr">→</span>
       </a>
       <a class="ch-btn ch-li" href="https://linkedin.com/in/roylyonse" target="_blank">
         <div class="ch-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
-        <div class="ch-info"><span class="ch-name">LinkedIn</span><span class="ch-handle">roylyonse</span></div>
-        <span class="ch-arr">→</span>
+        <div class="ch-info"><span class="ch-name">LinkedIn</span><span class="ch-handle">roylyonse</span></div><span class="ch-arr">→</span>
       </a>
       <a class="ch-btn ch-fb" href="https://facebook.com/saasbruv/" target="_blank">
         <div class="ch-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
-        <div class="ch-info"><span class="ch-name">Facebook</span><span class="ch-handle">saasbruv</span></div>
-        <span class="ch-arr">→</span>
+        <div class="ch-info"><span class="ch-name">Facebook</span><span class="ch-handle">saasbruv</span></div><span class="ch-arr">→</span>
       </a>
     </div>
   </div>
@@ -958,28 +961,28 @@ footer{
 <section>
   <div class="sec-hdr rv on"><div class="sec-num">05</div><div class="sec-lbl">All Recommended SaaS Tools</div></div>
   <div class="tools-grid">
-    <a class="tool-card" data-n="01" href="https://aifiesta.link/roylyonse-mwai" target="_blank"><div class="tool-name">AI Fiesta</div><div class="tool-desc">ChatGPT, Gemini, Claude, Deepseek, and Grok — all under one subscription. Compare side-by-side in real time.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="02" href="https://refer.testimonial.to/roylyonse-mwai" target="_blank"><div class="tool-name">Testimonial.to</div><div class="tool-desc">Collect and display video and text testimonials without writing a line of code. Embeds anywhere.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="03" href="https://ref.wisprflow.ai/roylyonse-mwai" target="_blank"><div class="tool-name">Wispr Flow</div><div class="tool-desc">Dictate into any Mac app with AI voice transcription that understands context and self-corrects.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="04" href="https://anara.com/?via=roylyonse-mwai" target="_blank"><div class="tool-name">Anara</div><div class="tool-desc">AI research assistant for professionals. Pull insights from documents, PDFs, and the web in seconds.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="05" href="https://go.cap.so/roylyonse-mwai" target="_blank"><div class="tool-name">Cap</div><div class="tool-desc">Open-source Loom alternative. Record, share, and collaborate on screen recordings with zero friction.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="06" href="https://try.replo.app/roylyonse-mwai" target="_blank"><div class="tool-name">Replo</div><div class="tool-desc">Build high-converting Shopify landing pages with a drag-and-drop editor for performance marketers.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="07" href="https://anything.link/roylyonse-mwai" target="_blank"><div class="tool-name">Anything AI</div><div class="tool-desc">Turn any idea into a deployed app just by describing it. The AI agent builds the whole thing.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="08" href="https://refer.cal.com/roywan-wwvt" target="_blank"><div class="tool-name">Cal.com</div><div class="tool-desc">Open-source scheduling infrastructure. Replace Calendly with something you actually own.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="09" href="https://ref.jace.ai/roylyonse-mwai" target="_blank"><div class="tool-name">Jace AI</div><div class="tool-desc">AI executive assistant that reads email, drafts replies, and manages your calendar autonomously.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="10" href="https://link.chatbase.co/roylyonse-mwai" target="_blank"><div class="tool-name">Chatbase</div><div class="tool-desc">Build a custom ChatGPT-powered chatbot trained on your own data. Embed in minutes.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="11" href="https://go.intellijend.com/roylyonse-mwai" target="_blank"><div class="tool-name">Intellijend</div><div class="tool-desc">AI outreach and sales intelligence. Find better leads and write better cold emails automatically.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="12" href="https://superli.st/roylyonse-mwai" target="_blank"><div class="tool-name">Superlist</div><div class="tool-desc">Beautifully fast to-do and project manager for teams who move fast and hate bloat.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="13" href="https://go.kite.video/roylyonse-mwai" target="_blank"><div class="tool-name">Kite Video</div><div class="tool-desc">Create interactive product demos and video tours that convert visitors without a sales call.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="14" href="https://try.magica.com/roylyonse-mwai" target="_blank"><div class="tool-name">Magica</div><div class="tool-desc">AI image enhancement and background removal. Restore photos or clean up product shots in one click.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="15" href="https://go.privy.com/roylyonse-mwai" target="_blank"><div class="tool-name">Privy</div><div class="tool-desc">Email and SMS marketing for Shopify stores. Grow your list, recover carts, and drive repeat sales.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="16" href="https://coderabbit.link/roylyonse-mwai" target="_blank"><div class="tool-name">CodeRabbit</div><div class="tool-desc">AI code reviewer that reads pull requests and gives actionable, context-aware feedback in seconds.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="17" href="https://marblism.com/?via=roylyonse-mwai" target="_blank"><div class="tool-name">Marblism</div><div class="tool-desc">AI employees who manage your inbox, post on social, write SEO articles, and find leads.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="18" href="https://tryclico.link/roylyonse-mwai" target="_blank"><div class="tool-name">Clico</div><div class="tool-desc">AI writing assistant extension. Write, summarise, and dictate inside every text box on the web.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="19" href="https://try.ranked.ai/roylyonse-mwai" target="_blank"><div class="tool-name">Ranked AI</div><div class="tool-desc">SEO platform with AI content writing, keyword research, and rank tracking in one dashboard.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="20" href="https://www.beehiiv.com?via=roylyonse-mwai" target="_blank"><div class="tool-name">Beehiiv</div><div class="tool-desc">The newsletter platform built for growth. Monetise your audience with built-in ads and subscriptions.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="21" href="https://refer.kick.co/roylyonse-mwai" target="_blank"><div class="tool-name">Kick</div><div class="tool-desc">Creator-first streaming with higher revenue share and fewer restrictions than legacy platforms.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool-card" data-n="22" href="https://tiiny.host?fpr=saasbro" target="_blank"><div class="tool-name">Tiiny Host</div><div class="tool-desc">The fastest way to publish a static site or prototype online. No server config, no nonsense.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="01" href="https://aifiesta.link/roylyonse-mwai" target="_blank"><div class="tool-number">01</div><div class="tool-name">AI Fiesta</div><div class="tool-desc">ChatGPT, Gemini, Claude, Deepseek, and Grok — all under one subscription. Compare side-by-side in real time.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="02" href="https://refer.testimonial.to/roylyonse-mwai" target="_blank"><div class="tool-number">02</div><div class="tool-name">Testimonial.to</div><div class="tool-desc">Collect and display video and text testimonials without writing a line of code. Embeds anywhere.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="03" href="https://ref.wisprflow.ai/roylyonse-mwai" target="_blank"><div class="tool-number">03</div><div class="tool-name">Wispr Flow</div><div class="tool-desc">Dictate into any Mac app with AI voice transcription that understands context and self-corrects.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="04" href="https://anara.com/?via=roylyonse-mwai" target="_blank"><div class="tool-number">04</div><div class="tool-name">Anara</div><div class="tool-desc">AI research assistant for professionals. Pull insights from documents, PDFs, and the web in seconds.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="05" href="https://go.cap.so/roylyonse-mwai" target="_blank"><div class="tool-number">05</div><div class="tool-name">Cap</div><div class="tool-desc">Open-source Loom alternative. Record, share, and collaborate on screen recordings with zero friction.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="06" href="https://try.replo.app/roylyonse-mwai" target="_blank"><div class="tool-number">06</div><div class="tool-name">Replo</div><div class="tool-desc">Build high-converting Shopify landing pages with a drag-and-drop editor for performance marketers.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="07" href="https://anything.link/roylyonse-mwai" target="_blank"><div class="tool-number">07</div><div class="tool-name">Anything AI</div><div class="tool-desc">Turn any idea into a deployed app just by describing it. The AI agent builds the whole thing.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="08" href="https://refer.cal.com/roywan-wwvt" target="_blank"><div class="tool-number">08</div><div class="tool-name">Cal.com</div><div class="tool-desc">Open-source scheduling infrastructure. Replace Calendly with something you actually own.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="09" href="https://ref.jace.ai/roylyonse-mwai" target="_blank"><div class="tool-number">09</div><div class="tool-name">Jace AI</div><div class="tool-desc">AI executive assistant that reads email, drafts replies, and manages your calendar autonomously.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="10" href="https://link.chatbase.co/roylyonse-mwai" target="_blank"><div class="tool-number">10</div><div class="tool-name">Chatbase</div><div class="tool-desc">Build a custom ChatGPT-powered chatbot trained on your own data. Embed in minutes.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="11" href="https://go.intellijend.com/roylyonse-mwai" target="_blank"><div class="tool-number">11</div><div class="tool-name">Intellijend</div><div class="tool-desc">AI outreach and sales intelligence. Find better leads and write better cold emails automatically.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="12" href="https://superli.st/roylyonse-mwai" target="_blank"><div class="tool-number">12</div><div class="tool-name">Superlist</div><div class="tool-desc">Beautifully fast to-do and project manager for teams who move fast and hate bloat.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="13" href="https://go.kite.video/roylyonse-mwai" target="_blank"><div class="tool-number">13</div><div class="tool-name">Kite Video</div><div class="tool-desc">Create interactive product demos and video tours that convert visitors without a sales call.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="14" href="https://try.magica.com/roylyonse-mwai" target="_blank"><div class="tool-number">14</div><div class="tool-name">Magica</div><div class="tool-desc">AI image enhancement and background removal. Restore photos or clean up product shots in one click.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="15" href="https://go.privy.com/roylyonse-mwai" target="_blank"><div class="tool-number">15</div><div class="tool-name">Privy</div><div class="tool-desc">Email and SMS marketing for Shopify stores. Grow your list, recover carts, and drive repeat sales.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="16" href="https://coderabbit.link/roylyonse-mwai" target="_blank"><div class="tool-number">16</div><div class="tool-name">CodeRabbit</div><div class="tool-desc">AI code reviewer that reads pull requests and gives actionable, context-aware feedback in seconds.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="17" href="https://marblism.com/?via=roylyonse-mwai" target="_blank"><div class="tool-number">17</div><div class="tool-name">Marblism</div><div class="tool-desc">AI employees who manage your inbox, post on social, write SEO articles, and find leads.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="18" href="https://tryclico.link/roylyonse-mwai" target="_blank"><div class="tool-number">18</div><div class="tool-name">Clico</div><div class="tool-desc">AI writing assistant extension. Write, summarise, and dictate inside every text box on the web.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="19" href="https://try.ranked.ai/roylyonse-mwai" target="_blank"><div class="tool-number">19</div><div class="tool-name">Ranked AI</div><div class="tool-desc">SEO platform with AI content writing, keyword research, and rank tracking in one dashboard.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="20" href="https://www.beehiiv.com?via=roylyonse-mwai" target="_blank"><div class="tool-number">20</div><div class="tool-name">Beehiiv</div><div class="tool-desc">The newsletter platform built for growth. Monetise your audience with built-in ads and subscriptions.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="21" href="https://refer.kick.co/roylyonse-mwai" target="_blank"><div class="tool-number">21</div><div class="tool-name">Kick</div><div class="tool-desc">Creator-first streaming with higher revenue share and fewer restrictions than legacy platforms.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool-card" data-n="22" href="https://tiiny.host?fpr=saasbro" target="_blank"><div class="tool-number">22</div><div class="tool-name">Tiiny Host</div><div class="tool-desc">The fastest way to publish a static site or prototype online. No server config, no nonsense.</div><div class="tool-cta">Try it →</div></a>
   </div>
 </section>
 
@@ -1062,108 +1065,154 @@ footer{
 
 <script>
 /* ── CURSOR ── */
-const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
-let mx=0,my=0,rx=0,ry=0;
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring'),trail=document.getElementById('cur-trail');
+let mx=0,my=0,rx=0,ry=0,tx=0,ty=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
 (function animC(){
   cur.style.left=mx+'px';cur.style.top=my+'px';
-  rx+=(mx-rx)*.1;ry+=(my-ry)*.1;
+  rx+=(mx-rx)*.14;ry+=(my-ry)*.14;
   ring.style.left=rx+'px';ring.style.top=ry+'px';
+  tx+=(mx-tx)*.07;ty+=(my-ty)*.07;
+  trail.style.left=tx+'px';trail.style.top=ty+'px';
   requestAnimationFrame(animC);
 })();
 
-/* ── ANIMATED BACKGROUND — PARTICLE GRID ── */
+/* Hover state */
+document.querySelectorAll('a,button,.opp-card,.deal-card,.tool-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
+});
+
+/* ─────────────────────────────────────────────
+   STARFIELD + SHOOTING STARS BACKGROUND
+───────────────────────────────────────────── */
 (function(){
   const canvas=document.getElementById('bg-canvas');
   const ctx=canvas.getContext('2d');
-  let W,H,pts=[];
+  let W,H,stars=[],shooters=[];
 
   function resize(){
     W=canvas.width=window.innerWidth;
     H=canvas.height=window.innerHeight;
-    init();
+    initStars();
   }
 
-  function init(){
-    pts=[];
-    const cols=Math.ceil(W/90),rows=Math.ceil(H/90);
-    for(let r=0;r<=rows;r++){
-      for(let c=0;c<=cols;c++){
-        pts.push({
-          ox:c*(W/cols),oy:r*(H/rows),
-          x:0,y:0,
-          vx:(Math.random()-.5)*.18,
-          vy:(Math.random()-.5)*.18,
-          r:Math.random()*1.1+.3,
-          pulse:Math.random()*Math.PI*2,
-          speed:Math.random()*.012+.005
-        });
-      }
+  /* ── STATIC STARS ── */
+  function initStars(){
+    stars=[];
+    const count=Math.floor((W*H)/3000);
+    for(let i=0;i<count;i++){
+      stars.push({
+        x:Math.random()*W,
+        y:Math.random()*H,
+        r:Math.random()*1.2+.15,
+        base:Math.random()*.55+.05,
+        phase:Math.random()*Math.PI*2,
+        speed:Math.random()*.018+.006,
+        color:pickStarColor()
+      });
     }
   }
 
-  let mouseX=W/2,mouseY=H/2;
+  function pickStarColor(){
+    const r=Math.random();
+    if(r<.05)return'rgba(0,107,63,'; // green — Kenya accent
+    if(r<.09)return'rgba(245,193,51,'; // gold — Kenya gold
+    if(r<.12)return'rgba(206,17,38,'; // red
+    return'rgba(255,255,255,';
+  }
+
+  /* ── SHOOTING STARS ── */
+  function spawnShooter(){
+    const angle=(Math.random()*.5+.1)*Math.PI; // mostly diagonal
+    const speed=Math.random()*6+5;
+    shooters.push({
+      x:Math.random()*W*.8,
+      y:Math.random()*H*.4,
+      vx:Math.cos(angle)*speed,
+      vy:Math.sin(angle)*speed,
+      len:Math.random()*120+60,
+      life:1,
+      decay:Math.random()*.012+.008,
+      width:Math.random()*.8+.4,
+      color:Math.random()<.15?'245,193,51':'255,255,255'
+    });
+  }
+
+  /* Schedule shooting stars */
+  function scheduleShooter(){
+    spawnShooter();
+    setTimeout(scheduleShooter, Math.random()*3200+1400);
+  }
+  setTimeout(scheduleShooter,800);
+
+  /* ── AURORA BLOBS ── */
+  const blobs=[
+    {x:.18,y:.28,rx:.38,c:'rgba(0,107,63,.042)'},
+    {x:.78,y:.65,rx:.3,c:'rgba(245,193,51,.028)'},
+    {x:.5,y:.5,rx:.25,c:'rgba(206,17,38,.022)'},
+  ];
+
+  let mouseX=0,mouseY=0;
   window.addEventListener('mousemove',e=>{mouseX=e.clientX;mouseY=e.clientY;});
 
   function draw(t){
     ctx.clearRect(0,0,W,H);
 
-    /* Aurora blobs */
-    const blobs=[
-      {x:W*.18,y:H*.28,r:W*.38,c:'rgba(0,107,63,.045)'},
-      {x:W*.78,y:H*.65,r:W*.3,c:'rgba(245,193,51,.03)'},
-      {x:W*.5,y:H*.5,r:W*.25,c:'rgba(206,17,38,.025)'},
-    ];
+    /* Aurora */
     blobs.forEach(b=>{
-      const ox=Math.sin(t*.00042+b.x)*60;
-      const oy=Math.cos(t*.00038+b.y)*50;
-      const grad=ctx.createRadialGradient(b.x+ox,b.y+oy,0,b.x+ox,b.y+oy,b.r);
-      grad.addColorStop(0,b.c);
-      grad.addColorStop(1,'rgba(0,0,0,0)');
-      ctx.fillStyle=grad;ctx.beginPath();
-      ctx.arc(b.x+ox,b.y+oy,b.r,0,Math.PI*2);ctx.fill();
+      const ox=Math.sin(t*.00042+b.x*10)*60;
+      const oy=Math.cos(t*.00038+b.y*10)*50;
+      const bx=b.x*W+ox,by=b.y*H+oy,br=b.rx*W;
+      const g=ctx.createRadialGradient(bx,by,0,bx,by,br);
+      g.addColorStop(0,b.c);g.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=g;ctx.beginPath();ctx.arc(bx,by,br,0,Math.PI*2);ctx.fill();
     });
 
-    /* Particles */
-    pts.forEach(p=>{
-      p.pulse+=p.speed;
-      const wobble=Math.sin(p.pulse);
-      p.x=p.ox+wobble*12+p.vx*t*.04;
-      p.y=p.oy+Math.cos(p.pulse*.7)*8+p.vy*t*.04;
-      if(p.x<-40)p.x=W+40;if(p.x>W+40)p.x=-40;
-      if(p.y<-40)p.y=H+40;if(p.y>H+40)p.y=-40;
-    });
-
-    /* Connections */
-    const maxDist=120;
-    ctx.lineWidth=.5;
-    for(let i=0;i<pts.length;i++){
-      for(let j=i+1;j<pts.length;j++){
-        const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y;
-        const d=Math.sqrt(dx*dx+dy*dy);
-        if(d<maxDist){
-          const alpha=(.22*(1-d/maxDist));
-          /* Mouse proximity boost */
-          const mdx=(pts[i].x+pts[j].x)/2-mouseX;
-          const mdy=(pts[i].y+pts[j].y)/2-mouseY;
-          const md=Math.sqrt(mdx*mdx+mdy*mdy);
-          const boost=md<180?(.3*(1-md/180)):0;
-          ctx.strokeStyle=`rgba(245,193,51,${alpha+boost})`;
-          ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.stroke();
-        }
-      }
-    }
-
-    /* Dots */
-    pts.forEach(p=>{
-      const mdx=p.x-mouseX,mdy=p.y-mouseY;
-      const md=Math.sqrt(mdx*mdx+mdy*mdy);
-      const near=md<160;
+    /* Twinkling stars */
+    stars.forEach(s=>{
+      s.phase+=s.speed;
+      const alpha=s.base+Math.sin(s.phase)*s.base*.7;
+      /* Mouse proximity boost */
+      const mdx=s.x-mouseX,mdy=s.y-mouseY,md=Math.sqrt(mdx*mdx+mdy*mdy);
+      const boost=md<200?(1-md/200)*.3:0;
       ctx.beginPath();
-      ctx.arc(p.x,p.y,near?p.r*2.2:p.r,0,Math.PI*2);
-      ctx.fillStyle=near?'rgba(245,193,51,.55)':'rgba(255,255,255,.18)';
+      ctx.arc(s.x,s.y,s.r+(boost*.6),0,Math.PI*2);
+      ctx.fillStyle=s.color+(Math.min(alpha+boost,.95))+')';
       ctx.fill();
+      /* Twinkle cross for brighter stars */
+      if(s.r>1.0&&alpha>.35){
+        const clen=s.r*4;
+        ctx.strokeStyle=s.color+(alpha*.4)+')';
+        ctx.lineWidth=.4;
+        ctx.beginPath();
+        ctx.moveTo(s.x-clen,s.y);ctx.lineTo(s.x+clen,s.y);
+        ctx.moveTo(s.x,s.y-clen);ctx.lineTo(s.x,s.y+clen);
+        ctx.stroke();
+      }
     });
+
+    /* Shooting stars */
+    for(let i=shooters.length-1;i>=0;i--){
+      const sh=shooters[i];
+      sh.x+=sh.vx;sh.y+=sh.vy;sh.life-=sh.decay;
+      if(sh.life<=0){shooters.splice(i,1);continue;}
+      const tailX=sh.x-sh.vx*(sh.len/Math.sqrt(sh.vx*sh.vx+sh.vy*sh.vy));
+      const tailY=sh.y-sh.vy*(sh.len/Math.sqrt(sh.vx*sh.vx+sh.vy*sh.vy));
+      const g=ctx.createLinearGradient(sh.x,sh.y,tailX,tailY);
+      g.addColorStop(0,'rgba('+sh.color+','+sh.life*.9+')');
+      g.addColorStop(.4,'rgba('+sh.color+','+sh.life*.3+')');
+      g.addColorStop(1,'rgba('+sh.color+',0)');
+      ctx.strokeStyle=g;ctx.lineWidth=sh.width;
+      ctx.beginPath();ctx.moveTo(sh.x,sh.y);ctx.lineTo(tailX,tailY);ctx.stroke();
+      /* Head glow */
+      const hg=ctx.createRadialGradient(sh.x,sh.y,0,sh.x,sh.y,3);
+      hg.addColorStop(0,'rgba('+sh.color+','+sh.life*.8+')');
+      hg.addColorStop(1,'rgba('+sh.color+',0)');
+      ctx.fillStyle=hg;ctx.beginPath();ctx.arc(sh.x,sh.y,3,0,Math.PI*2);ctx.fill();
+      /* Out of bounds */
+      if(sh.x<-200||sh.x>W+200||sh.y<-200||sh.y>H+200)shooters.splice(i,1);
+    }
 
     requestAnimationFrame(draw);
   }
@@ -1172,6 +1221,37 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
   window.addEventListener('resize',resize);
   requestAnimationFrame(draw);
 })();
+
+/* ── MAGNETIC CARD MOUSE TRACKING ── */
+function addMagneticTracking(selector){
+  document.querySelectorAll(selector).forEach(el=>{
+    el.addEventListener('mousemove',e=>{
+      const rect=el.getBoundingClientRect();
+      const x=((e.clientX-rect.left)/rect.width*100).toFixed(1)+'%';
+      const y=((e.clientY-rect.top)/rect.height*100).toFixed(1)+'%';
+      el.style.setProperty('--mx',x);
+      el.style.setProperty('--my',y);
+    });
+  });
+}
+addMagneticTracking('.deal-card');
+addMagneticTracking('.tool-card');
+addMagneticTracking('.article-card');
+addMagneticTracking('.opp-full');
+addMagneticTracking('.ch-btn');
+
+/* ── TILT ON TOOL CARDS ── */
+document.querySelectorAll('.tool-card,.opp-card,.deal-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const rect=card.getBoundingClientRect();
+    const cx=rect.left+rect.width/2,cy=rect.top+rect.height/2;
+    const dx=(e.clientX-cx)/rect.width,dy=(e.clientY-cy)/rect.height;
+    card.style.transform=`perspective(600px) rotateY(${dx*5}deg) rotateX(${-dy*4}deg) translateZ(4px)`;
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.transform='perspective(600px) rotateY(0deg) rotateX(0deg) translateZ(0)';
+  });
+});
 
 /* ── LOADER ── */
 const lbar=document.getElementById('lbar'),loader=document.getElementById('loader');
@@ -1202,23 +1282,18 @@ const lv=setInterval(()=>{
   draw();
 })();
 
-/* ── LIVE TICKER (BLOOMBERG STYLE) ── */
+/* ── LIVE TICKER ── */
 (function(){
   const deals=[
-    {name:'MARBLISM',val:'10% LT',up:true},
-    {name:'BEEHIIV',val:'20% · 3MO',up:true},
-    {name:'CAL.COM',val:'20% · 12MO',up:true},
-    {name:'CAP',val:'20% · 12MO',up:true},
-    {name:'DUB.CO',val:'20% · 3MO',up:true},
-    {name:'INTELLIJEND',val:'10% LT',up:true},
-    {name:'TIINY HOST',val:'20% OFF',up:true},
-    {name:'CHATBASE',val:'ACTIVE',up:true},
-    {name:'ANYTHING AI',val:'20% OFF',up:true},
-    {name:'JACE AI',val:'ACTIVE',up:true},
+    {name:'MARBLISM',val:'10% LT',up:true},{name:'BEEHIIV',val:'20% · 3MO',up:true},
+    {name:'CAL.COM',val:'20% · 12MO',up:true},{name:'CAP',val:'20% · 12MO',up:true},
+    {name:'DUB.CO',val:'20% · 3MO',up:true},{name:'INTELLIJEND',val:'10% LT',up:true},
+    {name:'TIINY HOST',val:'20% OFF',up:true},{name:'CHATBASE',val:'ACTIVE',up:true},
+    {name:'ANYTHING AI',val:'20% OFF',up:true},{name:'JACE AI',val:'ACTIVE',up:true},
   ];
   const track=document.getElementById('tickerTrack');
   if(!track)return;
-  const full=[...deals,...deals]; /* double for seamless loop */
+  const full=[...deals,...deals];
   full.forEach(d=>{
     const el=document.createElement('div');
     el.className='tick-item';
@@ -1273,7 +1348,7 @@ const cobs=new IntersectionObserver(en=>{
   en.forEach(e=>{
     if(e.isIntersecting){
       const idx=Array.from(document.querySelectorAll('.tool-card')).indexOf(e.target);
-      e.target.style.animationDelay=(idx%5)*.06+'s';
+      e.target.style.animationDelay=(idx%6)*.065+'s';
       e.target.classList.add('on');cobs.unobserve(e.target);
     }
   });
@@ -1292,5 +1367,3 @@ document.querySelectorAll('.cu').forEach(el=>cuObs.observe(el));
 </script>
 </body>
 </html>
-
-Done
