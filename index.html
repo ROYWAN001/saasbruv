@@ -56,166 +56,242 @@ body.hovering #cur-trail{width:64px;height:64px;}
 .rvR{opacity:0;transform:translateX(28px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1);}
 .rvR.on{opacity:1;transform:translateX(0);}
 
-/* HERO */
+
+/* ═══════════════════════════════
+   HERO — FULL WIDTH AI CONSULTING
+═══════════════════════════════ */
 .hero{position:relative;z-index:1;border-bottom:var(--border);opacity:0;animation:heroIn .9s cubic-bezier(.16,1,.3,1) .1s forwards;}
 @keyframes heroIn{from{opacity:0}to{opacity:1}}
-.hero-inner{display:grid;grid-template-columns:380px 1fr;min-height:96vh;}
-.hero-brand{padding:3rem 2.5rem;display:flex;flex-direction:column;justify-content:space-between;border-right:var(--border);position:relative;overflow:hidden;background:rgba(0,0,0,.6);backdrop-filter:blur(2px);}
-.hero-brand::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(245,193,51,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(245,193,51,.025) 1px,transparent 1px);background-size:36px 36px;animation:gridDrift 12s linear infinite;pointer-events:none;}
-@keyframes gridDrift{0%{background-position:0 0}100%{background-position:36px 36px}}
-.hero-brand>*{position:relative;z-index:1;}
-.flag-wrap{overflow:hidden;width:80px;height:12px;margin-bottom:1.4rem;border-radius:1px;}
-#flagCanvas{display:block;}
-.hero-name{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(2.6rem,5.5vw,5rem);line-height:.88;letter-spacing:-4px;color:var(--text);margin-bottom:1.4rem;}
-.hero-name em{display:block;color:var(--gold);font-style:italic;}
-.hero-bio p{font-size:.9rem;line-height:1.9;color:var(--text-muted);max-width:340px;}
-.hero-bio p+p{margin-top:.7rem;}
-.hero-bio strong{color:var(--text);}
-.hero-meta{display:grid;grid-template-columns:1fr 1fr;border-top:var(--border);margin-top:2rem;}
-.hm-cell{padding:.75rem 0;border-right:var(--border);}
-.hm-cell:nth-child(even){border-right:none;padding-left:1rem;}
-.hm-label{font-family:'Space Mono',monospace;font-size:.5rem;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.22);}
-.hm-val{font-family:'Fraunces',serif;font-weight:700;font-size:.85rem;color:var(--accent);margin-top:.1rem;}
+.hero-inner{display:grid;grid-template-columns:1fr;min-height:100vh;}
 
-.hero-right{display:flex;flex-direction:column;position:relative;}
-.hero-hl-block{padding:3rem 3rem 2.2rem;border-bottom:var(--border);background:rgba(0,0,0,.4);backdrop-filter:blur(4px);}
-
-/* ── AI CONSULTING HERO ── */
-.consult-hero{
-  flex:1;display:flex;flex-direction:column;justify-content:center;
-  padding:3.5rem 3rem;position:relative;overflow:hidden;
-  background:rgba(0,0,0,.3);
-}
-/* Animated green pulse bg */
-.consult-hero::before{
-  content:'';position:absolute;inset:0;
+/* animated bg layers */
+.hero-inner::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
   background:
-    radial-gradient(ellipse 70% 55% at 85% 20%,rgba(0,107,63,.13) 0%,transparent 65%),
-    radial-gradient(ellipse 50% 40% at 15% 85%,rgba(245,193,51,.06) 0%,transparent 60%);
-  animation:cpulse 6s ease-in-out infinite alternate;
-  pointer-events:none;
+    radial-gradient(ellipse 65% 60% at 75% 30%,rgba(0,107,63,.11) 0%,transparent 65%),
+    radial-gradient(ellipse 40% 50% at 20% 70%,rgba(245,193,51,.055) 0%,transparent 60%),
+    radial-gradient(ellipse 30% 40% at 85% 75%,rgba(206,17,38,.04) 0%,transparent 55%);
+  animation:hbg 8s ease-in-out infinite alternate;
 }
-@keyframes cpulse{
-  0%{opacity:.7;transform:scale(1);}
-  100%{opacity:1;transform:scale(1.04);}
-}
-.consult-hero>*{position:relative;z-index:1;}
+@keyframes hbg{0%{opacity:.7;transform:scale(1)}100%{opacity:1;transform:scale(1.03)}}
 
-.c-eyebrow{
+.hero-full{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  min-height:100vh;
+  position:relative;
+}
+
+/* LEFT COPY BLOCK */
+.hf-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:5rem 4rem 4rem 5rem;
+  border-right:var(--border);
+  position:relative;
+}
+
+.hf-badge{
   display:inline-flex;align-items:center;gap:.55rem;
   font-family:'Space Mono',monospace;font-size:.52rem;font-weight:700;
-  text-transform:uppercase;letter-spacing:.22em;
-  color:var(--accent);margin-bottom:1.4rem;
+  text-transform:uppercase;letter-spacing:.2em;
+  color:var(--accent);margin-bottom:2rem;
 }
-.c-eyebrow::before{
-  content:'';width:28px;height:1.5px;background:var(--accent);
-  box-shadow:0 0 6px rgba(0,107,63,.8);
-}
-.c-dot{
-  width:7px;height:7px;border-radius:50%;background:var(--accent);
+.hf-badge-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0;
   box-shadow:0 0 0 0 rgba(0,107,63,.8);
   animation:tpulse 1.6s ease-out infinite;
 }
+.hf-badge::after{content:'';flex:1;max-width:24px;height:1px;background:var(--accent);opacity:.5;}
 
-.c-headline{
+.hf-headline{
   font-family:'Fraunces',serif;font-weight:900;
-  font-size:clamp(2.4rem,4.2vw,4rem);
-  line-height:.92;letter-spacing:-3px;
-  color:var(--text);margin-bottom:1.4rem;
+  font-size:clamp(3rem,5.5vw,5.4rem);
+  line-height:.9;letter-spacing:-4px;
+  color:var(--text);
+  margin-bottom:1.8rem;
 }
-.c-headline em{
+.hf-headline em{
   display:block;color:var(--gold);font-style:italic;
-  text-shadow:0 0 40px rgba(245,193,51,.25);
+  text-shadow:0 0 60px rgba(245,193,51,.2);
 }
-.c-headline strong{color:var(--red);}
+.hf-headline .hl-red{color:var(--red);}
 
-.c-sub{
-  font-size:.96rem;line-height:1.85;color:var(--text-muted);
-  max-width:480px;margin-bottom:2rem;
-  border-left:2px solid rgba(0,107,63,.4);
-  padding-left:1rem;
-}
-.c-sub strong{color:var(--text);}
-
-/* Services pills */
-.c-services{
-  display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.2rem;
-}
-.c-pill{
-  font-family:'Space Mono',monospace;font-size:.52rem;font-weight:700;
-  text-transform:uppercase;letter-spacing:.1em;
-  padding:.3rem .7rem;
-  border:1px solid rgba(255,255,255,.1);
+.hf-sub{
+  font-size:1rem;line-height:1.85;
   color:var(--text-muted);
-  position:relative;overflow:hidden;
-  transition:border-color .2s,color .2s,background .2s;
+  max-width:440px;
+  margin-bottom:2.5rem;
 }
-.c-pill:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,107,63,.06);}
-.c-pill.hot{border-color:rgba(245,193,51,.35);color:var(--gold);}
-.c-pill.hot:hover{background:rgba(245,193,51,.06);}
+.hf-sub strong{color:var(--text);}
 
-/* Big CTA */
-.c-cta-group{display:flex;align-items:center;gap:.85rem;flex-wrap:wrap;}
-.btn-consult{
-  display:inline-flex;align-items:center;gap:.6rem;
-  padding:1rem 1.8rem;
+/* CTA STACK */
+.hf-ctas{display:flex;flex-direction:column;gap:.75rem;align-items:flex-start;margin-bottom:3rem;}
+
+.btn-primary{
+  display:inline-flex;align-items:center;gap:.7rem;
+  padding:1.05rem 2rem;
   background:var(--accent);color:#fff;
-  font-family:'Fraunces',serif;font-weight:900;font-size:1rem;
+  font-family:'Fraunces',serif;font-weight:900;font-size:1.05rem;
   letter-spacing:-.01em;text-decoration:none;
   position:relative;overflow:hidden;
-  transition:transform .18s cubic-bezier(.16,1,.3,1),box-shadow .18s,background .18s;
-  box-shadow:0 0 0 0 rgba(0,107,63,0);
+  transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s,background .2s;
+  border:1px solid rgba(255,255,255,.08);
 }
-.btn-consult::before{
+.btn-primary::before{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(255,255,255,.15) 0%,transparent 55%);
+  background:linear-gradient(135deg,rgba(255,255,255,.12) 0%,transparent 50%);
   pointer-events:none;
 }
-.btn-consult:hover{
-  transform:translateY(-3px);
-  background:#007a47;
-  box-shadow:0 10px 36px rgba(0,107,63,.5),0 0 0 1px rgba(245,193,51,.25);
+.btn-primary:hover{
+  transform:translateY(-3px);background:#007a47;
+  box-shadow:0 14px 40px rgba(0,107,63,.55),0 0 0 1px rgba(245,193,51,.2);
 }
-.btn-consult-ghost{
-  display:inline-flex;align-items:center;gap:.5rem;
-  padding:.95rem 1.6rem;
+.btn-primary svg{flex-shrink:0;}
+
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:1rem 1.8rem;
   border:var(--border-strong);color:var(--text);
   font-family:'Space Mono',monospace;font-weight:700;font-size:.6rem;
   text-transform:uppercase;letter-spacing:.12em;text-decoration:none;
-  transition:background .2s,border-color .2s,color .2s;
+  transition:border-color .2s,background .2s,color .2s;
 }
-.btn-consult-ghost:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.25);}
+.btn-secondary:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.3);}
 
-/* Trust proof row */
-.c-trust{
-  margin-top:2rem;padding-top:1.6rem;
-  border-top:var(--border);
-  display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap;
+/* MICRO TRUST */
+.hf-trust{
+  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
 }
+.hf-trust-item{
+  display:flex;flex-direction:column;
+  border-left:2px solid rgba(255,255,255,.07);
+  padding-left:.7rem;
+}
+.hf-trust-num{font-family:'Fraunces',serif;font-weight:900;font-size:1.35rem;line-height:1;color:var(--text);}
+.hf-trust-lbl{font-family:'Space Mono',monospace;font-size:.46rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.28);margin-top:.1rem;}
+
+/* RIGHT PANEL */
+.hf-right{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:5rem 4rem 4rem;
+  gap:1px;
+  position:relative;
+}
+
+/* Flag strip — top of right panel */
+.hf-flag{width:100%;height:3px;margin-bottom:3rem;position:relative;overflow:hidden;}
+#flagCanvasHero{display:block;width:100%;height:100%;}
+
+/* SERVICE CARDS */
+.hf-services{display:flex;flex-direction:column;gap:1px;flex:1;}
+
+.hf-svc{
+  padding:1.4rem 1.6rem;
+  border:var(--border);
+  background:rgba(255,255,255,.018);
+  display:flex;flex-direction:column;gap:.45rem;
+  position:relative;overflow:hidden;
+  transition:background .22s,border-color .22s;
+  cursor:default;
+  --mx:50%;--my:50%;
+}
+.hf-svc::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at var(--mx) var(--my),rgba(0,107,63,.09) 0%,transparent 65%);
+  opacity:0;transition:opacity .3s;pointer-events:none;
+}
+.hf-svc:hover::before{opacity:1;}
+.hf-svc::after{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:var(--accent);transform:scaleY(0);transform-origin:bottom;
+  transition:transform .3s cubic-bezier(.16,1,.3,1);
+}
+.hf-svc:hover::after{transform:scaleY(1);}
+.hf-svc:hover{background:rgba(0,107,63,.04);border-color:rgba(0,107,63,.2);}
+.hf-svc>*{position:relative;z-index:1;}
+
+.hf-svc-top{display:flex;align-items:center;justify-content:space-between;gap:.5rem;}
+.hf-svc-name{font-family:'Fraunces',serif;font-weight:700;font-size:1rem;color:var(--text);line-height:1.1;}
+.hf-svc-tag{
+  font-family:'Space Mono',monospace;font-size:.46rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;padding:.2rem .45rem;
+  border:1px solid currentColor;flex-shrink:0;
+}
+.hf-svc-tag.core{color:var(--gold);border-color:rgba(245,193,51,.35);}
+.hf-svc-tag.new{color:var(--accent);border-color:rgba(0,107,63,.4);}
+.hf-svc-desc{font-size:.75rem;line-height:1.68;color:var(--text-muted);}
+.hf-svc-outcome{
+  font-family:'Space Mono',monospace;font-size:.52rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.08em;color:var(--accent);
+  display:flex;align-items:center;gap:.35rem;
+  transition:gap .2s,color .2s;
+}
+.hf-svc:hover .hf-svc-outcome{color:var(--gold);gap:.65rem;}
+
+/* BOTTOM CTA BAR */
+.hf-bottom-bar{
+  padding:1.6rem 4rem 1.6rem 5rem;
+  border-top:var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:2rem;flex-wrap:wrap;
+  background:rgba(0,107,63,.04);
+  position:relative;
+}
+.hf-bottom-bar::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(0,107,63,.5) 30%,rgba(245,193,51,.3) 70%,transparent);
+}
+.hf-bottom-copy{font-family:'Space Mono',monospace;font-size:.56rem;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.1em;}
+.hf-bottom-copy strong{color:var(--text);font-family:'Fraunces',serif;font-size:.9rem;font-weight:700;text-transform:none;letter-spacing:0;display:block;margin-bottom:.15rem;}
+
+/* RESPONSIVE */
+@keyframes tpulse{0%{box-shadow:0 0 0 0 rgba(0,107,63,.7)}70%{box-shadow:0 0 0 6px rgba(0,107,63,0)}100%{box-shadow:0 0 0 0 rgba(0,107,63,0)}}
+
+/* old styles kept for sections below */
+.hero-brand{display:none;}
+.hero-hl-block{padding:3rem 3rem 2.2rem;border-bottom:var(--border);background:rgba(0,0,0,.4);backdrop-filter:blur(4px);}
+
+/* Outcome proof points */
+.c-outcomes{display:flex;flex-direction:column;gap:.75rem;margin-bottom:2rem;}
+.c-outcome{display:flex;align-items:flex-start;gap:.9rem;padding:.85rem 1rem;border:var(--border);background:rgba(255,255,255,.02);position:relative;overflow:hidden;transition:border-color .2s,background .2s;}
+.c-outcome::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--accent);transform:scaleY(0);transform-origin:bottom;transition:transform .28s cubic-bezier(.16,1,.3,1);}
+.c-outcome:hover::before{transform:scaleY(1);}
+.c-outcome:hover{border-color:rgba(0,107,63,.25);background:rgba(0,107,63,.04);}
+.c-outcome-icon{font-size:1.1rem;flex-shrink:0;line-height:1;margin-top:.1rem;}
+.c-outcome strong{font-family:'Fraunces',serif;font-weight:700;font-size:.88rem;display:block;margin-bottom:.2rem;color:var(--text);}
+.c-outcome span{font-size:.72rem;line-height:1.65;color:var(--text-muted);}
+
+/* ── AI CONSULTING (old classes kept for compat) ── */
+.consult-hero{flex:1;display:flex;flex-direction:column;justify-content:center;padding:3.5rem 3rem;position:relative;overflow:hidden;background:rgba(0,0,0,.3);}
+.consult-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 85% 20%,rgba(0,107,63,.13) 0%,transparent 65%),radial-gradient(ellipse 50% 40% at 15% 85%,rgba(245,193,51,.06) 0%,transparent 60%);animation:cpulse 6s ease-in-out infinite alternate;pointer-events:none;}
+@keyframes cpulse{0%{opacity:.7;transform:scale(1);}100%{opacity:1;transform:scale(1.04);}}
+.consult-hero>*{position:relative;z-index:1;}
+.c-eyebrow{display:inline-flex;align-items:center;gap:.55rem;font-family:'Space Mono',monospace;font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:.22em;color:var(--accent);margin-bottom:1.4rem;}
+.c-eyebrow::before{content:'';width:28px;height:1.5px;background:var(--accent);box-shadow:0 0 6px rgba(0,107,63,.8);}
+.c-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(0,107,63,.8);animation:tpulse 1.6s ease-out infinite;}
+.c-headline{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(2.4rem,4.2vw,4rem);line-height:.92;letter-spacing:-3px;color:var(--text);margin-bottom:1.4rem;}
+.c-headline em{display:block;color:var(--gold);font-style:italic;text-shadow:0 0 40px rgba(245,193,51,.25);}
+.c-headline strong{color:var(--red);}
+.c-sub{font-size:.96rem;line-height:1.85;color:var(--text-muted);max-width:480px;margin-bottom:2rem;border-left:2px solid rgba(0,107,63,.4);padding-left:1rem;}
+.c-sub strong{color:var(--text);}
+.c-services{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.2rem;}
+.c-pill{font-family:'Space Mono',monospace;font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.3rem .7rem;border:1px solid rgba(255,255,255,.1);color:var(--text-muted);position:relative;overflow:hidden;transition:border-color .2s,color .2s,background .2s;}
+.c-pill:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,107,63,.06);}
+.c-pill.hot{border-color:rgba(245,193,51,.35);color:var(--gold);}
+.c-pill.hot:hover{background:rgba(245,193,51,.06);}
+.c-cta-group{display:flex;align-items:center;gap:.85rem;flex-wrap:wrap;}
+.btn-consult{display:inline-flex;align-items:center;gap:.6rem;padding:1rem 1.8rem;background:var(--accent);color:#fff;font-family:'Fraunces',serif;font-weight:900;font-size:1rem;letter-spacing:-.01em;text-decoration:none;position:relative;overflow:hidden;transition:transform .18s cubic-bezier(.16,1,.3,1),box-shadow .18s,background .18s;}
+.btn-consult::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.15) 0%,transparent 55%);pointer-events:none;}
+.btn-consult:hover{transform:translateY(-3px);background:#007a47;box-shadow:0 10px 36px rgba(0,107,63,.5),0 0 0 1px rgba(245,193,51,.25);}
+.btn-consult-ghost{display:inline-flex;align-items:center;gap:.5rem;padding:.95rem 1.6rem;border:var(--border-strong);color:var(--text);font-family:'Space Mono',monospace;font-weight:700;font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;text-decoration:none;transition:background .2s,border-color .2s,color .2s;}
+.btn-consult-ghost:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.25);}
+.c-trust{margin-top:2rem;padding-top:1.6rem;border-top:var(--border);display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap;}
 .c-trust-item{display:flex;align-items:center;gap:.45rem;}
 .c-trust-num{font-family:'Fraunces',serif;font-weight:900;font-size:1.1rem;color:var(--gold);}
 .c-trust-lbl{font-family:'Space Mono',monospace;font-size:.5rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.3);}
 .c-trust-div{width:1px;height:22px;background:rgba(255,255,255,.08);}
-
-/* ── CONSULTING BRAND (LEFT PANEL) ── */
-.brand-consult-badge{
-  display:inline-flex;align-items:center;gap:.5rem;
-  font-family:'Space Mono',monospace;font-size:.48rem;font-weight:700;
-  text-transform:uppercase;letter-spacing:.16em;
-  color:var(--accent);
-  border:1px solid rgba(0,107,63,.4);
-  padding:.22rem .55rem;
-  margin-bottom:1.2rem;
-  background:rgba(0,107,63,.06);
-}
-.brand-consult-badge span{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:ldot 1.5s ease-in-out infinite;}
-
-/* Vertical divider accent */
-.hero-brand::after{
-  content:'';position:absolute;top:10%;bottom:10%;right:0;width:1px;
-  background:linear-gradient(180deg,transparent,rgba(0,107,63,.4) 40%,rgba(245,193,51,.3) 60%,transparent);
-  pointer-events:none;
-}
+.brand-consult-badge{display:none;}
+.hero-brand::after{display:none;}
 .eyebrow{font-family:'Space Mono',monospace;font-size:.52rem;text-transform:uppercase;letter-spacing:.22em;color:rgba(255,255,255,.28);margin-bottom:.7rem;}
 .hero-headline{font-family:'Fraunces',serif;font-size:clamp(2rem,3.6vw,3.4rem);font-weight:900;line-height:.96;letter-spacing:-2px;color:var(--text);}
 .hero-headline em{color:var(--gold);font-style:italic;}
@@ -546,94 +622,114 @@ footer{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:var(--border);p
 
 <header class="hero">
   <div class="hero-inner">
+    <div class="hero-full">
 
-    <!-- LEFT — Identity + Consulting Signal -->
-    <div class="hero-brand" id="heroLeft">
-      <div>
-        <div class="flag-wrap"><canvas id="flagCanvas" width="80" height="12"></canvas></div>
-        <div class="brand-consult-badge"><span></span>AI Consulting · Available Now</div>
-        <div class="hero-name">Roy<em>lyonse.</em></div>
-        <div class="hero-bio">
-          <p>I help <strong>businesses and organisations</strong> in Nairobi and beyond understand, adopt, and profit from artificial intelligence — without the jargon, without the bloat.</p>
-          <p>Strategy sessions, workflow automation, AI tool selection, team training. <strong>Practical AI. Real results.</strong></p>
-          <p>Also: SaaS affiliate, content creator, <strong>@SaaSBruv</strong>. But right now — let's talk about what AI can do for your organisation.</p>
+      <!-- LEFT — Headline + CTA -->
+      <div class="hf-left">
+        <div class="hf-badge">
+          <div class="hf-badge-dot"></div>
+          AI Consulting &amp; Automation · Open for Engagements
         </div>
-        <div class="hero-meta">
-          <div class="hm-cell"><div class="hm-label">Service</div><div class="hm-val">AI Consulting</div></div>
-          <div class="hm-cell"><div class="hm-label">Location</div><div class="hm-val">Nairobi, KE</div></div>
-          <div class="hm-cell"><div class="hm-label">Status</div><div class="hm-val" style="color:var(--accent);">● Open</div></div>
-          <div class="hm-cell"><div class="hm-label">Also</div><div class="hm-val">@SaaSBruv</div></div>
-        </div>
-      </div>
-    </div>
 
-    <!-- RIGHT — AI Consulting Lead Machine -->
-    <div class="hero-right">
-      <div class="consult-hero">
-        <div class="c-eyebrow"><div class="c-dot"></div>AI Consulting for Businesses &amp; Organisations</div>
-
-        <h1 class="c-headline">
-          Your business<br>
-          needs <em>AI.</em><br>
-          <strong>Now.</strong>
+        <h1 class="hf-headline">
+          We make<br>your business<br>
+          run on <em>AI.</em>
         </h1>
 
-        <p class="c-sub">
-          I work with <strong>companies, teams, and organisations</strong> to implement AI that cuts costs, speeds up work, and opens new revenue — without replacing your people with robots.
-          From Nairobi to anywhere. Hands-on. No fluff.
+        <p class="hf-sub">
+          We help <strong>businesses and organisations</strong> cut costs, eliminate bottlenecks,
+          and scale output — by deploying AI into the workflows your team runs every single day.
+          Not theory. Not decks. <strong>Working systems, in weeks.</strong>
         </p>
 
-        <div class="c-services">
-          <span class="c-pill hot">AI Strategy &amp; Roadmap</span>
-          <span class="c-pill hot">Workflow Automation</span>
-          <span class="c-pill">Team AI Training</span>
-          <span class="c-pill">Tool Selection &amp; Setup</span>
-          <span class="c-pill">AI Content Systems</span>
-          <span class="c-pill">Process Audit</span>
-          <span class="c-pill">Custom AI Integration</span>
-        </div>
-
-        <div class="c-cta-group">
-          <a class="btn-consult" href="mailto:roylyonse@roylyonse.co.uk?subject=AI%20Consulting%20Enquiry">
+        <div class="hf-ctas">
+          <a class="btn-primary" href="mailto:roylyonse@roylyonse.co.uk?subject=AI%20Consulting%20Enquiry&body=Hi%20Roylyonse%2C%0A%0AI%27d%20like%20to%20book%20a%20free%20discovery%20call%20to%20discuss%20AI%20consulting%20for%20my%20business.%0A%0AOrganisation%3A%0AChallenge%3A%0ABest%20time%20to%20talk%3A">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            Book a Consultation
+            Book a Free Discovery Call
           </a>
-          <a class="btn-consult-ghost" href="https://twitter.com/roylyonse" target="_blank">
-            Talk on X ↗
+          <a class="btn-secondary" href="https://linktr.ee/roylyonse" target="_blank">
+            See All Services ↗
           </a>
         </div>
 
-        <div class="c-trust">
-          <div class="c-trust-item">
-            <span class="c-trust-num">22+</span>
-            <span class="c-trust-lbl">AI Tools<br>Deployed</span>
+        <div class="hf-trust">
+          <div class="hf-trust-item">
+            <span class="hf-trust-num">22+</span>
+            <span class="hf-trust-lbl">AI Tools<br>Deployed</span>
           </div>
-          <div class="c-trust-div"></div>
-          <div class="c-trust-item">
-            <span class="c-trust-num">3</span>
-            <span class="c-trust-lbl">Sectors<br>Served</span>
+          <div class="hf-trust-item">
+            <span class="hf-trust-num">60%</span>
+            <span class="hf-trust-lbl">Avg. Time<br>Recovered</span>
           </div>
-          <div class="c-trust-div"></div>
-          <div class="c-trust-item">
-            <span class="c-trust-num">KE</span>
-            <span class="c-trust-lbl">Based in<br>Nairobi</span>
+          <div class="hf-trust-item">
+            <span class="hf-trust-num">Weeks</span>
+            <span class="hf-trust-lbl">Not months<br>to deploy</span>
           </div>
-          <div class="c-trust-div"></div>
-          <div class="c-trust-item">
-            <span class="c-trust-num">↗</span>
-            <span class="c-trust-lbl">Remote<br>Available</span>
+          <div class="hf-trust-item">
+            <span class="hf-trust-num">KE +</span>
+            <span class="hf-trust-lbl">Nairobi &amp;<br>Remote</span>
           </div>
         </div>
       </div>
 
-      <div class="hero-cta-row">
-        <a href="https://linktr.ee/roylyonse" target="_blank" class="btn-main"><span>All Links ↗</span></a>
-        <a href="https://reddit.com/u/saasmarkt" target="_blank" class="btn-main btn-red"><span>Reddit ↗</span></a>
-        <a href="https://twitter.com/roylyonse" target="_blank" class="btn-main"><span>X / Twitter ↗</span></a>
+      <!-- RIGHT — Service Cards -->
+      <div class="hf-right">
+        <div class="hf-flag"><canvas id="flagCanvas" width="800" height="3"></canvas></div>
+
+        <div class="hf-services">
+          <div class="hf-svc">
+            <div class="hf-svc-top">
+              <div class="hf-svc-name">AI Strategy &amp; Roadmap</div>
+              <span class="hf-svc-tag core">Core</span>
+            </div>
+            <div class="hf-svc-desc">We audit your operations, identify where AI has the highest leverage, and build a prioritised roadmap your team can actually execute — with or without a tech background.</div>
+            <div class="hf-svc-outcome">Clarity in week one →</div>
+          </div>
+
+          <div class="hf-svc">
+            <div class="hf-svc-top">
+              <div class="hf-svc-name">Workflow Automation</div>
+              <span class="hf-svc-tag core">Core</span>
+            </div>
+            <div class="hf-svc-desc">We map your repetitive processes — emails, reports, approvals, data entry — and replace them with AI-powered pipelines that run 24/7 without supervision.</div>
+            <div class="hf-svc-outcome">Hours back, every week →</div>
+          </div>
+
+          <div class="hf-svc">
+            <div class="hf-svc-top">
+              <div class="hf-svc-name">Custom AI Integration</div>
+              <span class="hf-svc-tag new">In Demand</span>
+            </div>
+            <div class="hf-svc-desc">Connect AI to your existing tools — CRMs, ERPs, spreadsheets, WhatsApp, email — so intelligence flows through your business, not around it.</div>
+            <div class="hf-svc-outcome">Your stack, made smarter →</div>
+          </div>
+
+          <div class="hf-svc">
+            <div class="hf-svc-top">
+              <div class="hf-svc-name">Team AI Training</div>
+              <span class="hf-svc-tag new">Popular</span>
+            </div>
+            <div class="hf-svc-desc">Hands-on training for your team — from basics to advanced prompting, AI-assisted workflows, and building habits that compound over time. No jargon. Just results.</div>
+            <div class="hf-svc-outcome">Team upskilled in a day →</div>
+          </div>
+        </div>
       </div>
+
     </div>
-
   </div>
+
+  <!-- BOTTOM BAR -->
+  <div class="hf-bottom-bar">
+    <div class="hf-bottom-copy">
+      <strong>Roylyonse Mwai</strong>
+      AI Consultant · Nairobi, Kenya · roylyonse.co.uk
+    </div>
+    <div style="display:flex;gap:.65rem;flex-wrap:wrap;">
+      <a href="https://linktr.ee/roylyonse" target="_blank" class="btn-main"><span>All Links ↗</span></a>
+      <a href="https://reddit.com/u/saasmarkt" target="_blank" class="btn-main btn-red"><span>Reddit ↗</span></a>
+    </div>
+  </div>
+
 </header>
 
 <div class="mq1" aria-hidden="true">
