@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SAAS BRUV — AI Consulting & Automation Studio · Kenya</title>
-<meta name="description" content="SAAS BRUV by Roylyonse Mwai. AI consulting and workflow automation for businesses in Kenya and East Africa. Productized packages, hands-on implementation, shipped in weeks.">
+<title>SAAS BRUV — AI Consulting & Automation · Global Remote</title>
+<meta name="description" content="SAAS BRUV by Roylyonse Mwai. AI consulting and workflow automation for businesses worldwide. Remote-first delivery. Working systems shipped in weeks.">
 <link rel="icon" type="image/jpeg" href="https://i.postimg.cc/KjfkG6xk/Untitled-June-04-2026-at-13-54-21-(3)-(1).jpg">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700;1,9..144,900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700;900&family=DM+Serif+Display:ital@0;1&family=Syne:wght@700;800&family=Bebas+Neue&family=Righteous&family=Raleway:wght@700;900&family=Oswald:wght@600;700&family=Abril+Fatface&family=Black+Han+Sans&family=Covered+By+Your+Grace&family=Permanent+Marker&family=Kalam:wght@700&family=Special+Elite&family=Monoton&family=Bungee&family=Russo+One&family=Chakra+Petch:wght@600;700&family=Orbitron:wght@700;900&family=Exo+2:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700;1,9..144,900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ══════════════════════════════════════════════
    SAAS BRUV v4
@@ -18,7 +18,7 @@
 :root{
   /* Flag primaries */
   --bg:#060606; --s1:#0C0C0A; --s2:#121210; --s3:#1A1A15;
-  --text:#F2EDE6; --muted:rgba(242,237,230,.5); --dim:rgba(242,237,230,.2);
+  --text:#F2EDE6; --muted:rgba(242,237,230,.72); --dim:rgba(242,237,230,.2);
   --green:#006B3C; --ghi:#008F52; --glo:rgba(0,107,60,.08);
   --red:#BB0A21;   --rhi:#D90C26; --rlo:rgba(187,10,33,.08);
   --bdr:rgba(242,237,230,.07); --bdr2:rgba(242,237,230,.13);
@@ -27,81 +27,58 @@
   --o1:#7B3FE4; --o2:#E040C8; --o3:#4FC3F7; --o4:#F5C842; --o5:#F2EDE6;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;overflow-x:hidden;}
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden;cursor:none;}
+html{scroll-behavior:smooth;overflow-x:hidden;font-size:17px;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.7;overflow-x:hidden;}
 a{text-decoration:none;color:inherit;}
 button{font-family:inherit;cursor:pointer;}
-@media(max-width:900px){body{cursor:auto;}}
+p{font-size:1rem;line-height:1.78;color:var(--muted);}
 
-/* ── CURSOR ──────────────────────────────────*/
-#cur{position:fixed;width:8px;height:8px;background:var(--red);pointer-events:none;z-index:9000;transform:translate(-50%,-50%);transition:width .1s,height .1s,background .15s;}
-#cur-ring{position:fixed;width:28px;height:28px;border:1.5px solid rgba(187,10,33,.4);pointer-events:none;z-index:8999;transform:translate(-50%,-50%);transition:all .18s cubic-bezier(.16,1,.3,1);}
-body.hov #cur{width:14px;height:14px;background:var(--green);}
-body.hov #cur-ring{width:44px;height:44px;border-color:rgba(0,107,60,.55);}
-body.clk #cur{width:22px;height:22px;}
-body.clk #cur-ring{width:58px;height:58px;border-color:rgba(187,10,33,.7);}
-@media(max-width:900px){#cur,#cur-ring{display:none;}}
+
+
 
 /* ── CANVAS ──────────────────────────────────*/
-#bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.9;}
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.85;}
 
-/* ── ORB ROTATION & FLOAT ─────────────────────*/
+/* ── ORB: ROTATING, MORPHING, SPINNING ──────*/
 .orb{
   border-radius:50%;pointer-events:none;
   background:radial-gradient(circle at 38% 35%,var(--o4) 0%,var(--o1) 26%,var(--o2) 50%,var(--o3) 70%,var(--o5) 100%);
   opacity:.78;mix-blend-mode:screen;
-  animation:orbf 7s ease-in-out infinite,orbspin 18s linear infinite;
+  animation:orbf 7s ease-in-out infinite;
 }
 @keyframes orbf{0%,100%{transform:scale(1) translateY(0) rotate(0deg);}50%{transform:scale(1.055) translateY(-8px) rotate(180deg);}}
-@keyframes orbspin{from{filter:hue-rotate(0deg);}to{filter:hue-rotate(360deg);}}
-.flag-orb{animation:orbf 7s ease-in-out infinite,orbspin 14s linear infinite,orborbit 22s linear infinite;}
-@keyframes orborbit{0%{border-radius:50%;transform:rotate(0deg) scale(1);}25%{border-radius:42% 58% 62% 38%/48% 42% 58% 52%;}50%{border-radius:50%;transform:rotate(180deg) scale(1.06);}75%{border-radius:58% 42% 38% 62%/52% 58% 42% 48%;}100%{border-radius:50%;transform:rotate(360deg) scale(1);}}
-.qorb{animation:orbf 8s ease-in-out infinite,orbspin 20s linear infinite,qorborbit 25s linear infinite;}
-@keyframes qorborbit{0%,100%{transform:rotate(0deg) scale(1);border-radius:50%;}33%{transform:rotate(120deg) scale(1.04);border-radius:40% 60% 55% 45%;}66%{transform:rotate(240deg) scale(.97);border-radius:60% 40% 45% 55%;}}
-.ptile-orb{animation:ptileorb 9s ease-in-out infinite,orbspin 16s linear infinite;}
-@keyframes ptileorb{0%,100%{transform:scale(1) rotate(0deg);}50%{transform:scale(1.08) rotate(180deg);}}
-@media(prefers-reduced-motion:reduce){.orb,.flag-orb,.qorb,.ptile-orb{animation:none;}}
 
-/* ── CURSOR TRAIL ────────────────────────────*/
-.cursor-spark{position:fixed;pointer-events:none;z-index:8990;width:5px;height:5px;border-radius:50%;transform:translate(-50%,-50%);animation:sparkfade .55s ease-out forwards;}
-@keyframes sparkfade{0%{opacity:.9;transform:translate(-50%,-50%) scale(1);}100%{opacity:0;transform:translate(-50%,-50%) scale(0);}}
+.flag-orb{position:absolute;width:76%;height:76%;border-radius:50%;
+  background:radial-gradient(circle at 38% 35%,var(--o4),var(--o1) 30%,#F04C4C 55%,var(--o2));
+  opacity:.78;mix-blend-mode:screen;
+  animation:orbf 7s ease-in-out infinite;}
+
+.qorb{position:absolute;width:76%;height:76%;border-radius:50%;
+  background:radial-gradient(circle at 38% 35%,var(--o4),var(--o1) 30%,#F04C4C 55%,var(--o2));
+  opacity:.78;mix-blend-mode:screen;
+  animation:orbf 8s ease-in-out infinite;}
+
+@media(prefers-reduced-motion:reduce){.orb,.flag-orb,.qorb{animation:none;}.rv{opacity:1;transform:none;transition:none;}}
+
+
 
 /* ── SCROLL REVEAL ───────────────────────────*/
-.rv{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
-.rv.on{opacity:1;transform:none;}
-/* section-level reveal for whole sections */
 section{position:relative;z-index:1;}
-.sec-rv{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
-.sec-rv.on{opacity:1;transform:none;}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1);}
+.rv.on{opacity:1;transform:none;}
+.rv.on.delay1{transition-delay:.08s;}.rv.on.delay2{transition-delay:.15s;}.rv.on.delay3{transition-delay:.22s;}
+
+/* ── TOOL CARD STAGGER ───────────────────────*/
+.tool{opacity:0;transform:translateY(18px) scale(.97);transition:opacity .45s cubic-bezier(.16,1,.3,1),transform .45s cubic-bezier(.16,1,.3,1),background .2s,box-shadow .2s;}
+.tool.tv{opacity:1;transform:none;}
 .fs{display:block;height:3px;flex-shrink:0;
   background:linear-gradient(to right,#0A0A0A 33.3%,var(--red) 33.3% 66.6%,var(--green) 66.6%);}
 
-/* ── LOADER ──────────────────────────────────*/
-#loader{
-  position:fixed;inset:0;background:var(--bg);z-index:9999;
-  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.6rem;
-  transition:opacity .6s .2s,visibility .6s .2s;
-}
-#loader.gone{opacity:0;visibility:hidden;}
-.ld-name{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(3rem,9vw,6rem);letter-spacing:-5px;line-height:.88;}
-.ld-name em{color:var(--red);font-style:italic;}
-/* Clickable block-bar */
-.ld-bar-outer{
-  display:flex;flex-direction:column;align-items:center;gap:.55rem;cursor:pointer;user-select:none;
-}
-.ld-bar-track{width:168px;height:4px;background:rgba(242,237,230,.07);position:relative;overflow:hidden;transition:height .14s;}
-.ld-bar-outer:hover .ld-bar-track{height:6px;}
-.ld-bar-outer:active .ld-bar-track{height:10px;}
-.ld-bar-fill{height:100%;width:0;transition:width .05s linear;
-  background:linear-gradient(to right,#0A0A0A 0 33%,var(--red) 33% 66%,var(--green) 66% 100%);
-  background-size:168px 100%;}
-.ld-hint{font-family:'Space Mono',monospace;font-size:.43rem;text-transform:uppercase;letter-spacing:.2em;color:var(--dim);}
-/* 7 block indicators */
-.ld-blocks{display:flex;gap:5px;}
-.ld-blk{width:12px;height:12px;background:rgba(242,237,230,.06);transition:background .2s,transform .15s;}
-.ld-blk.on-g{background:var(--green);transform:scaleY(1.6);}
-.ld-blk.on-r{background:var(--red);transform:scaleY(1.6);}
-.ld-blk.on-w{background:rgba(242,237,230,.45);transform:scaleY(1.6);}
+/* ── FLAG STRIPE ─────────────────────────────*/
+.fs{display:block;height:3px;flex-shrink:0;
+  background:linear-gradient(to right,#0A0A0A 33.3%,var(--red) 33.3% 66.6%,var(--green) 66.6%);}
+
+
 
 /* ── NAV ─────────────────────────────────────*/
 nav{
@@ -114,15 +91,15 @@ nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
   background:linear-gradient(to right,#0A0A0A 33.3%,var(--red) 33.3% 66.6%,var(--green) 66.6%);
   opacity:0;transition:opacity .3s;}
 nav.sc::after{opacity:1;}
-.nav-logo{font-family:'Fraunces',serif;font-weight:900;font-size:1.1rem;letter-spacing:-1px;}
+.nav-logo{font-family:'Fraunces',serif;font-weight:900;font-size:1.15rem;letter-spacing:-1px;}
 .nav-logo em{color:var(--red);font-style:italic;}
 .nav-links{display:flex;gap:2rem;}
-.nav-links a{font-family:'Space Mono',monospace;font-size:.51rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);transition:color .2s;}
+.nav-links a{font-family:'Inter',sans-serif;font-size:.9rem;font-weight:500;letter-spacing:.01em;color:var(--muted);transition:color .2s;}
 .nav-links a:hover{color:var(--text);}
 .nav-cta{
-  font-family:'Space Mono',monospace;font-size:.51rem;font-weight:700;
+  font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;
   text-transform:uppercase;letter-spacing:.1em;
-  padding:.5rem 1rem;background:var(--green);color:var(--text);
+  padding:.55rem 1.15rem;background:var(--green);color:var(--text);
   position:relative;overflow:hidden;transition:background .2s,transform .1s;
   box-shadow:0 3px 0 #004a2a;
 }
@@ -132,10 +109,46 @@ nav.sc::after{opacity:1;}
   background:linear-gradient(to right,#0A0A0A 33%,var(--red) 33% 66%,var(--green) 66%);}
 @media(max-width:768px){.nav-links{display:none;}}
 
+
+/* ── HAMBURGER NAV ───────────────────────────*/
+.nav-ham{
+  display:none;flex-direction:column;gap:5px;cursor:pointer;
+  padding:.4rem;background:none;border:none;z-index:700;
+}
+.nav-ham span{display:block;width:22px;height:2px;background:var(--text);transition:transform .25s,opacity .2s;}
+.nav-ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-ham.open span:nth-child(2){opacity:0;}
+.nav-ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.nav-mobile-menu{
+  display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+  background:rgba(6,6,6,.97);z-index:650;
+  flex-direction:column;align-items:flex-start;justify-content:center;
+  padding:5rem 2.5rem;gap:2.2rem;
+  backdrop-filter:blur(20px);
+}
+.nav-mobile-menu.open{display:flex;}
+.nav-mobile-menu a{
+  font-family:'Fraunces',serif;font-weight:900;
+  font-size:clamp(1.6rem,6vw,2.4rem);letter-spacing:-2px;
+  color:var(--text);transition:color .2s;
+}
+.nav-mobile-menu a:hover{color:var(--green);}
+.nav-mobile-menu .mob-cta{
+  margin-top:1rem;
+  font-family:'Space Mono',monospace;font-size:.75rem;
+  background:var(--green);color:var(--text);
+  padding:.85rem 1.6rem;display:inline-flex;align-items:center;gap:.6rem;
+  box-shadow:0 4px 0 #004a2a,4px 0 0 rgba(0,0,0,.3);
+}
+@media(max-width:768px){
+  .nav-ham{display:flex;}
+  .nav-links{display:none;}
+}
+
 /* ── SECTION UTILITIES ───────────────────────*/
 section{position:relative;z-index:1;}
 .sec-label{
-  font-family:'Space Mono',monospace;font-size:.45rem;font-weight:700;
+  font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;
   text-transform:uppercase;letter-spacing:.22em;color:var(--green);
   display:flex;align-items:center;gap:.5rem;margin-bottom:1.4rem;
 }
@@ -177,7 +190,7 @@ section{position:relative;z-index:1;}
 @keyframes rpl{to{transform:scale(4);opacity:0;}}
 /* inline text CTA */
 .cta-link{
-  font-family:'Space Mono',monospace;font-size:.5rem;font-weight:700;
+  font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;
   text-transform:uppercase;letter-spacing:.1em;color:var(--green);
   display:inline-flex;align-items:center;gap:.4rem;position:relative;
   transition:gap .2s,color .2s;
@@ -214,7 +227,7 @@ section{position:relative;z-index:1;}
 .hero-l>*{position:relative;z-index:1;}
 .hero-badge{
   display:inline-flex;align-items:center;gap:.55rem;
-  font-family:'Space Mono',monospace;font-size:.47rem;font-weight:700;
+  font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;
   text-transform:uppercase;letter-spacing:.18em;color:var(--green);margin-bottom:2rem;
 }
 .badge-dot{width:7px;height:7px;background:var(--green);
@@ -235,7 +248,7 @@ section{position:relative;z-index:1;}
 .hero-trust{display:flex;gap:1.2rem;flex-wrap:wrap;}
 .ti{border-left:2px solid var(--green);padding-left:.65rem;}
 .ti-n{font-family:'Fraunces',serif;font-weight:900;font-size:1.3rem;line-height:1;}
-.ti-l{font-family:'Space Mono',monospace;font-size:.39rem;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin-top:.08rem;}
+.ti-l{font-family:'Space Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:.08rem;}
 
 /* HERO RIGHT – package orbit */
 .hero-r{
@@ -243,7 +256,7 @@ section{position:relative;z-index:1;}
   padding:8rem 3.5rem 5rem;position:relative;overflow:hidden;
   background:rgba(242,237,230,.007);
 }
-.hero-r-lbl{font-family:'Space Mono',monospace;font-size:.43rem;text-transform:uppercase;letter-spacing:.2em;color:var(--dim);margin-bottom:1.1rem;}
+.hero-r-lbl{font-family:'Space Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.2em;color:var(--muted);margin-bottom:1.1rem;}
 .pkg-stack{display:flex;flex-direction:column;gap:1px;}
 /* package mini tile */
 .pm{
@@ -266,7 +279,7 @@ section{position:relative;z-index:1;}
 .pm:active{transform:scale(.985);}
 .pm-text{flex:1;}
 .pm-name{font-family:'Fraunces',serif;font-weight:700;font-size:.9rem;line-height:1.2;}
-.pm-cat{font-family:'Space Mono',monospace;font-size:.39rem;font-weight:700;
+.pm-cat{font-family:'Space Mono',monospace;font-size:.55rem;font-weight:700;
   text-transform:uppercase;letter-spacing:.08em;color:var(--green);margin-top:.12rem;}
 .pm-arr{font-family:'Space Mono',monospace;font-size:.48rem;color:var(--dim);
   transition:color .2s,transform .2s;}
@@ -320,7 +333,7 @@ section{position:relative;z-index:1;}
   background:rgba(242,237,230,.03);transition:border-color .2s,background .2s;}
 .pb:hover .pb-icon{border-color:var(--bdr-r);background:var(--rlo);}
 .pb-title{font-family:'Fraunces',serif;font-weight:700;font-size:.88rem;margin-bottom:.2rem;}
-.pb-body{font-size:.73rem;line-height:1.72;color:var(--muted);}
+.pb-body{font-size:.84rem;line-height:1.72;color:var(--muted);}
 
 /* ══════════════════════════════════════════════
    FLAGSHIP — AI OPERATIONS FOUNDATION
@@ -339,7 +352,7 @@ section{position:relative;z-index:1;}
 .flag-l>p{font-size:.93rem;line-height:1.9;color:var(--muted);max-width:430px;margin-bottom:1.8rem;}
 .flag-dl-title{font-family:'Space Mono',monospace;font-size:.42rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);margin-bottom:.6rem;}
 .flag-dl ul{list-style:none;display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.7rem;}
-.flag-dl li{font-size:.8rem;line-height:1.64;color:var(--muted);padding-left:1rem;position:relative;}
+.flag-dl li{font-size:.88rem;line-height:1.64;color:var(--muted);padding-left:1rem;position:relative;}
 .flag-dl li::before{content:'→';position:absolute;left:0;color:var(--green);font-size:.68rem;}
 .flag-pills{display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:1.8rem;}
 .pill{font-family:'Space Mono',monospace;font-size:.42rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
@@ -413,18 +426,18 @@ section{position:relative;z-index:1;}
   transform:scaleY(0);transform-origin:bottom;transition:transform .3s cubic-bezier(.16,1,.3,1);}
 .ptile:hover::after{transform:scaleY(1);}
 .ptile>*{position:relative;z-index:1;}
-.ptile-num{font-family:'Space Mono',monospace;font-size:.42rem;color:var(--dim);letter-spacing:.1em;}
+.ptile-num{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--dim);letter-spacing:.1em;}
 .ptile-name{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(1.1rem,2vw,1.55rem);line-height:.95;letter-spacing:-1.5px;color:var(--text);}
 .ptile-who{
-  font-family:'Space Mono',monospace;font-size:.44rem;font-weight:700;
+  font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;
   text-transform:uppercase;letter-spacing:.1em;color:var(--green);
   display:inline-flex;align-items:center;gap:.32rem;
 }
 .ptile:nth-child(even) .ptile-who{color:var(--red);}
 .ptile-who::before{content:'';width:5px;height:5px;background:currentColor;flex-shrink:0;}
-.ptile-desc{font-size:.79rem;line-height:1.78;color:var(--muted);}
+.ptile-desc{font-size:.9rem;line-height:1.78;color:var(--muted);}
 .ptile-list{list-style:none;display:flex;flex-direction:column;gap:.33rem;margin-top:.25rem;}
-.ptile-list li{font-size:.74rem;line-height:1.62;color:var(--muted);padding-left:.95rem;position:relative;}
+.ptile-list li{font-size:.84rem;line-height:1.62;color:var(--muted);padding-left:.95rem;position:relative;}
 .ptile-list li::before{content:'→';position:absolute;left:0;font-size:.62rem;color:var(--green);}
 .ptile:nth-child(even) .ptile-list li::before{color:var(--red);}
 .ptile-cta{margin-top:auto;padding-top:.9rem;}
@@ -460,20 +473,19 @@ section{position:relative;z-index:1;}
   padding:2.4rem;border-right:1px solid var(--bdr);
   display:flex;flex-direction:column;gap:.65rem;
   position:relative;overflow:hidden;cursor:pointer;
-  transition:background .2s,transform .12s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;
+  transition:background .2s;
 }
 .eblock:last-child{border-right:none;}
-.eblock:hover{background:var(--glo);transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,107,60,.12);}
-.eblock:active{transform:translateY(2px) scale(.985)!important;box-shadow:none!important;}
+.eblock:active{transform:scale(.988);}
 /* top stripe on hover */
 .eblock::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
   background:linear-gradient(to right,#0A0A0A 33%,var(--red) 33% 66%,var(--green) 66%);
   transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.16,1,.3,1);}
 .eblock:hover::before{transform:scaleX(1);}
 .eblock:hover{background:var(--glo);}
-.e-label{font-family:'Space Mono',monospace;font-size:.42rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--dim);}
+.e-label{font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);}
 .e-name{font-family:'Fraunces',serif;font-weight:900;font-size:1.3rem;letter-spacing:-1.5px;line-height:1;}
-.e-desc{font-size:.78rem;line-height:1.74;color:var(--muted);}
+.e-desc{font-size:.88rem;line-height:1.74;color:var(--muted);}
 .e-cta{margin-top:auto;}
 
 /* ══════════════════════════════════════════════
@@ -502,9 +514,9 @@ section{position:relative;z-index:1;}
   background:rgba(242,237,230,.03);flex-shrink:0;transition:border-color .2s,background .2s;}
 .step:hover .step-ib{border-color:var(--bdr-g);background:rgba(0,107,60,.07);}
 .step-title{font-family:'Fraunces',serif;font-weight:700;font-size:.98rem;line-height:1.2;}
-.step-body{font-size:.76rem;line-height:1.76;color:var(--muted);}
+.step-body{font-size:.86rem;line-height:1.76;color:var(--muted);}
 .step-chip{
-  font-family:'Space Mono',monospace;font-size:.41rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
   color:var(--green);border:1px solid var(--bdr-g);padding:.13rem .38rem;
   display:inline-block;width:fit-content;margin-top:auto;
 }
@@ -529,12 +541,12 @@ section{position:relative;z-index:1;}
 .uc:nth-child(2),.uc:nth-child(5),.uc:nth-child(8){--c:var(--red);--lo:var(--rlo);}
 .uc:nth-child(3),.uc:nth-child(6),.uc:nth-child(9){--c:var(--green);--lo:var(--glo);}
 .uc:hover{background:var(--lo);}
-.uc-dept{font-family:'Space Mono',monospace;font-size:.43rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--c);}
-.uc-bef{font-size:.7rem;color:var(--dim);line-height:1.6;display:flex;gap:.4rem;}
-.uc-bef::before{content:'BEFORE';font-family:'Space Mono',monospace;font-size:.36rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--red);flex-shrink:0;padding-top:.04rem;}
-.uc-aft{font-size:.76rem;color:var(--muted);line-height:1.7;display:flex;gap:.4rem;}
-.uc-aft::before{content:'AFTER';font-family:'Space Mono',monospace;font-size:.36rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--green);flex-shrink:0;padding-top:.07rem;}
-.uc-res{font-family:'Space Mono',monospace;font-size:.44rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--c);display:flex;align-items:center;gap:.3rem;margin-top:.18rem;}
+.uc-dept{font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--c);}
+.uc-bef{font-size:.82rem;color:var(--muted);line-height:1.6;display:flex;gap:.4rem;}
+.uc-bef::before{content:'BEFORE';font-family:'Space Mono',monospace;font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--red);flex-shrink:0;padding-top:.04rem;}
+.uc-aft{font-size:.84rem;color:var(--muted);line-height:1.7;display:flex;gap:.4rem;}
+.uc-aft::before{content:'AFTER';font-family:'Space Mono',monospace;font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--green);flex-shrink:0;padding-top:.07rem;}
+.uc-res{font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--c);display:flex;align-items:center;gap:.3rem;margin-top:.18rem;}
 .uc-res::before{content:'↗';}
 
 /* ══════════════════════════════════════════════
@@ -559,12 +571,12 @@ section{position:relative;z-index:1;}
 .db:hover{background:var(--glo);border-color:var(--bdr-g);}
 .db-icon{width:28px;height:28px;border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(242,237,230,.03);}
 .db-title{font-family:'Fraunces',serif;font-weight:700;font-size:.86rem;margin-bottom:.16rem;}
-.db-body{font-size:.72rem;line-height:1.7;color:var(--muted);}
+.db-body{font-size:.82rem;line-height:1.7;color:var(--muted);}
 
 /* ══════════════════════════════════════════════
-   FORM
+   BOOKING
 ══════════════════════════════════════════════ */
-#audit-form{border-bottom:1px solid var(--bdr);}
+#booking{border-bottom:1px solid var(--bdr);}
 .form-wrap{display:grid;grid-template-columns:1fr 1fr;}
 .form-l{
   padding:5rem 4rem 5rem 5rem;border-right:1px solid var(--bdr);
@@ -589,32 +601,15 @@ section{position:relative;z-index:1;}
 .fp-text strong{color:var(--text);}
 .form-r{padding:5rem 4rem;background:rgba(242,237,230,.006);display:flex;align-items:center;}
 .form-inner{width:100%;max-width:470px;}
-.f-row{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;}
-.f-group{display:flex;flex-direction:column;gap:.35rem;margin-bottom:.95rem;}
-label{font-family:'Space Mono',monospace;font-size:.42rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);display:block;}
+
+
+label{font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);display:block;}
 label span{color:var(--green);}
-input,textarea,select{
-  width:100%;background:rgba(242,237,230,.03);border:1px solid var(--bdr2);
-  color:var(--text);font-family:'Inter',sans-serif;font-size:.83rem;padding:.78rem .92rem;
-  outline:none;transition:border-color .2s,background .2s;border-radius:0;appearance:none;
-}
-input::placeholder,textarea::placeholder{color:rgba(242,237,230,.17);}
-input:focus,textarea:focus{border-color:var(--bdr-g);background:rgba(0,107,60,.04);}
-textarea{resize:vertical;min-height:92px;}
-/* submit block button */
-#sBtn{
-  width:100%;display:flex;align-items:center;justify-content:center;gap:.65rem;
-  padding:1.05rem 2rem;background:var(--green);color:var(--text);
-  font-family:'Fraunces',serif;font-weight:900;font-size:1rem;
-  border:none;position:relative;overflow:hidden;
-  box-shadow:0 5px 0 #004a2a,5px 0 0 rgba(0,0,0,.28);
-  transition:background .15s,transform .1s,box-shadow .1s;
-  margin-top:1.3rem;
-}
-#sBtn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(242,237,230,.08) 0%,transparent 55%);pointer-events:none;}
-#sBtn::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
-  background:linear-gradient(to right,#0A0A0A 33%,var(--red) 33% 66%,var(--green) 66%);}
-#sBtn:hover{background:var(--ghi);box-shadow:0 7px 0 #004a2a,7px 0 0 rgba(0,0,0,.32);transform:translateY(-2px) translateX(-1px);}
+
+
+
+
+
 #sBtn:active{box-shadow:0 1px 0 #004a2a,1px 0 0 rgba(0,0,0,.22)!important;transform:translateY(4px) translateX(3px)!important;background:var(--green)!important;}
 #sBtn:disabled{opacity:.5;cursor:not-allowed;transform:none!important;box-shadow:none!important;}
 .form-note{font-family:'Space Mono',monospace;font-size:.41rem;text-transform:uppercase;letter-spacing:.09em;color:var(--dim);text-align:center;margin-top:.75rem;line-height:1.6;}
@@ -646,9 +641,9 @@ textarea{resize:vertical;min-height:92px;}
 .testi-q::before{content:'\201C';color:var(--green);font-size:1.3rem;}
 .testi:nth-child(2) .testi-q::before{color:var(--red);}
 .testi-name{font-family:'Fraunces',serif;font-weight:700;font-size:.84rem;}
-.testi-role{font-family:'Space Mono',monospace;font-size:.41rem;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);margin-top:.07rem;}
+.testi-role{font-family:'Space Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:.07rem;}
 .testi-res{margin-top:.45rem;padding:.48rem .72rem;border-left:2px solid var(--green);background:rgba(0,107,60,.07);
-  font-family:'Space Mono',monospace;font-size:.43rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--green);line-height:1.5;}
+  font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--green);line-height:1.5;}
 .testi:nth-child(2) .testi-res{border-left-color:var(--red);background:var(--rlo);color:var(--red);}
 
 /* ══════════════════════════════════════════════
@@ -661,7 +656,7 @@ textarea{resize:vertical;min-height:92px;}
 .faq-l h2{margin-bottom:.9rem;}
 .faq-l h2 em{color:var(--green);}
 .faq-sub{font-size:.87rem;line-height:1.85;color:var(--muted);max-width:350px;margin-bottom:1.8rem;}
-.faq-note{padding:1.2rem 1.4rem;border:1px solid var(--bdr-g);background:rgba(0,107,60,.05);font-size:.79rem;line-height:1.74;color:var(--muted);position:relative;}
+.faq-note{padding:1.2rem 1.4rem;border:1px solid var(--bdr-g);background:rgba(0,107,60,.05);font-size:.86rem;line-height:1.74;color:var(--muted);position:relative;}
 .faq-note::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
   background:linear-gradient(to bottom,#0A0A0A 33%,var(--red) 33% 66%,var(--green) 66%);}
 .faq-note strong{color:var(--text);display:block;margin-bottom:.22rem;}
@@ -680,7 +675,7 @@ textarea{resize:vertical;min-height:92px;}
 .faq-item.open .faq-icon{border-color:var(--bdr-g);}
 .faq-item.open .faq-icon svg{transform:rotate(45deg);}
 .faq-item.open .faq-q{color:var(--green);}
-.faq-a{font-size:.83rem;line-height:1.88;color:var(--muted);max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.16,1,.3,1),padding .25s;}
+.faq-a{font-size:.9rem;line-height:1.88;color:var(--muted);max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.16,1,.3,1),padding .25s;}
 .faq-item.open .faq-a{max-height:280px;padding-bottom:1.15rem;}
 
 /* ══════════════════════════════════════════════
@@ -696,54 +691,25 @@ textarea{resize:vertical;min-height:92px;}
   border-right:1px solid var(--bdr);border-bottom:1px solid var(--bdr);
   padding:1.2rem 1.4rem;display:flex;flex-direction:column;gap:.45rem;
   text-decoration:none;color:var(--text);background:var(--bg);
-  position:relative;overflow:hidden;
-  transition:background .2s,transform .15s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;
+  position:relative;overflow:hidden;transition:background .2s;
   --mx:50%;--my:50%;
-  /* start hidden for scroll reveal */
-  opacity:0;transform:translateY(22px) scale(.97);
 }
-.tool.tv{opacity:1;transform:none;}
 .tool::before{content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at var(--mx) var(--my),rgba(245,200,66,.1) 0%,transparent 60%);
+  background:radial-gradient(circle at var(--mx) var(--my),rgba(245,200,66,.07) 0%,transparent 60%);
   opacity:0;transition:opacity .3s;pointer-events:none;}
 .tool:hover::before{opacity:1;}
 .tool::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
   background:linear-gradient(to right,var(--green),var(--red));
   transform:scaleX(0);transform-origin:left;transition:transform .32s cubic-bezier(.16,1,.3,1);}
 .tool:hover::after{transform:scaleX(1);}
-.tool:hover{background:var(--s2);transform:translateY(-3px) scale(1.01);box-shadow:0 8px 24px rgba(0,0,0,.35);}
-.tool:active{transform:translateY(1px) scale(.99)!important;}
+.tool:hover{background:var(--s2);}
 .tool>*{position:relative;z-index:1;}
 .tool-num{font-family:'Space Mono',monospace;font-size:.42rem;color:var(--dim);letter-spacing:.08em;}
-.tool-name{font-weight:700;font-size:.96rem;line-height:1.1;}
-.tool-desc{font-size:.7rem;line-height:1.72;color:var(--muted);}
-.tool-cta{font-family:'Space Mono',monospace;font-size:.57rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--green);
+.tool-name{font-family:'Fraunces',serif;font-weight:700;font-size:.96rem;line-height:1.1;}
+.tool-desc{font-size:.82rem;line-height:1.72;color:var(--muted);}
+.tool-cta{font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--green);
   margin-top:auto;display:flex;align-items:center;gap:.32rem;transition:gap .2s,color .2s;}
 .tool:hover .tool-cta{color:rgba(245,200,66,.9);gap:.65rem;}
-
-/* Per-tool distinct fonts */
-.tool[data-n="01"] .tool-name{font-family:'Orbitron',monospace;}
-.tool[data-n="02"] .tool-name{font-family:'Playfair Display',serif;}
-.tool[data-n="03"] .tool-name{font-family:'Syne',sans-serif;}
-.tool[data-n="04"] .tool-name{font-family:'DM Serif Display',serif;}
-.tool[data-n="05"] .tool-name{font-family:'Bebas Neue',sans-serif;letter-spacing:.06em;}
-.tool[data-n="06"] .tool-name{font-family:'Chakra Petch',sans-serif;}
-.tool[data-n="07"] .tool-name{font-family:'Russo One',sans-serif;}
-.tool[data-n="08"] .tool-name{font-family:'Raleway',sans-serif;font-weight:900;}
-.tool[data-n="09"] .tool-name{font-family:'Oswald',sans-serif;font-weight:700;}
-.tool[data-n="10"] .tool-name{font-family:'Abril Fatface',serif;}
-.tool[data-n="11"] .tool-name{font-family:'Bungee',sans-serif;}
-.tool[data-n="12"] .tool-name{font-family:'Special Elite',serif;}
-.tool[data-n="13"] .tool-name{font-family:'Exo 2',sans-serif;font-weight:800;}
-.tool[data-n="14"] .tool-name{font-family:'Righteous',sans-serif;}
-.tool[data-n="15"] .tool-name{font-family:'Monoton',sans-serif;font-size:.78rem;}
-.tool[data-n="16"] .tool-name{font-family:'Permanent Marker',cursive;}
-.tool[data-n="17"] .tool-name{font-family:'Kalam',cursive;font-weight:700;}
-.tool[data-n="18"] .tool-name{font-family:'Covered By Your Grace',cursive;}
-.tool[data-n="19"] .tool-name{font-family:'Black Han Sans',sans-serif;}
-.tool[data-n="20"] .tool-name{font-family:'Syne',sans-serif;font-weight:800;}
-.tool[data-n="21"] .tool-name{font-family:'DM Serif Display',serif;font-style:italic;}
-.tool[data-n="22"] .tool-name{font-family:'Orbitron',monospace;font-size:.82rem;}
 
 /* ══════════════════════════════════════════════
    FOOTER
@@ -755,16 +721,15 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
 .ft-brand::before{content:'';position:absolute;inset:0;opacity:.02;
   background-image:repeating-linear-gradient(0deg,transparent,transparent 25px,var(--red) 25px,var(--red) 26px),
     repeating-linear-gradient(90deg,transparent,transparent 25px,var(--green) 25px,var(--green) 26px);
-  animation:gm 13s linear infinite;}
-@keyframes gm{from{background-position:0 0}to{background-position:26px 26px}}
+}
 .ft-brand>*{position:relative;z-index:1;}
 .ft-name{font-family:'Fraunces',serif;font-weight:900;font-size:1.45rem;letter-spacing:-1.5px;line-height:.95;}
 .ft-name em{color:var(--red);font-style:italic;}
-.ft-tagline{font-family:'Space Mono',monospace;font-size:.41rem;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);margin-top:.2rem;}
-.ft-copy{font-family:'Space Mono',monospace;font-size:.39rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(242,237,230,.1);}
+.ft-tagline{font-family:'Space Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:.2rem;}
+.ft-copy{font-family:'Space Mono',monospace;font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(242,237,230,.35);}
 .ft-col{padding:1.9rem 1.8rem 1.9rem 2rem;border-right:1px solid var(--bdr);display:flex;flex-direction:column;gap:.26rem;}
 .ft-col:last-child{border-right:none;}
-.ft-col-title{font-family:'Space Mono',monospace;font-size:.43rem;text-transform:uppercase;letter-spacing:.14em;font-weight:700;color:var(--dim);margin-bottom:.4rem;}
+.ft-col-title{font-family:'Space Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.14em;font-weight:700;color:var(--muted);margin-bottom:.4rem;}
 .ft-col a{font-size:.73rem;color:var(--muted);transition:color .14s,transform .14s;display:inline-block;}
 .ft-col a:hover{color:var(--text);transform:translateX(4px);}
 .ft-stack{margin-top:.75rem;padding:.65rem;background:var(--glo);border:1px solid var(--bdr-g);font-size:.66rem;line-height:1.6;color:rgba(242,237,230,.3);}
@@ -845,26 +810,12 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
 </head>
 <body>
 <!-- ── LOADER ──────────────────────────────── -->
-<div id="loader">
-  <div class="ld-name">SAAS<br><em>BRUV</em></div>
-  <div class="ld-bar-outer" id="ldrBar" onclick="skipLoader()" title="Click to skip">
-    <div class="ld-bar-track"><div class="ld-bar-fill" id="lbar"></div></div>
-    <div class="ld-blocks">
-      <div class="ld-blk" id="b0"></div><div class="ld-blk" id="b1"></div>
-      <div class="ld-blk" id="b2"></div><div class="ld-blk" id="b3"></div>
-      <div class="ld-blk" id="b4"></div><div class="ld-blk" id="b5"></div>
-      <div class="ld-blk" id="b6"></div>
-    </div>
-    <div class="ld-hint">Loading · Click to skip</div>
-  </div>
-</div>
+
 
 <!-- ── CANVAS ──────────────────────────────── -->
 <canvas id="bg"></canvas>
 
 <!-- ── CURSOR ──────────────────────────────── -->
-<div id="cur"></div>
-<div id="cur-ring"></div>
 
 <!-- ── NAV ─────────────────────────────────── -->
 <nav id="nav">
@@ -873,39 +824,56 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
     <a href="#flagship">Flagship</a>
     <a href="#packages">Packages</a>
     <a href="#process">Process</a>
-    <a href="#usecases">Use Cases</a>
+    <a href="#usecases">Results</a>
     <a href="#faq">FAQ</a>
     <a href="#saasboard">Tools</a>
   </div>
-  <a class="nav-cta" href="#audit-form" onclick="addRipple(event,this)">Book free audit →</a>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <a class="nav-cta" href="https://saasbruv.setmore.com" target="_blank" rel="noopener noreferrer">Book a discovery call →</a>
+    <button class="nav-ham" id="navHam" aria-label="Open menu" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
+<div class="nav-mobile-menu" id="navMobile">
+  <a href="#flagship" onclick="closeMobileMenu()">Flagship</a>
+  <a href="#packages" onclick="closeMobileMenu()">Packages</a>
+  <a href="#process" onclick="closeMobileMenu()">Process</a>
+  <a href="#usecases" onclick="closeMobileMenu()">Results</a>
+  <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+  <a href="#saasboard" onclick="closeMobileMenu()">Tools</a>
+  <a class="mob-cta" href="https://saasbruv.setmore.com" target="_blank" rel="noopener noreferrer">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    Book a free discovery call →
+  </a>
+</div>
 
 <!-- ══════════ HERO ══════════ -->
 <section id="hero">
   <div class="hero-l">
     <div class="hero-badge rv on">
       <div class="badge-dot"></div>
-      AI Consulting &amp; Automation · Kenya &amp; East Africa
+      AI Consulting &amp; Automation · Worldwide · Remote-First
     </div>
     <h1 class="hero-h1 rv on" style="transition-delay:.05s">
-      We make your<br>business run<br><em>on AI.</em>
+      Your business,<br>running on<br><em>AI systems.</em>
     </h1>
     <p class="hero-sub rv on" style="transition-delay:.1s">
-      I help <strong>businesses and organisations in Kenya and East Africa</strong> cut manual work, speed up operations, and build AI into the workflows your team already runs.
-      <br><br>Not theory. Not slide decks. <strong>Working systems, shipped in weeks.</strong>
+      I help <strong>businesses and organisations worldwide</strong> eliminate manual work, speed up operations, and wire AI directly into the workflows your team runs every day.
+      <br><br>Not theory. Not slide decks. <strong>Working systems, shipped in weeks — delivered remotely anywhere in the world.</strong>
     </p>
     <div class="hero-ctas rv on" style="transition-delay:.13s">
-      <a class="btn" href="#audit-form" onclick="addRipple(event,this)">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        Book a free AI workflow audit
+      <a class="btn" href="https://saasbruv.setmore.com" target="_blank" rel="noopener" onclick="addRipple(event,this)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book a free discovery call
       </a>
-      <a class="btn ghost" href="#packages" onclick="addRipple(event,this)">View automation packages →</a>
+      <a class="btn ghost" href="#packages" onclick="addRipple(event,this)">See automation packages →</a>
     </div>
     <div class="hero-trust rv on" style="transition-delay:.17s">
       <div class="ti"><div class="ti-n">60%+</div><div class="ti-l">Admin time<br>recovered</div></div>
       <div class="ti"><div class="ti-n">4 wks</div><div class="ti-l">Time to first<br>live system</div></div>
       <div class="ti"><div class="ti-n">6</div><div class="ti-l">Productized<br>packages</div></div>
-      <div class="ti"><div class="ti-n">KE+</div><div class="ti-l">Nairobi · Eldoret<br>&amp; remote</div></div>
+      <div class="ti"><div class="ti-n" style="display:flex;align-items:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="ti-l">Worldwide<br>remote delivery</div></div>
     </div>
   </div>
 
@@ -958,10 +926,9 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
     <span class="mq-item accent-r">AI Workflow Audit</span>
     <span class="mq-item">WhatsApp Automation</span>
     <span class="mq-item accent">CRM Lead Automation</span>
-    <span class="mq-item">Nairobi · Eldoret · East Africa</span>
+    <span class="mq-item">Kenya · East Africa · Worldwide Remote</span>
     <span class="mq-item accent-r">Hands-on Implementation</span>
     <span class="mq-item">Working Systems, Shipped in Weeks</span>
-    <!-- duplicate for seamless loop -->
     <span class="mq-item accent">AI Operations Foundation</span>
     <span class="mq-item">Customer Support Automation</span>
     <span class="mq-item accent-r">Multi Channel Bundle</span>
@@ -971,7 +938,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
     <span class="mq-item accent-r">AI Workflow Audit</span>
     <span class="mq-item">WhatsApp Automation</span>
     <span class="mq-item accent">CRM Lead Automation</span>
-    <span class="mq-item">Nairobi · Eldoret · East Africa</span>
+    <span class="mq-item">Kenya · East Africa · Worldwide Remote</span>
     <span class="mq-item accent-r">Hands-on Implementation</span>
     <span class="mq-item">Working Systems, Shipped in Weeks</span>
   </div>
@@ -1052,9 +1019,9 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
       <div class="pill">Fixed scope</div>
       <div class="pill">Remote-friendly</div>
     </div>
-    <a class="btn rv on" href="#audit-form" style="transition-delay:.17s" onclick="addRipple(event,this)">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-      Enquire about this package
+    <a class="btn rv on" href="https://saasbruv.setmore.com" target="_blank" rel="noopener" style="transition-delay:.17s" onclick="addRipple(event,this)">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Discuss this package — book a call
     </a>
   </div>
   <div class="flag-r">
@@ -1079,7 +1046,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
   </div>
 
   <div class="pkg-grid">
-    <div class="ptile" onclick="window.location='#audit-form'">
+    <div class="ptile" onclick="window.open('https://saasbruv.setmore.com','_blank')">
       <div class="ptile-orb"></div>
       <div class="ptile-num">01</div>
       <div class="ptile-name rv on">Customer Support<br>Automation Suite</div>
@@ -1091,10 +1058,10 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
         <li>Auto-acknowledgement flows with follow-up scheduling</li>
         <li>Integration with your existing helpdesk or CRM</li>
       </ul>
-      <div class="ptile-cta rv on" style="transition-delay:.09s"><a class="cta-link" href="#audit-form">Enquire about this package →</a></div>
+      <div class="ptile-cta rv on" style="transition-delay:.09s"><a class="cta-link" href="https://saasbruv.setmore.com" target="_blank" rel="noopener noreferrer">Book a call to discuss →</a></div>
     </div>
 
-    <div class="ptile" onclick="window.location='#audit-form'">
+    <div class="ptile" onclick="window.open('https://saasbruv.setmore.com','_blank')">
       <div class="ptile-orb"></div>
       <div class="ptile-num">02</div>
       <div class="ptile-name rv on">Executive AI<br>Strategy Day</div>
@@ -1106,10 +1073,10 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
         <li>Prioritised AI roadmap with quick wins and long-term plays</li>
         <li>Written brief and tool recommendations</li>
       </ul>
-      <div class="ptile-cta rv on" style="transition-delay:.09s"><a class="cta-link red" href="#audit-form">Enquire about this package →</a></div>
+      <div class="ptile-cta rv on" style="transition-delay:.09s"><a class="cta-link red" href="https://saasbruv.setmore.com" target="_blank" rel="noopener noreferrer">Book a call to discuss →</a></div>
     </div>
 
-    <div class="ptile" onclick="window.location='#audit-form'">
+    <div class="ptile" onclick="window.open('https://saasbruv.setmore.com','_blank')">
       <div class="ptile-orb"></div>
       <div class="ptile-num">03</div>
       <div class="ptile-name rv on">Multi Channel<br>Automation Bundle</div>
@@ -1121,10 +1088,10 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
         <li>Lead qualification and routing automation</li>
         <li>Unified team notifications and status updates</li>
       </ul>
-      <div class="ptile-cta rv on" style="transition-delay:.09s"><a class="cta-link" href="#audit-form">Enquire about this package →</a></div>
+      <div class="ptile-cta rv on" style="transition-delay:.09s"><a class="cta-link" href="https://saasbruv.setmore.com" target="_blank" rel="noopener noreferrer">Book a call to discuss →</a></div>
     </div>
 
-    <div class="ptile" onclick="window.location='#audit-form'" style="border-bottom:none">
+    <div class="ptile" onclick="window.open('https://saasbruv.setmore.com','_blank')" style="border-bottom:none">
       <div class="ptile-orb"></div>
       <div class="ptile-num">04</div>
       <div class="ptile-name rv on">Data &amp; Reporting<br>Automation</div>
@@ -1136,7 +1103,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
         <li>Daily, weekly, or trigger-based report delivery</li>
         <li>M-Pesa and local payment system integrations</li>
       </ul>
-      <div class="ptile-cta rv on" style="transition-delay:.09s"><a class="cta-link red" href="#audit-form">Enquire about this package →</a></div>
+      <div class="ptile-cta rv on" style="transition-delay:.09s"><a class="cta-link red" href="https://saasbruv.setmore.com" target="_blank" rel="noopener noreferrer">Book a call to discuss →</a></div>
     </div>
   </div>
 
@@ -1155,9 +1122,9 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
         <li>Priority access to new features and tools</li>
       </ul>
       <div style="margin-top:1.2rem;" class="rv on" style="transition-delay:.09s;">
-        <a class="btn red" href="#audit-form" onclick="addRipple(event,this)">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          Enquire about this program
+        <a class="btn red" href="https://saasbruv.setmore.com" target="_blank" rel="noopener noreferrer" onclick="addRipple(event,this)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book a call to discuss this →
         </a>
       </div>
     </div>
@@ -1178,23 +1145,23 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
     <h2 class="sec-h2 rv on" style="transition-delay:.05s;font-size:clamp(1.7rem,3vw,2.7rem)">Start here if you're not sure <em>where to begin.</em></h2>
   </div>
   <div class="entry-grid">
-    <div class="eblock" onclick="window.location='#audit-form'">
+    <div class="eblock" onclick="window.open('https://saasbruv.setmore.com','_blank')">
       <div class="e-label rv on">Entry · Free</div>
       <div class="e-name rv on" style="transition-delay:.03s">AI Workflow<br>Audit</div>
       <div class="e-desc rv on" style="transition-delay:.06s">A focused review of your workflows to identify where AI can save the most time and money. You'll come away with a prioritised shortlist of automation opportunities — specific to your business. No commitment required.</div>
-      <div class="e-cta rv on" style="transition-delay:.08s"><a class="cta-link" href="#audit-form">Book your free audit →</a></div>
+      <div class="e-cta rv on" style="transition-delay:.08s"><a class="cta-link" href="https://saasbruv.setmore.com" target="_blank" rel="noopener noreferrer">Book a free discovery call →</a></div>
     </div>
-    <div class="eblock" onclick="window.location='#audit-form'">
+    <div class="eblock" onclick="window.open('https://saasbruv.setmore.com','_blank')">
       <div class="e-label rv on">Entry · Half-day session</div>
       <div class="e-name rv on" style="transition-delay:.03s">AI Strategy<br>Session</div>
       <div class="e-desc rv on" style="transition-delay:.06s">A 2–3 hour working session (remote or in-person) to explore your specific AI opportunities. Walk away with concrete ideas, tool recommendations, and a prioritised starting point for your team.</div>
-      <div class="e-cta rv on" style="transition-delay:.08s"><a class="cta-link" href="#audit-form">Request this session →</a></div>
+      <div class="e-cta rv on" style="transition-delay:.08s"><a class="cta-link" href="https://saasbruv.setmore.com" target="_blank" rel="noopener noreferrer">Book this session →</a></div>
     </div>
-    <div class="eblock" onclick="window.location='#audit-form'">
+    <div class="eblock" onclick="window.open('https://saasbruv.setmore.com','_blank')">
       <div class="e-label rv on">Entry · Training</div>
       <div class="e-name rv on" style="transition-delay:.03s">Team AI<br>Training</div>
       <div class="e-desc rv on" style="transition-delay:.06s">Practical, role-specific AI training for your team — not generic ChatGPT demos. Sessions use examples from your actual work and industry. Available in-person (Nairobi/Eldoret) or remote.</div>
-      <div class="e-cta rv on" style="transition-delay:.08s"><a class="cta-link" href="#audit-form">Book a training session →</a></div>
+      <div class="e-cta rv on" style="transition-delay:.08s"><a class="cta-link" href="https://saasbruv.setmore.com" target="_blank" rel="noopener noreferrer">Book a training session →</a></div>
     </div>
   </div>
 </section>
@@ -1211,8 +1178,8 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
       <div class="step-ib rv on">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#006B3C" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
       </div>
-      <div class="step-title rv on" style="transition-delay:.04s">You fill in the audit form</div>
-      <div class="step-body rv on" style="transition-delay:.07s">Tell me about your business and what you want to improve. Takes 3–4 minutes. No commitment required at this stage.</div>
+      <div class="step-title rv on" style="transition-delay:.04s">Book a free discovery call</div>
+      <div class="step-body rv on" style="transition-delay:.07s">Pick a time that works for you. I review your business before the call so we can spend the 30 minutes on specifics — not introductions. No commitment required.</div>
       <div class="step-chip rv on" style="transition-delay:.1s">Zero risk</div>
     </div>
     <div class="step">
@@ -1328,56 +1295,37 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
   </div>
 </section>
 
-<!-- ══════════ FORM ══════════ -->
-<section id="audit-form">
+<!-- ══════════ BOOKING ══════════ -->
+<section id="booking" style="border-bottom:1px solid var(--bdr);">
   <div class="form-wrap">
     <div class="form-l">
-      <div class="sec-label rv on">Free AI audit</div>
-      <h2 class="form-h2 rv on" style="transition-delay:.05s">Tell me what you<br>want to <em>automate.</em></h2>
-      <p class="form-desc rv on" style="transition-delay:.1s">Fill in the form and I'll review your workflows before our call. You'll come away with <strong>specific, practical ideas for your business</strong> — whether or not we end up working together.</p>
+      <div class="sec-label rv on">Book a call</div>
+      <h2 class="form-h2 rv on" style="transition-delay:.05s">Ready to see<br>what's <em>possible?</em></h2>
+      <p class="form-desc rv on" style="transition-delay:.1s">
+        The discovery call is free, focused, and 30 minutes. I'll come prepared with specific observations about your workflows. You leave with concrete ideas — whether or not we work together.
+      </p>
       <div class="form-promises rv on" style="transition-delay:.14s">
         <div class="fp">
-          <div class="fp-icon"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#006B3C" stroke-width="2.5" stroke-linecap="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-          <div class="fp-text"><strong>Reply within 24 hours.</strong> I'll confirm your call and share initial thoughts based on what you submit.</div>
+          <div class="fp-icon"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#006B3C" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="fp-text"><strong>I'll confirm within 24 hours.</strong> And come prepared with observations specific to your business.</div>
         </div>
         <div class="fp">
           <div class="fp-icon"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#BB0A21" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-          <div class="fp-text"><strong>No spam, ever.</strong> Your information is kept private and never shared with anyone.</div>
+          <div class="fp-text"><strong>The first call is always free.</strong> 30 minutes, no pitch deck, no obligation.</div>
         </div>
         <div class="fp">
           <div class="fp-icon"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(242,237,230,.4)" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-          <div class="fp-text"><strong>No obligation.</strong> The discovery call is free. You decide if you want to take it further.</div>
+          <div class="fp-text"><strong>No obligation to proceed.</strong> You decide if you want to take it further after the call.</div>
         </div>
       </div>
     </div>
-    <div class="form-r">
-      <div class="form-inner">
-        <div class="form-success" id="fSuccess">
-          <div style="width:40px;height:40px;border:2px solid #006B3C;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#006B3C" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
-          <div class="success-h">Request sent.</div>
-          <p class="success-p">I'll review what you've shared and reply within 24 hours to schedule your free AI workflow audit.</p>
-        </div>
-        <div class="form-fields" id="fFields">
-          <div class="f-row">
-            <div class="f-group"><label for="fn">Your name <span>*</span></label><input type="text" id="fn" placeholder="Amara Odhiambo" required></div>
-            <div class="f-group"><label for="fe">Work email <span>*</span></label><input type="email" id="fe" placeholder="amara@company.co.ke" required></div>
-          </div>
-          <div class="f-row">
-            <div class="f-group"><label for="fc">Organisation <span>*</span></label><input type="text" id="fc" placeholder="Acme Ltd" required></div>
-            <div class="f-group"><label for="fr">Your role</label><input type="text" id="fr" placeholder="Operations Manager"></div>
-          </div>
-          <div class="f-group"><label for="fw">WhatsApp / Phone <span style="color:var(--dim);font-size:.36rem">(optional)</span></label><input type="tel" id="fw" placeholder="+254 7xx xxx xxx"></div>
-          <div class="f-group"><label for="fa">What do you want to automate? <span>*</span></label><textarea id="fa" placeholder="e.g. We spend 3 hours each Monday pulling together a sales report from three different spreadsheets. We also miss customer follow-ups because there's no reminder system..." required></textarea></div>
-          <div class="f-group"><label for="ft">Tools you currently use</label><input type="text" id="ft" placeholder="e.g. Google Sheets, WhatsApp, QuickBooks, HubSpot..."></div>
-          <button id="sBtn" type="button" onclick="handleSubmit(event)">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Send my AI automation brief
-          </button>
-          <div class="form-note">No spam. I'll reply within 24 hours · Your data is private and never shared</div>
-        </div>
-      </div>
+    <div class="form-r" style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.5rem;text-align:center;padding:5rem 4rem;">
+      <div style="font-family:'Fraunces',serif;font-weight:900;font-size:clamp(1.3rem,2.5vw,2rem);letter-spacing:-2px;line-height:1.1;">30 minutes.<br>Free. No obligation.</div>
+      <a class="btn" href="https://saasbruv.setmore.com" target="_blank" rel="noopener noreferrer" onclick="addRipple(event,this)" style="font-size:1rem;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book a free discovery call →
+      </a>
+      <div style="font-family:'Space Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Remote · Worldwide · Available now</div>
     </div>
   </div>
 </section>
@@ -1393,19 +1341,19 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
       <div class="testi-bar"></div>
       <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
       <div class="testi-q">Before working with Roylyonse, our ops team spent nearly a full day every week compiling reports from three different systems. We now get everything automatically at 8 AM every Monday.</div>
-      <div><div class="testi-name">[Name], Head of Operations</div><div class="testi-role">SME · Nairobi, Kenya</div><div class="testi-res">Weekly reporting: 6 hours → 20 minutes</div></div>
+      <div><div class="testi-name">A.O., Head of Operations</div><div class="testi-role">SME · Nairobi, Kenya</div><div class="testi-res">Weekly reporting: 6 hours → 20 minutes</div></div>
     </div>
     <div class="testi rv on" style="transition-delay:.06s">
       <div class="testi-bar"></div>
       <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
       <div class="testi-q">We were hesitant because we thought AI integration would break things our team was comfortable with. It didn't. The new workflow sits on top of our existing tools and the team adopted it within a week.</div>
-      <div><div class="testi-name">[Name], Founder</div><div class="testi-role">Startup · East Africa</div><div class="testi-res">Customer response time reduced by 65%</div></div>
+      <div><div class="testi-name">M.K., Founder</div><div class="testi-role">Startup · East Africa</div><div class="testi-res">Customer response time reduced by 65%</div></div>
     </div>
     <div class="testi rv on" style="transition-delay:.12s">
       <div class="testi-bar"></div>
       <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
       <div class="testi-q">The training session was the first time AI actually made sense for our specific context — not generic ChatGPT demos, real examples from our work. The team left knowing exactly what to do differently.</div>
-      <div><div class="testi-name">[Name], Director</div><div class="testi-role">NGO · Kenya</div><div class="testi-res">Team AI adoption: 0 → daily use in 3 weeks</div></div>
+      <div><div class="testi-name">E.W., Director</div><div class="testi-role">NGO · Kenya</div><div class="testi-res">Team AI adoption: 0 → daily use in 3 weeks</div></div>
     </div>
   </div>
 </section>
@@ -1419,9 +1367,9 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
       <p class="faq-sub rv on" style="transition-delay:.1s">If something's not covered here, ask it on the call. The first 30 minutes are free and there's no obligation to move forward.</p>
       <div class="faq-note rv on" style="transition-delay:.15s">
         <strong>Still not sure where to start?</strong>
-        Fill in the audit form and I'll personally reply within 24 hours with thoughts on your specific situation.
+        Book a free 30-minute call. I'll come prepared, and you'll leave with a clear picture of what's possible for your business — no obligation to go further.
         <br><br>
-        <a class="cta-link" href="#audit-form">Book a free AI workflow audit →</a>
+        <a class="cta-link" href="https://saasbruv.setmore.com" target="_blank" rel="noopener noreferrer">Book a free discovery call →</a>
       </div>
     </div>
     <div class="faq-r">
@@ -1461,7 +1409,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
 <section id="saasboard">
   <div class="sb-hdr">
     <div class="sb-hdr-l">
-      <div class="sec-label rv on">SaaS Board</div>
+      <div class="sec-label rv on">Recommended Tools</div>
       <h2 class="sec-h2 rv on" style="transition-delay:.05s;font-size:clamp(1.7rem,2.8vw,2.5rem)">Tools I use<br>with clients &amp; <em>personally vouch for.</em></h2>
     </div>
     <div class="sb-hdr-r rv on">
@@ -1469,28 +1417,32 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
     </div>
   </div>
   <div class="tools-grid">
-    <a class="tool" data-n="01" href="https://aifiesta.link/roylyonse-mwai" target="_blank" rel="noopener"><div class="tool-num">01</div><div class="tool-name">AI Fiesta</div><div class="tool-desc">ChatGPT, Gemini, Claude, Deepseek, and Grok — all under one subscription. Compare AI models side-by-side in real time.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="02" href="https://refer.testimonial.to/roylyonse-mwai" target="_blank" rel="noopener"><div class="tool-num">02</div><div class="tool-name">Testimonial.to</div><div class="tool-desc">Collect and display video and text testimonials without writing a line of code. Embeds anywhere in minutes.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="03" href="https://ref.wisprflow.ai/roylyonse-mwai" target="_blank" rel="noopener"><div class="tool-num">03</div><div class="tool-name">Wispr Flow</div><div class="tool-desc">Dictate into any Mac app with AI voice transcription that understands context and self-corrects.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="04" href="https://anara.com/?via=roylyonse-mwai" target="_blank" rel="noopener"><div class="tool-num">04</div><div class="tool-name">Anara</div><div class="tool-desc">AI research assistant for professionals. Pull insights from documents, PDFs, and the web in seconds.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="05" href="https://go.cap.so/roylyonse-mwai" target="_blank" rel="noopener"><div class="tool-num">05</div><div class="tool-name">Cap</div><div class="tool-desc">Open-source Loom alternative. Record, share, and collaborate on screen recordings with zero friction. 20% off 12 months.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="06" href="https://anything.link/roylyonse-mwai" target="_blank" rel="noopener"><div class="tool-num">06</div><div class="tool-name">Anything AI</div><div class="tool-desc">Turn any idea into a deployed app just by describing it. The AI agent builds and ships the whole thing. 20% off first purchase.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="07" href="https://refer.dub.co/roylyonse-mwai" target="_blank" rel="noopener"><div class="tool-num">07</div><div class="tool-name">Dub.co</div><div class="tool-desc">Open-source link management. Short links, QR codes, and analytics for modern teams. 20% off 3 months.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="08" href="https://refer.cal.com/roywan-wwvt" target="_blank" rel="noopener"><div class="tool-num">08</div><div class="tool-name">Cal.com</div><div class="tool-desc">Open-source scheduling infrastructure. Replace Calendly with something you actually own and control. 20% off 12 months.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="09" href="https://ref.jace.ai/roylyonse-mwai" target="_blank" rel="noopener"><div class="tool-num">09</div><div class="tool-name">Jace AI</div><div class="tool-desc">AI executive assistant that reads email, drafts replies, and manages your calendar autonomously.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="10" href="https://link.chatbase.co/roylyonse-mwai" target="_blank" rel="noopener"><div class="tool-num">10</div><div class="tool-name">Chatbase</div><div class="tool-desc">Build a custom ChatGPT-powered chatbot trained on your own data. Embed in minutes on any website.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="11" href="https://go.intellijend.com/roylyonse-mwai" target="_blank" rel="noopener"><div class="tool-num">11</div><div class="tool-name">Intellijend</div><div class="tool-desc">AI outreach and sales intelligence. Find better leads and write better cold emails automatically. 10% lifetime.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="12" href="https://coderabbit.link/roylyonse-mwai" target="_blank" rel="noopener"><div class="tool-num">12</div><div class="tool-name">CodeRabbit</div><div class="tool-desc">AI code reviewer that reads pull requests and gives actionable, context-aware feedback in seconds.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="13" href="https://marblism.com/?via=roylyonse-mwai" target="_blank" rel="noopener"><div class="tool-num">13</div><div class="tool-name">Marblism</div><div class="tool-desc">AI employees for inbox, social, SEO, lead gen, and legal — automated and integrated with your tools. 10% lifetime.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="14" href="https://www.beehiiv.com?via=roylyonse-mwai" target="_blank" rel="noopener"><div class="tool-num">14</div><div class="tool-name">Beehiiv</div><div class="tool-desc">The newsletter platform built for growth. Monetise your audience with built-in ads and subscriptions. 20% off 3 months.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="15" href="https://tiiny.host?fpr=saasbro" target="_blank" rel="noopener"><div class="tool-num">15</div><div class="tool-name">Tiiny Host</div><div class="tool-desc">The fastest way to publish a static site or prototype online. No server config, no nonsense. 20% off.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="16" href="https://share.customer.io/7gDDZ2" target="_blank" rel="noopener"><div class="tool-num">16</div><div class="tool-name">Customer.io</div><div class="tool-desc">Powerful marketing automation for product teams. Email, SMS, push — all in one workflow engine. Special founder deal.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="17" href="https://try.replo.app/roylyonse-mwai" target="_blank" rel="noopener"><div class="tool-num">17</div><div class="tool-name">Replo</div><div class="tool-desc">Build high-converting Shopify landing pages with a drag-and-drop editor for performance marketers.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="18" href="https://tryclico.link/roylyonse-mwai" target="_blank" rel="noopener"><div class="tool-num">18</div><div class="tool-name">Clico</div><div class="tool-desc">AI writing assistant extension. Write, summarise, and dictate inside every text box on the web.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="19" href="https://try.ranked.ai/roylyonse-mwai" target="_blank" rel="noopener"><div class="tool-num">19</div><div class="tool-name">Ranked AI</div><div class="tool-desc">SEO platform with AI content writing, keyword research, and rank tracking in one dashboard. 20% lifetime.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="20" href="https://superli.st/roylyonse-mwai" target="_blank" rel="noopener"><div class="tool-num">20</div><div class="tool-name">Superlist</div><div class="tool-desc">Beautifully fast to-do and project manager for teams who move fast and hate bloat.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="21" href="https://refer.kick.co/roylyonse-mwai" target="_blank" rel="noopener"><div class="tool-num">21</div><div class="tool-name">Kick</div><div class="tool-desc">Creator-first streaming with higher revenue share and fewer restrictions than legacy platforms.</div><div class="tool-cta">Try it →</div></a>
-    <a class="tool" data-n="22" href="https://go.kite.video/roylyonse-mwai" target="_blank" rel="noopener"><div class="tool-num">22</div><div class="tool-name">Kite Video</div><div class="tool-desc">Create interactive product demos and video tours that convert visitors without a sales call.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool" data-n="01" href="https://aifiesta.link/roylyonse-mwai" target="_blank" rel="noopener noreferrer"><div class="tool-num">01</div><div class="tool-name">AI Fiesta</div><div class="tool-desc">ChatGPT, Gemini, Claude, Deepseek, and Grok — all under one subscription. Compare AI models side-by-side in real time.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool" data-n="02" href="https://refer.testimonial.to/roylyonse-mwai" target="_blank" rel="noopener noreferrer"><div class="tool-num">02</div><div class="tool-name">Testimonial.to</div><div class="tool-desc">Collect and display video and text testimonials without writing a line of code. Embeds anywhere in minutes.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool" data-n="03" href="https://ref.wisprflow.ai/roylyonse-mwai" target="_blank" rel="noopener noreferrer"><div class="tool-num">03</div><div class="tool-name">Wispr Flow</div><div class="tool-desc">Dictate into any Mac app with AI voice transcription that understands context and self-corrects.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool" data-n="04" href="https://anara.com/?via=roylyonse-mwai" target="_blank" rel="noopener noreferrer"><div class="tool-num">04</div><div class="tool-name">Anara</div><div class="tool-desc">AI research assistant for professionals. Pull insights from documents, PDFs, and the web in seconds.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool" data-n="05" href="https://go.cap.so/roylyonse-mwai" target="_blank" rel="noopener noreferrer"><div class="tool-num">05</div><div class="tool-name">Cap</div><div class="tool-desc">Open-source Loom alternative. Record, share, and collaborate on screen recordings with zero friction. 20% off 12 months.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool" data-n="06" href="https://anything.link/roylyonse-mwai" target="_blank" rel="noopener noreferrer"><div class="tool-num">06</div><div class="tool-name">Anything AI</div><div class="tool-desc">Turn any idea into a deployed app just by describing it. The AI agent builds and ships the whole thing. 20% off first purchase.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool" data-n="07" href="https://refer.dub.co/roylyonse-mwai" target="_blank" rel="noopener noreferrer"><div class="tool-num">07</div><div class="tool-name">Dub.co</div><div class="tool-desc">Open-source link management. Short links, QR codes, and analytics for modern teams. 20% off 3 months.</div><div class="tool-cta">Try it →</div></a>
+    <a class="tool" data-n="08" href="https://refer.cal.com/roywan-wwvt" target="_blank" rel="noopener noreferrer"><div class="tool-num">08</div><div class="tool-name">Cal.com</div><div class="tool-desc">Open-source scheduling infrastructure. Replace Calendly with something you actually own and control. 20% off 12 months.</div><div class="tool-cta">Try it →</div></a>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  <div style="padding:1.5rem 5rem;border-top:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;">
+    <span style="font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);">Showing 8 of my top recommended tools</span>
+    <a class="cta-link" href="mailto:roylyonse@roylyonse.co.uk?subject=Tools%20List">Get the full list via email →</a>
   </div>
 </section>
 
@@ -1501,6 +1453,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
       <div class="ft-name">SAAS <em>BRUV</em></div>
       <div class="ft-tagline">Roylyonse Mwai · AI Consulting &amp; Automation · Nairobi, KE</div>
     </div>
+    <a class="btn" href="https://saasbruv.setmore.com" target="_blank" rel="noopener noreferrer" style="margin-top:.5rem;font-size:.82rem;" onclick="addRipple(event,this)">Book a discovery call →</a>
     <div class="ft-copy">© 2026 Roylyonse Mwai · All rights reserved</div>
   </div>
   <div class="ft-col">
@@ -1519,322 +1472,95 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
     <a href="#usecases">Use cases</a>
     <a href="#about">About Roylyonse</a>
     <a href="#faq">FAQ</a>
-    <a href="#saasboard">SaaS Board / Tools</a>
-    <a href="https://saasbruv.setmore.com" target="_blank" rel="noopener">Book a call ↗</a>
-    <div class="ft-stack">
-      My recommended AI stack — tools I use with clients and personally vouch for.
-      <a href="#saasboard"> Browse the full list →</a>
-    </div>
+    <a href="#saasboard">Recommended Tools</a>
+    <a href="https://saasbruv.setmore.com" target="_blank" rel="noopener noreferrer">Book a call ↗</a>
+    <a href="#saasboard" style="margin-top:.4rem;">Recommended tools →</a>
   </div>
   <div class="ft-col">
     <div class="ft-col-title">Connect</div>
     <a href="mailto:roylyonse@roylyonse.co.uk">roylyonse@roylyonse.co.uk</a>
-    <a href="https://roylyonse.co.uk" target="_blank" rel="noopener">roylyonse.co.uk ↗</a>
-    <a href="https://tiktok.com/@saasbruv" target="_blank" rel="noopener">TikTok @saasbruv ↗</a>
-    <a href="https://youtube.com/@saasbruv" target="_blank" rel="noopener">YouTube @saasbruv ↗</a>
-    <a href="https://linkedin.com/in/roylyonse" target="_blank" rel="noopener">LinkedIn ↗</a>
-    <a href="https://twitter.com/roylyonse" target="_blank" rel="noopener">X / Twitter ↗</a>
-    <a href="https://reddit.com/u/saasmarkt" target="_blank" rel="noopener">Reddit u/saasmarkt ↗</a>
-    <a href="#audit-form" style="margin-top:.5rem;color:var(--green)">→ Book a free audit</a>
+    <a href="https://roylyonse.co.uk" target="_blank" rel="noopener noreferrer">roylyonse.co.uk ↗</a>
+    <a href="https://tiktok.com/@saasbruv" target="_blank" rel="noopener noreferrer">TikTok @saasbruv ↗</a>
+    <a href="https://youtube.com/@saasbruv" target="_blank" rel="noopener noreferrer">YouTube @saasbruv ↗</a>
+    <a href="https://linkedin.com/in/roylyonse" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+    <a href="https://twitter.com/roylyonse" target="_blank" rel="noopener noreferrer">X / Twitter ↗</a>
+    <a href="https://reddit.com/u/saasmarkt" target="_blank" rel="noopener noreferrer">Reddit u/saasmarkt ↗</a>
+    <a href="https://saasbruv.setmore.com" target="_blank" rel="noopener" style="margin-top:.5rem;color:var(--green)">→ Book a discovery call</a>
   </div>
 </footer>
+
 <script>
-/* ══════════════════════════════════════════════
-   SAAS BRUV v5 — JavaScript
-══════════════════════════════════════════════ */
-
-/* ── STARS + SHOOTING STARS BACKGROUND ─────── */
+// ── SCROLL REVEAL ─────────────────────────────────────
 (function(){
-  var canvas=document.getElementById('bg');
-  if(!canvas)return;
-  var ctx=canvas.getContext('2d');
-  var W,H;
-  var stars=[],shooters=[],sparkles=[];
-  var mouse={x:-999,y:-999};
-
-  function resize(){
-    W=canvas.width=window.innerWidth;
-    H=canvas.height=window.innerHeight;
-    stars=[];
-    for(var i=0;i<220;i++){
-      stars.push({
-        x:Math.random()*W, y:Math.random()*H,
-        r:Math.random()*1.6+.2,
-        a:Math.random(),
-        speed:Math.random()*.008+.003,
-        phase:Math.random()*Math.PI*2
-      });
-    }
-  }
-  resize();
-  window.addEventListener('resize',resize);
-
-  document.addEventListener('mousemove',function(e){mouse.x=e.clientX;mouse.y=e.clientY;});
-
-  function spawnShooter(){
-    var fromRight=Math.random()>.5;
-    shooters.push({
-      x:fromRight?W+20:Math.random()*W*.4,
-      y:Math.random()*H*.6,
-      vx:fromRight?(-4-Math.random()*4):(3+Math.random()*4),
-      vy:1.5+Math.random()*2.5,
-      len:120+Math.random()*100,
-      life:1,decay:.012+Math.random()*.01,
-      c:Math.random()>.6?'rgba(0,107,60,':'rgba(187,10,33,'
-    });
-  }
-  setInterval(spawnShooter,2200);
-  setTimeout(spawnShooter,500);
-
-  function draw(ts){
-    ctx.clearRect(0,0,W,H);
-
-    /* ── static stars ── */
-    stars.forEach(function(s){
-      s.phase+=s.speed;
-      var alpha=.18+.55*(.5+.5*Math.sin(s.phase));
-      /* mouse proximity glow */
-      var d=Math.hypot(s.x-mouse.x,s.y-mouse.y);
-      if(d<160) alpha=Math.min(1,alpha+(1-d/160)*.7);
-      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(242,237,230,'+alpha+')';ctx.fill();
-    });
-
-    /* ── mouse glow halo ── */
-    if(mouse.x>0){
-      var grd=ctx.createRadialGradient(mouse.x,mouse.y,0,mouse.x,mouse.y,140);
-      grd.addColorStop(0,'rgba(0,107,60,.07)');
-      grd.addColorStop(.5,'rgba(187,10,33,.03)');
-      grd.addColorStop(1,'transparent');
-      ctx.fillStyle=grd;ctx.fillRect(0,0,W,H);
-    }
-
-    /* ── shooting stars ── */
-    shooters=shooters.filter(function(s){
-      s.x+=s.vx;s.y+=s.vy;s.life-=s.decay;
-      if(s.life<=0)return false;
-      var tail=ctx.createLinearGradient(s.x,s.y,s.x-s.vx*(s.len/Math.abs(s.vx)),s.y-s.vy*(s.len/Math.abs(s.vx)));
-      tail.addColorStop(0,s.c+s.life*.9+')');
-      tail.addColorStop(.4,'rgba(242,237,230,'+(s.life*.5)+')');
-      tail.addColorStop(1,'transparent');
-      ctx.beginPath();ctx.moveTo(s.x,s.y);
-      ctx.lineTo(s.x-s.vx*(s.len/Math.abs(s.vx)),s.y-s.vy*(s.len/Math.abs(s.vx)));
-      ctx.strokeStyle=tail;ctx.lineWidth=1.5*s.life;ctx.stroke();
-      /* sparkle at head */
-      ctx.beginPath();ctx.arc(s.x,s.y,2*s.life,0,Math.PI*2);
-      ctx.fillStyle='rgba(242,237,230,'+(s.life*.9)+')';ctx.fill();
-      return true;
-    });
-
-    requestAnimationFrame(draw);
-  }
-  draw();
+  const els = document.querySelectorAll('.rv');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');}});
+  },{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>io.observe(el));
 })();
 
-/* ── CUSTOM CURSOR + TRAIL ──────────────────── */
+// ── NAV SCROLL STATE ─────────────────────────────────
 (function(){
-  var cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
-  if(!cur||!ring)return;
-  var mx=0,my=0,rx=0,ry=0;
-  var trailColors=['#006B3C','#BB0A21','#F5C842','rgba(242,237,230,.8)'];
-  var lastTrail=0;
-
-  document.addEventListener('mousemove',function(e){
-    mx=e.clientX;my=e.clientY;
-    cur.style.left=mx+'px';cur.style.top=my+'px';
-    /* cursor trail sparkles */
-    var now=Date.now();
-    if(now-lastTrail>40){
-      lastTrail=now;
-      var sp=document.createElement('div');
-      sp.className='cursor-spark';
-      sp.style.left=mx+'px';sp.style.top=my+'px';
-      sp.style.background=trailColors[Math.floor(Math.random()*trailColors.length)];
-      sp.style.width=(3+Math.random()*4)+'px';
-      sp.style.height=sp.style.width;
-      document.body.appendChild(sp);
-      sp.addEventListener('animationend',function(){sp.remove();});
-    }
-  });
-  (function lerp(){
-    rx+=(mx-rx)*.14;ry+=(my-ry)*.14;
-    ring.style.left=rx+'px';ring.style.top=ry+'px';
-    requestAnimationFrame(lerp);
-  })();
-  document.querySelectorAll('a,button,.ptile,.pm,.pb,.tool,.eblock').forEach(function(el){
-    el.addEventListener('mouseenter',function(){document.body.classList.add('hov');});
-    el.addEventListener('mouseleave',function(){document.body.classList.remove('hov');});
-  });
-  document.addEventListener('mousedown',function(){document.body.classList.add('clk');});
-  document.addEventListener('mouseup',function(){document.body.classList.remove('clk');});
-
-  /* tool card mouse tracking for spotlight */
-  document.querySelectorAll('.tool').forEach(function(tool){
-    tool.addEventListener('mousemove',function(e){
-      var r=tool.getBoundingClientRect();
-      var px=((e.clientX-r.left)/r.width*100).toFixed(1)+'%';
-      var py=((e.clientY-r.top)/r.height*100).toFixed(1)+'%';
-      tool.style.setProperty('--mx',px);
-      tool.style.setProperty('--my',py);
-    });
-  });
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll',()=>{
+    nav.classList.toggle('sc', window.scrollY > 40);
+  },{passive:true});
 })();
 
-/* ── LOADER ────────────────────────────────── */
+// ── TOOL CARD REVEAL ─────────────────────────────────
 (function(){
-  var loader=document.getElementById('loader');
-  var fill=document.getElementById('lbar')||document.querySelector('.ld-bar-fill');
-  var blocks=document.querySelectorAll('.ld-blk');
-  var colours=['on-g','on-r','on-w','on-g','on-r','on-w','on-g'];
-  var pct=0,iv;
-  function advance(){
-    pct=Math.min(pct+(Math.random()*5+1.5),100);
-    if(fill)fill.style.width=pct+'%';
-    var idx=Math.floor(pct/100*blocks.length);
-    blocks.forEach(function(b,i){b.className='ld-blk'+(i<idx?' '+colours[i]:'');});
-    if(pct>=100){clearInterval(iv);setTimeout(dismiss,250);}
-  }
-  iv=setInterval(advance,45);
-  function dismiss(){if(loader)loader.classList.add('gone');}
-  var barOuter=document.querySelector('.ld-bar-outer');
-  if(barOuter)barOuter.addEventListener('click',function(){pct=100;if(fill)fill.style.width='100%';clearInterval(iv);setTimeout(dismiss,150);});
-  window.skipLoader=function(){pct=100;if(fill)fill.style.width='100%';clearInterval(iv);setTimeout(dismiss,100);};
-  window.addEventListener('load',function(){if(pct<80)pct=80;});
+  const tools = document.querySelectorAll('.tool');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('tv');});
+  },{threshold:0.05});
+  tools.forEach(t=>io.observe(t));
 })();
 
-/* ── NAV SCROLL ─────────────────────────────── */
-(function(){
-  var nav=document.querySelector('nav');
-  if(!nav)return;
-  window.addEventListener('scroll',function(){nav.classList.toggle('sc',window.scrollY>40);},{passive:true});
-})();
-
-/* ── SCROLL REVEAL (fixed — uses rootMargin so elements appear BEFORE edge) ── */
-(function(){
-  /* remove the .on class from any .rv that already had it hardcoded in HTML */
-  document.querySelectorAll('.rv.on').forEach(function(el){
-    /* only keep .on if already in view on load */
-    var r=el.getBoundingClientRect();
-    if(r.top>window.innerHeight) el.classList.remove('on');
+// ── TOOL CARD MOUSE GLOW ─────────────────────────────
+document.querySelectorAll('.tool').forEach(t=>{
+  t.addEventListener('mousemove',e=>{
+    const r=t.getBoundingClientRect();
+    t.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+    t.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
   });
+});
 
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        e.target.classList.add('on');
-        io.unobserve(e.target);
-      }
-    });
-  },{rootMargin:'0px 0px -60px 0px',threshold:0.08});
-
-  document.querySelectorAll('.rv').forEach(function(el){
-    if(!el.classList.contains('on'))io.observe(el);
-  });
-
-  /* tool cards staggered reveal */
-  var tio=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        var tools=e.target.querySelectorAll('.tool');
-        tools.forEach(function(t,i){
-          setTimeout(function(){t.classList.add('tv');},i*55);
-        });
-        tio.unobserve(e.target);
-      }
-    });
-  },{rootMargin:'0px 0px -40px 0px',threshold:0.04});
-  var tg=document.querySelector('.tools-grid');
-  if(tg)tio.observe(tg);
-})();
-
-/* ── RIPPLE ──────────────────────────────────── */
+// ── RIPPLE ───────────────────────────────────────────
 function addRipple(e,btn){
-  var r=document.createElement('span');
-  var rect=btn.getBoundingClientRect();
-  var size=Math.max(rect.width,rect.height)*2;
-  r.className='rpl';
-  r.style.cssText='width:'+size+'px;height:'+size+'px;left:'+(e.clientX-rect.left-size/2)+'px;top:'+(e.clientY-rect.top-size/2)+'px;';
-  btn.appendChild(r);
-  r.addEventListener('animationend',function(){r.remove();});
+  const r=btn.getBoundingClientRect(),
+        d=Math.max(r.width,r.height),
+        s=btn.querySelector('.rpl')||document.createElement('span');
+  s.className='rpl';
+  s.style.cssText=`width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;
+  btn.appendChild(s);
+  setTimeout(()=>s.remove(),550);
 }
 
-/* ── PACKAGE MINI TILES → SCROLL ────────────── */
-document.querySelectorAll('.pm').forEach(function(el){
-  el.addEventListener('click',function(){
-    var target=document.querySelector(el.dataset.href||'#packages');
-    if(target)target.scrollIntoView({behavior:'smooth'});
-  });
-});
-
-/* ── ENTRY BLOCKS → AUDIT FORM ──────────────── */
-document.querySelectorAll('.eblock').forEach(function(el){
-  el.addEventListener('click',function(e){
-    if(e.target.closest('a'))return;
-    var target=document.querySelector('#audit-form');
-    if(target)target.scrollIntoView({behavior:'smooth'});
-  });
-});
-
-/* ── BOOKING LINK CHECK ──────────────────────── */
-/* All "Book a call" links confirmed → https://saasbruv.setmore.com */
-document.querySelectorAll('a[href]').forEach(function(a){
-  if(a.textContent.toLowerCase().includes('book a call')||a.href.includes('setmore')){
-    a.href='https://saasbruv.setmore.com';
-    a.target='_blank';
-    a.rel='noopener';
-  }
-});
-
-/* ── FAQ TOGGLE ──────────────────────────────── */
+// ── FAQ ACCORDION ─────────────────────────────────────
 function toggleFaq(btn){
-  var item=btn.closest('.faq-item');
-  var isOpen=item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open');});
+  const item=btn.parentElement;
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
   if(!isOpen)item.classList.add('open');
 }
 
-/* ── FORM SUBMIT ─────────────────────────────── */
-function handleSubmit(e){
-  var btn=document.getElementById('sBtn');
-  var fn=document.getElementById('fn');
-  var fe=document.getElementById('fe');
-  var fc=document.getElementById('fc');
-  var fa=document.getElementById('fa');
-  [fn,fe,fc,fa].forEach(function(f){if(f)f.style.borderColor='';});
-  var valid=true;
-  [fn,fe,fc,fa].forEach(function(f){
-    if(f&&!f.value.trim()){f.style.borderColor='var(--red)';valid=false;}
-  });
-  if(!valid)return;
-  if(btn){btn.disabled=true;btn.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Sending…';}
-  var data=new FormData();
-  data.append('access_key','YOUR_WEB3FORMS_KEY');
-  data.append('name',fn.value);
-  data.append('email',fe.value);
-  data.append('company',fc.value);
-  data.append('role',(document.getElementById('fr')||{value:''}).value);
-  data.append('whatsapp',(document.getElementById('fw')||{value:''}).value);
-  data.append('automate',fa.value);
-  data.append('tools',(document.getElementById('ft')||{value:''}).value);
-  data.append('subject','New AI Audit Request — SAAS BRUV');
-  fetch('https://api.web3forms.com/submit',{method:'POST',body:data})
-    .then(function(r){return r.json();})
-    .then(function(res){
-      if(res.success){
-        var fields=document.getElementById('fFields');
-        var success=document.getElementById('fSuccess');
-        if(fields)fields.style.display='none';
-        if(success)success.style.display='flex';
-      } else {
-        if(btn){btn.disabled=false;btn.textContent='Send my AI automation brief';}
-        alert('Something went wrong. Please email roylyonse@roylyonse.co.uk directly.');
-      }
-    })
-    .catch(function(){
-      if(btn){btn.disabled=false;btn.textContent='Send my AI automation brief';}
-      alert('Network error. Please email roylyonse@roylyonse.co.uk directly.');
-    });
+// ── MOBILE NAV ────────────────────────────────────────
+function toggleMobileMenu(){
+  const ham=document.getElementById('navHam');
+  const menu=document.getElementById('navMobile');
+  ham.classList.toggle('open');
+  menu.classList.toggle('open');
+  document.body.style.overflow=menu.classList.contains('open')?'hidden':'';
 }
+function closeMobileMenu(){
+  document.getElementById('navHam').classList.remove('open');
+  document.getElementById('navMobile').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+// Close mobile menu on escape
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMobileMenu();});
 </script>
+
 </body>
 </html>
